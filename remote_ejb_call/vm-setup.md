@@ -20,6 +20,7 @@ After the VM is restarted, all the applications are not running because they do 
 1. Login VM as `root`. 
 2. Switch to `informix` user - `su - informix`
 3. Start the informix server - `oninit`. You should see something similar to the below screenshot.
+![Start Informix](start_informix.png)
  
 ## Start JBoss for Direct
 1. Login VM as `root`. 
@@ -27,6 +28,7 @@ After the VM is restarted, all the applications are not running because they do 
 3. Go to jboss bin directory - `jbb`
 4. Start the jboss service - `./start.sh`
 The JBoss should be starting. You can use “tn” to check the log. Wait until the application is running. It may take several minutes.
+![Start Direct Jboss](start_direct_jboss.png)
 
 ## Start JBoss for legacy website
 1. Login VM as `root`. 
@@ -34,5 +36,5 @@ The JBoss should be starting. You can use “tn” to check the log. Wait until 
 3. Go to jboss bin directory - `jbb`
 4. Start the jboss service - `./start.sh`
 You can use “tn” to check the log. Wait until the application finishes starting. It may take several minutes.
- 
+![Start TC Jboss](start_tc_jboss.png)
 
