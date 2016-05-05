@@ -20,7 +20,7 @@ We will be using Docker and docker-compose to run or mock up the following servi
 
 We will execute the following services directly, from an IDE or from your command line, since these are the services we will be modifying:
 
-1. Submission microservice: API used by the UI to initiate and finalize submissions;
+1. Submission microservice: API used by the UI to initiate and finalize submissions.
 2. Submission processor: processes the submissions, which includes validating files, generating watermarked images, resizing images, generating consolidated zip files for download, updating Informix, and more.
 
 ## Pre-requisites
@@ -43,8 +43,8 @@ To prepare your environment to run the submission system, please start by instal
 
 Update your localhost entry in your hosts file (/etc/hosts) to map local.topcoder-dev.com:
 
-  | `127.0.0.1        localhost local.topcoder-dev.com` |
-  | --- |
+| `127.0.0.1        localhost local.topcoder-dev.com` |
+| --- |
 
 * Windows:
 
@@ -88,15 +88,17 @@ aws_secret_access_key = secret
 
 Inside the submission-system folder, you will find a `env.sh` file. This file contains local environment configurations, open it and edit the configurations in there according to your environment:
 
-| # The IP address of the computer running the submission systemexport |
-| IP=192.168.1.65 |
-| --- |
+```sh
+#The IP address of the computer running the submission systemexport
+IP=192.168.1.65
+```
 
 Windows/Mac OS X:
 
-| # The IP address of the computer running the submission systemexport |
-| IP=192.168.99.100 |
-| --- |
+```sh
+#The IP address of the computer running the submission systemexport
+IP=192.168.99.100
+```
 
 ## Starting the Local Services
 
@@ -114,21 +116,21 @@ The first time you execute this command will cause all the required docker image
 
 Once you see the following message, all services are up:
 
-  | submissions_1 \| webpack: bundle is now VALID |
-  | --- |
+| submissions_1 | webpack: bundle is now VALID |
+| --- |
 
 At this point you should be able to connect to:
 
-- DynamoDB on localhost:7777
-- Informix on localhost:2021
-  - User: informix
-  - Password: 1nf0rm1x
-  - Server: informixoltp\_tcp
-  - Jdbc url: jdbc:informix-sqli://localhost:2021/tcs\_catalog:INFORMIXSERVER=informixoltp\_tcp
-- SQS on localhost:4568
-- Kafka on localhost:9092
-- Zookeeper on localhost:2181
-- Frontend on http://local.topcoder-dev.com:3000/
+- DynamoDB on `localhost:7777`
+- Informix on `localhost:2021`
+  - User: `informix`
+  - Password: `1nf0rm1x`
+  - Server: `informixoltp_tcp`
+  - Jdbc url: `jdbc:informix-sqli://localhost:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp`
+- SQS on `localhost:4568`
+- Kafka on `localhost:9092`
+- Zookeeper on `localhost:2181`
+- Frontend on `http://local.topcoder-dev.com:3000/`
 
 To stop the local services:
 
@@ -145,7 +147,7 @@ At this point you could use your favorite IDE to do the next tasks. We will take
 
 Common classes for all member facing services
 
-Unzip it the ap-supply-library folder, cd into it and:
+Unzip into the `ap-supply-library` folder, cd into it and run:
 
 | `mvn clean compile install` |
 | --- |
@@ -154,7 +156,7 @@ Unzip it the ap-supply-library folder, cd into it and:
 
 Common classes for the submissions system, such as models, service clients, utilities, etc.
 
-Unzip it the ap-submission-library folder, cd into it and:
+Unzip into the `ap-submission-library` folder, cd into it and run:
 
 | `mvn clean compile install` |
 | --- |
@@ -163,7 +165,7 @@ Unzip it the ap-submission-library folder, cd into it and:
 
 Submission API
 
-Unzip it the ap-submission-microservice/service folder, cd into it and:
+Unzip into the `ap-submission-microservice/service` folder, cd into it and run:
 
 | `mvn clean compile package` |
 | --- |
@@ -172,14 +174,14 @@ Unzip it the ap-submission-microservice/service folder, cd into it and:
 
 Processor of submissions.
 
-Unzip it the ap-submission-processor/service folder, cd into it and:
+Unzip into the `ap-submission-processor/service` folder, cd into it and run:
 
 | `mvn clean compile package` |
 | --- |
 
 ### Executing the Submission Service
 
-cd into the ap-submission-service/service, you will find a run.sh file in there containing all environment variables and the startup command to run the service locally:
+cd into the `ap-submission-service/service`, you will find a `run.sh` file in there containing all environment variables and the startup command to run the service locally:
 
 ```sh
 export AUTH_DOMAIN=topcoder-dev.com
@@ -198,7 +200,7 @@ To execute the service:
 
 ### Executing the Submission Processor
 
-cd into the ap-submission-processor/service folder, in there you will find a run.sh file which contains all environment variables and the startup command to run the processor:
+cd into the `ap-submission-processor/service` folder, in there you will find a `run.sh` file which contains all environment variables and the startup command to run the processor:
 
 ```sh
 SQS_URL=http://localhost:4568/submissions
@@ -227,7 +229,7 @@ This browser now has the fake authentication, and we can go to the submission UI
 
 Note the challenge id there is 11, that is the only challenge that is setup in Informix to allow submissions, if you would like to use other challenges you will have to create resource and phase records in Informix, however, using challenge 11 should be sufficient for our purposes.
 
-You should now see a series of fields that can be populated by the submitter, the only required fields are the files at the top, and the "I UNDERSTAND AND AGREE" checkbox at the bottom:
+You should now see a series of fields that can be populated by the submitter, the only required fields are the files at the top, and the **"I UNDERSTAND AND AGREE"** checkbox at the bottom:
 
 
 
@@ -237,9 +239,9 @@ The source zip file contains the source files for the submission, such as a phot
 
 The preview image is a cover image for the submission, any valid png or jpg file can be  submitted as the preview.
 
-Select your 3 files, scroll to the bottom, check the "AGREE" box, and click the submit button, you should see the upload happening, and the process logs flowing in the submission processor console.
+Select your 3 files, scroll to the bottom, check the **"AGREE"** box, and click the submit button, you should see the upload happening, and the process logs flowing in the submission processor console.
 
-If you see a message in the console saying "SUCCESSFUL NOTIFICATION SENT", it means the processor finished successfully, otherwise you would see the exceptions in the log.
+If you see a message in the console saying **"SUCCESSFUL NOTIFICATION SENT"**, it means the processor finished successfully, otherwise you would see the exceptions in the log.
 
 ### Known Issues
 
