@@ -91,11 +91,11 @@ Windows/Mac OS X:
 
 Export the env file configurations by issuing the following command inside the submission-system folder:
 
-    source [env.sh] (/env.sh)
+    source env.sh
 
 Inside the submission-system folder, issue the following command:
 
-    [docker-compose] (/docker-compose.yaml) up submissions
+    docker-compose up submissions
 
 The first time you execute this command will cause all the required docker images to be downloaded to your local environment, this is a large download and it could take some time. Subsequent executions will be much faster.
 
