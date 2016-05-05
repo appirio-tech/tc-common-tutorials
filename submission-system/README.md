@@ -8,15 +8,15 @@ The submission system uses multiple AWS services and Topcoder APIs to handle mem
 
 We will be using Docker and docker-compose to run or mock up the following services:
 
-1. File microservice and S3: Used to upload and download submission files.
-2. DynamoDB: Main submission datastore.
-3. Informix: Legacy datastore, data is update in Informix to allow legacy applications to work with the submissions.
-4. NFS: legacy file storage.
-5. Challenge microservice: api to interact with challenge information.
-6. Member microservice: api to interact with member information.
-7. SQS: queueing service used to send and receive submission process requests.
-8. Kafka: queueing service used to send process failure notifications.
-9. Submissions UI: web page used to upload submissions.
+1. **File microservice and S3**: Used to upload and download submission files.
+2. **DynamoDB**: Main submission datastore.
+3. **Informix**: Legacy datastore, data is update in Informix to allow legacy applications to work with the submissions.
+4. **NFS**: legacy file storage.
+5. **Challenge microservice**: api to interact with challenge information.
+6. **Member microservice**: api to interact with member information.
+7. **SQS**: queueing service used to send and receive submission process requests.
+8. **Kafka**: queueing service used to send process failure notifications.
+9. **Submissions UI**: web page used to upload submissions.
 
 We will execute the following services directly, from an IDE or from your command line, since these are the services we will be modifying:
 
@@ -116,8 +116,7 @@ The first time you execute this command will cause all the required docker image
 
 Once you see the following message, all services are up:
 
-| submissions_1 | webpack: bundle is now VALID |
-| --- |
+`submissions_1 | webpack: bundle is now VALID`
 
 At this point you should be able to connect to:
 
@@ -225,7 +224,7 @@ document.cookie="tcjwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJhZG1p
 localStorage.setItem("appiriojwt", '"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJhZG1pbmlzdHJhdG9yIl0sImlzcyI6Imh0dHBzOi8vYXBpLnRvcGNvZGVyLWRldi5jb20iLCJoYW5kbGUiOiJoZWZmYW4iLCJleHAiOjE3NjYyODkyNDYsInVzZXJJZCI6IjEzMjQ1NiIsImlhdCI6MTQ1MDkyOTI0NiwiZW1haWwiOm51bGwsImp0aSI6IjEzNjljNjAwLWUwYTEtNDUyNS1hN2M3LTU2YmU3ZDgxM2Y1MSJ9.hp5peSoj-fh3KFkskvBpfUFIcJNtsv4zIMFV-D8F3JA"');
 ```
 
-This browser now has the fake authentication, and we can go to the submission UI: [http://local.topcoder-dev.com:3000/challenges/11/submit/file/](http://local.topcoder-dev.com:3000/challenges/11/submit/file/)
+This browser now has the fake authentication, and we can go to the submission UI: <br/> [http://local.topcoder-dev.com:3000/challenges/11/submit/file/](http://local.topcoder-dev.com:3000/challenges/11/submit/file/)
 
 Note the challenge id there is 11, that is the only challenge that is setup in Informix to allow submissions, if you would like to use other challenges you will have to create resource and phase records in Informix, however, using challenge 11 should be sufficient for our purposes.
 
