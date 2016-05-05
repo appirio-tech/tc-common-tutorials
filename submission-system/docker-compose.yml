@@ -1,0 +1,58 @@
+version: '2'
+services:
+    dynamodb:
+        image: "appiriodevops/submissions:dynamodb"
+        command: "-inMemory -port 7777"
+        ports:
+            - "7777:7777"
+    sqs:
+        image: "appiriodevops/submissions:sqs"
+        ports:
+            - "4568:4568"
+    aws-init:
+        image: "appiriodevops/submissions:aws-cli"
+        environment:
+            IP: "$IP"
+        depends_on:
+            - dynamodb
+            - sqs
+        command: "/bin/bash -c /data/init.sh"
+    informix:
+        image: appiriodevops/informix:1.2
+        ports:
+            - "2021:2021"
+    mock-services:
+        image: appiriodevops/submissions:mock-services
+        environment:
+            BASE_URL: "http://$IP"
+        ports:
+            - "8080:8080"
+    kafka:
+        image: spotify/kafka
+        environment:
+            ADVERTISED_HOST: $IP
+            ADVERTISED_PORT: 9092
+        ports:
+            - "2181:2181"
+            - "9092:9092"
+    nginx:
+        image: appiriodevops/submissions:nginx-old
+        volumes:
+            - "$PWD/data:/root"
+        command: /bin/sh -c 'cp /root/default.conf /etc/nginx/conf.d/ && nginx && tail -f /var/log/nginx/access.log'
+        depends_on:
+            - aws-init
+            - mock-services
+        ports:
+            - "80:80"
+    submissions:
+        image: appiriodevops/submissions:frontend
+        volumes:
+            - "$PWD/data:/root"
+        command: /bin/sh -c "cp /root/tc-constants.coffee /data/topcoder-app/node_modules/appirio-tech-webpack-config/ && npm start"
+        depends_on:
+            - nginx
+            - informix
+            - kafka
+        ports:
+            - "3000:3000"
