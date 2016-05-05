@@ -201,7 +201,7 @@ Note the challenge id there is 11, that is the only challenge that is setup in I
 
 You should now see a series of fields that can be populated by the submitter, the only required fields are the files at the top, and the “I UNDERSTAND AND AGREE” checkbox at the bottom:
 
-^^^^^^^^^^^^^^^^^IMAGE%^%&*&*))%^&*%%&^%^&%&%&%(&(
+![Files submission preview](submission-preview.png)
 
 The submission zip is the representation of a design submission, it should be a simple zip file containing images. Any valid png, jpg, gif, or bpm files are allowed. You can download some images, take a few screenshots and create a submission zip file containing those images. The folder structure inside this submission zip doesn’t matter. This file needs to have valid images because those are processed, resized, watermarked, etc. Non image files in the submission.zip should be ignored.
 
