@@ -20,21 +20,21 @@ We will be using Docker and docker-compose to run or mock up the following servi
 
 We will execute the following services directly, from an IDE or from your command line, since these are the services we will be modifying:
 
-1. Submission microservice: API used by the UI to initiate and finalize submissions.
-2. Submission processor: processes the submissions, which includes validating files, generating watermarked images, resizing images, generating consolidated zip files for download, updating Informix, and more.
+1. **Submission microservice**: API used by the UI to initiate and finalize submissions.
+2. **Submission processor**: processes the submissions, which includes validating files, generating watermarked images, resizing images, generating consolidated zip files for download, updating Informix, and more.
 
 ## Pre-requisites
 
 To prepare your environment to run the submission system, please start by installing these pre-requisites:
 
-- Docker: [https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/)
-- Docker-compose: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+- **Docker**: [https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/)
+- **Docker-compose**: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 - Windows/Mac OS X:
-	- Docker Toolbox: [https://www.docker.com/products/docker-toolbox](https://www.docker.com/products/docker-toolbox)
-- Java 1.8
+	- **Docker Toolbox**: [https://www.docker.com/products/docker-toolbox](https://www.docker.com/products/docker-toolbox)
+- **Java 1.8**
 - Your favorite IDE (our team uses Eclipse and Intellij).
 - The submission-system.zip file, unzipped to a local folder. Henceforth in this document, we will call this folder submission-system.
-- (Optional but recommended) aws cli: [http://docs.aws.amazon.com/cli/latest/userguide/installing.html](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+- (Optional but recommended) **aws cli**: [http://docs.aws.amazon.com/cli/latest/userguide/installing.html](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
 - This will allow you to view data in the mongodb database, messages in sqs, etc.
 
 ## Local Configuration
