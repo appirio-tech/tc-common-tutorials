@@ -19,9 +19,14 @@ services:
   tc-online-review-auto-pilot:
     image: appiriodevops/online-review:env
     working_dir: /root/online_review
-    command: bash -c "sh start_local_auto_pilot.sh "
+    command: bash -c "sh start_local_auto_pilot.sh"
     container_name: tc-online-review-auto-pilot
     volumes:
       - .:/root/online_review
+    links:
+      - tc-informix:db
+  run-auto-pilot:
+    image: appiriodevops/online-review:autopilot
+    container_name: run-auto-pilot
     links:
       - tc-informix:db
