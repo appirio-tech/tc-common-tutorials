@@ -1,0 +1,23 @@
+########################################
+# Build parameters for Auto Pilot tool #
+########################################
+
+
+# The online_review_home is the directory where the development distribution for
+# Online Review application is checked to
+online_review_home=/root/online_review
+
+# A deployment directory for Auto Pilot tool
+deploy-dir=/root/auto_pilot
+
+
+# A path to file to signal to Auto Pilot to stop the job
+guard_file=@auto_pilot_guard_file@
+
+
+# A path to file to signal to Auto Pilot that there is another tool instance already running
+running_file=@auto_pilot_running_file@
+
+
+# An interval (in seconds) between Auto Pilot job executions
+poll_interval=@auto_pilot_poll_interval@

@@ -1,0 +1,27 @@
+version: '2'
+services:
+  tc-informix:
+    image: appiriodevops/informix:1.1
+  tc-online-review:
+    image: appiriodevops/online-review:env
+    working_dir: /root/online_review
+    command: bash -c "sh start_local.sh"
+    container_name: tc-online-review
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m
+    volumes:
+      - .:/root/online_review
+    ports: 
+      - "8080:8080"
+      - "443:443"
+    links:
+      - tc-informix:db
+  tc-online-review-auto-pilot:
+    image: appiriodevops/online-review:env
+    working_dir: /root/online_review
+    command: bash -c "sh start_local_auto_pilot.sh "
+    container_name: tc-online-review-auto-pilot
+    volumes:
+      - .:/root/online_review
+    links:
+      - tc-informix:db
