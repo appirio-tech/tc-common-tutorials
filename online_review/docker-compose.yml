@@ -11,7 +11,7 @@ services:
       - JAVA_OPTS=-Xms256m -Xmx512m
     volumes:
       - .:/root/online_review
-    ports: 
+    ports:
       - "8080:8080"
       - "443:443"
     links:
@@ -28,5 +28,14 @@ services:
   run-auto-pilot:
     image: appiriodevops/online-review:autopilot
     container_name: run-auto-pilot
+    links:
+      - tc-informix:db
+  run-online-review:
+    image: appiriodevops/online-review
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m
+    ports:
+      - "8080:8080"
+      - "443:443"
     links:
       - tc-informix:db
