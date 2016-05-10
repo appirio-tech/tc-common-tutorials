@@ -36,13 +36,12 @@ services:
             - "2181:2181"
             - "9092:9092"
     nginx:
-        image: appiriodevops/submissions:nginx-old
-        volumes:
-            - "$PWD/data:/root"
-        command: /bin/sh -c 'cp /root/default.conf /etc/nginx/conf.d/ && nginx && tail -f /var/log/nginx/access.log'
+        image: appiriodevops/submissions:nginx
         depends_on:
             - aws-init
             - mock-services
+        environment:
+            IP: $IP
         ports:
             - "80:80"
     submissions:
