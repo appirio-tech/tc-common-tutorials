@@ -46,10 +46,7 @@ services:
         ports:
             - "80:80"
     submissions:
-        image: appiriodevops/submissions:frontend
-        volumes:
-            - "$PWD/data:/root"
-        command: /bin/sh -c "cp /root/tc-constants.coffee /data/topcoder-app/node_modules/appirio-tech-webpack-config/ && npm start"
+        image: appiriodevops/submissions:frontend-1.0
         depends_on:
             - nginx
             - informix
