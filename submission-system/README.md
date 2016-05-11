@@ -89,6 +89,11 @@ Windows/Mac OS X:
 
 # Starting the Local Services
 
+if you are running with `sudo` command, be sure to switch to `root` user.
+```
+sudo /bin/bash
+```
+
 Export the env file configurations by issuing the following command inside the submission-system folder:
 
     source env.sh
