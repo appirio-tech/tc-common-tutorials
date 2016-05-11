@@ -1,0 +1,28 @@
+{
+  "name": "s3_mock_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon src/app",
+    "lint": "eslint -c .eslintrc src || true",
+    "lint:fix": "eslint -c .eslintrc src --fix || true"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb-base": "^1.0.1",
+    "eslint-plugin-import": "^1.5.0"
+  },
+  "dependencies": {
+    "koa": "^1.2.0",
+    "koa-bodyparser": "^2.0.1",
+    "koa-cors": "^0.0.16",
+    "koa-router": "^5.4.0",
+    "mz": "^2.4.0",
+    "nodemon": "^1.9.1",
+    "rox": "0.0.1-14",
+    "underscore": "^1.8.3"
+  }
+}
