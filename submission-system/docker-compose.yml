@@ -12,7 +12,7 @@ services:
     aws-init:
         image: "appiriodevops/submissions:aws-cli"
         environment:
-            IP: "$IP"
+            IP: "$DOCKER_IP"
         depends_on:
             - dynamodb
             - sqs
@@ -24,24 +24,25 @@ services:
     mock-services:
         image: appiriodevops/submissions:mock-services
         environment:
-            BASE_URL: "http://$IP"
+            BASE_URL: "http://$DOCKER_IP"
         ports:
             - "8080:8080"
     kafka:
         image: spotify/kafka
         environment:
-            ADVERTISED_HOST: $IP
+            ADVERTISED_HOST: $DOCKER_IP
             ADVERTISED_PORT: 9092
         ports:
             - "2181:2181"
             - "9092:9092"
     nginx:
-        image: appiriodevops/submissions:nginx
+        image: appiriodevops/submissions:nginx-1.0
         depends_on:
             - aws-init
             - mock-services
         environment:
-            IP: $IP
+            DOCKER_IP: $DOCKER_IP
+            HOST_IP: $HOST_IP
         ports:
             - "80:80"
     submissions:
