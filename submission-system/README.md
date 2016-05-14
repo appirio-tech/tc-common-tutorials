@@ -77,15 +77,17 @@ Create a ~/.aws folder, and in this folder create the following files:
 
 ## Environment Configs
 
-Inside the submission-system folder, you will find a env.sh file. This file contains local environment configurations, open it and edit the configurations in there according to your environment:
-
-    # The IP address of the computer running the submission system
-    export IP=192.168.1.65
+Inside the submission-system folder, you will find a `env.sh` file. This file contains local environment configurations, open it and edit the configurations in there according to your environment:
+For Linux
+    # The IP address of the docker machine and host are same,
+    export DOCKER_IP=192.168.1.75
+    export HOST_IP=$DOCKER_IP
 
 Windows/Mac OS X:
 
-    # The IP address of the computer running the submission system
-    export IP=192.168.99.100
+    # The IP address of the docker machine and host are different
+    export DOCKER_IP=192.168.99.100
+    export HOST_IP=192.168.1.75
 
 # Starting the Local Services
 
