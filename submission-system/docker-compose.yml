@@ -17,7 +17,6 @@ services:
         environment:
             IP: "$DOCKER_IP"
         depends_on:
-            - postgres
             - sqs
         command: "/bin/bash -c /data/init.sh"
     informix:
