@@ -9,7 +9,7 @@ The submission system uses multiple AWS services and Topcoder APIs to handle mem
 We will be using Docker and docker-compose to run or mock up the following services:
 
 1. File microservice and S3: Used to upload and download submission files;
-2. DynamoDB: Main submission datastore;
+2. Postgres: Main submission datastore;
 3. Informix: Legacy datastore, data is update in Informix to allow legacy applications to work with the submissions;
 4. NFS: legacy file storage;
 5. Challenge microservice: api to interact with challenge information;
@@ -48,11 +48,11 @@ Update your localhost entry in your hosts file (/etc/hosts) to map local.topcode
 Windows:  
 C:\Windows\System32\drivers\etc\hosts
 ```
-192.168.99.100	 localhost local.topcoder-dev.com
+192.168.99.100	local.topcoder-dev.com
 ```
 Mac OS X - `/etc/hosts`
 ```
-192.168.99.100	 localhost local.topcoder-dev.com
+192.168.99.100	 local.topcoder-dev.com
 ```
 ## AWS credentials
 
@@ -112,15 +112,15 @@ submissions_1 | webpack: bundle is now VALID.
 ```
 At this point you should be able to connect to:
 
-* DynamoDB on localhost:7777;
-* Informix on localhost:2021;
+* Postgres on local.topcoder-dev.com:5432;
+* Informix on local.topcoder-dev.com:2021;
  * User: informix
  * Password: 1nf0rm1x
  * Server: informixoltp_tcp
- * Jdbc url: jdbc:informix-sqli://localhost:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp;
-* SQS on localhost:4568;
-* Kafka on localhost:9092
-* Zookeeper on localhost:2181;
+ * Jdbc url: jdbc:informix-sqli://local.topcoder-dev.com:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp;
+* SQS on local.topcoder-dev.com:4568;
+* Kafka on local.topcoder-dev.com:9092
+* Zookeeper on local.topcoder-dev.com:2181;
 * Frontend on http://local.topcoder-dev.com:3000/
 
 To stop the local services:
@@ -167,29 +167,17 @@ mvn clean compile package
 ```
 # Executing the Submission Service
 
-cd into the ap-submission-service/service, you will find a run.sh file in there containing all environment variables and the startup command to run the service locally:
-```
-export AUTH_DOMAIN=topcoder-dev.com
-export DYNAMODB_ENDPOINT=http://local.topcoder-dev.com:7777
-export FILE_SERVICE_ENDPOINT=http://local.topcoder-dev.com/v3/
-export CHALLENGE_SERVICE_ENDPOINT=http://local.topcoder-dev.com/v3/
-export IDENTITY_SERVICE_ENDPOINT=http://local.topcoder-dev.com/v3/
-export SQS_URL=http://local.topcoder-dev.com:4568/submissions
-java -Ddw.server.applicationConnectors[0].port=8180 -Ddw.server.adminConnectors[0].port=8181 -jar target/submission-service-1.0.1-SNAPSHOT.jar server src/main/resources/config.yml
-```
+cd into the `ap-submission-microservice/service` folder, you will find a run.sh file in there containing all environment variables and the startup command to run the service locally:
 To execute the service:
 ```
 sh run.sh
 ```
 # Executing the Submission Processor
 
-cd into the ap-submission-processor/service folder, in there you will find a run.sh file which contains all environment variables and the startup command to run the processor:
+cd into the `ap-submission-processor/service` folder, in there you will find a run.sh file which contains all environment variables and the startup command to run the processor:
+To execute the service:
 ```
-export SQS_URL=http://local.topcoder-dev.com:4568/submissions
-export API_URL=http://local.topcoder-dev.com/v3
-export DYNAMODB_URL=http://local.topcoder-dev.com:7777
-export ZOOKEEPER_HOSTS_LIST=local.topcoder-dev.com:2181
-java -Ddw.server.applicationConnectors[0].port=8280 -Ddw.server.adminConnectors[0].port=8281 -jar target/ap-submission-processor-1.0-SNAPSHOT.jar server src/main/resources/config.yml
+sh run.sh
 ```
 # Accessing the Submission UI
 
