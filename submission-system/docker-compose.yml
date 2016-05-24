@@ -1,7 +1,7 @@
 version: '2'
 services:
     postgres:
-        image: "appiriodevops/submissions:postgres"
+        image: "appiriodevops/submissions:postgres-1.0"
         environment:
             POSTGRES_PASSWORD: "test"
             POSTGRES_USER: "postgres"
