@@ -1,0 +1,21 @@
+header(ng-hide="vm.loading || !vm.registered")
+  h1.section-title #[span iOS] Community
+
+.section-loading(ng-show="vm.loading")
+
+section.ios(ng-hide="vm.loading")
+  .unregistered(ng-hide="vm.registered")
+    empty-state-placeholder(state-name="dashboard-ios-community", show="!vm.registered", theme="sky")
+
+  .registered(ng-show="vm.registered")
+    .badge-and-challenges
+      .registered-badge
+        .flex-wrapper
+          p iOS Community
+
+          .badge-timeline
+            img(src=require("../../../assets/images/member-program/svg/Member-06.svg"), alt="Development Challenge Icon")
+
+          a.tc-btn.tc-btn-s.tc-btn-ghost.tc-btn-wide(href="http://ios.{{vm.domain}}", title="topcoder iOS Member Program") View Challenges
+
+      ios-card(ng-repeat="challenge in vm.challenges | orderBy:reviewType:true| orderBy:registrationEndDate:true", challenge="challenge", view="'tile'")

@@ -1,0 +1,221 @@
+@import 'topcoder/tc-includes';
+
+.history-graph-directive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .compare {
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+}
+.history-graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .history-graph {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: none;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    rect {
+      fill: $white;
+      stroke: $gray-lighter;
+      stroke-width: 2.3px;
+    }
+
+    .line {
+      fill: none;
+      stroke: #c5c5c5;
+      stroke-width: 2.3px;
+    }
+
+    .grid.x .tick {
+      stroke: $gray-light;
+      stroke-width: 2px;
+      stroke-dasharray: 6, 8;
+    }
+
+    .grid.y .tick {
+      stroke: none;
+      opacity: 0;
+      stroke-width: 1px;
+    }
+
+    .y.axis .tick text {
+      font-size: 10px;
+      width: 20px;
+      text-align: left;
+    }
+
+    circle {
+      r: 5.5px;
+      stroke: $white;
+      stroke-width: 1.5px;
+    }
+
+    circle::hover {
+      r: 7.5px;
+      stroke-width: 2px;
+    }
+
+
+  }
+  .info-port {
+    background: white;
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .rating {
+      width: 130px;
+      height: 130px;
+      background: #09affe;
+      -moz-border-radius: 65px;
+      -webkit-border-radius: 65px;
+      border-radius: 65px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .num {
+        color: white;
+        font-family: 'Sofia Pro';
+        font-size: 35px;
+        font-weight: bold;
+        margin-bottom: 2px;
+      }
+      .label {
+        font-family: 'Sofia Pro';
+        font-size: 14px;
+        font-weight: 200;
+        color: white;
+      }
+      margin-bottom: 20px;
+    }
+    .history-info {
+      height: 50px;
+      margin-bottom: 15px;
+      font-family: 'Sofia Pro';
+      font-weight: 500;
+      font-size: 15px;
+      padding: 0 5px;
+      text-align: center;
+      .challenge {
+      }
+      .date {
+        color: #a3a3ae;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+
+.stats > .graphs {
+  margin-top: -40px !important;
+}
+
+.history-graph-container {
+  width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: row;
+  align-items: flex-start;
+  .history-graph {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: none;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: #c5c5c5;
+      stroke-width: 2.3px;
+    }
+
+    .grid .tick {
+      stroke: white;
+      opacity: 0.7;
+    }
+
+    .y.axis .tick text {
+      font-size: 10px;
+    }
+
+
+  }
+  .info-port {
+    background: #f6f6f6;
+    height: 400px;
+    width: 300px;
+    display: flex;
+    margin-top: 20px;
+    padding-top: 100px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .rating {
+      width: 130px;
+      height: 130px;
+      background: #09affe;
+      -moz-border-radius: 65px;
+      -webkit-border-radius: 65px;
+      border-radius: 65px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .num {
+        color: white;
+        font-family: 'Sofia Pro';
+        font-size: 35px;
+        font-weight: bold;
+        margin-bottom: 2px;
+      }
+      .label {
+        font-family: 'Sofia Pro';
+        font-size: 14px;
+        font-weight: 200;
+        color: white;
+      }
+      margin-bottom: 20px;
+    }
+    .history-info {
+      margin-bottom: 20px;
+      padding: 0 5px;
+      text-align: center;
+    }
+    .compare {
+    }
+  }
+}
+}

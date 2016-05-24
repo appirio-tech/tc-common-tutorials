@@ -1,0 +1,24 @@
+header
+  h1.section-title Single Round Matches
+
+
+.section-loading(ng-show="vm.loading")
+
+tc-section(state="vm.state")
+  .srm-tiles
+    srm-tile(ng-repeat="srm in vm.srms", srm="srm", view="'tile'", ng-class="'tile-view'", user-id="vm.userId")
+
+    .srm-links-card
+      .flex-wrapper
+        h2 Practice on past problems
+
+        a.tc-btn.tc-btn-s.tc-btn-wide.tc-btn-ghost(ng-href="https://arena.{{DOMAIN}}/#/u/practiceProblemList") Practice Problems
+
+        a.tc-btn.tc-btn-s.tc-btn-wide.tc-btn-ghost(ng-href="https://community.{{DOMAIN}}/tc?module=ProblemArchive") Problem Archive
+
+        a.tc-btn.tc-btn-s.tc-btn-wide.tc-btn-ghost(ng-href="https://www.{{DOMAIN}}/member-onboarding/learning-practicing-skills/") Learn More
+
+.srms-links(ng-hide="vm.loading")
+  a(ui-sref="my-srms") View Past SRMs
+
+  a(ng-href="https://arena.{{DOMAIN}}") Launch Arena

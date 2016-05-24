@@ -1,0 +1,157 @@
+@import 'topcoder/tc-includes';
+
+.account-info-container {
+  // padding-bottom: 75px;
+
+  .account-info-error {
+    color: #ef3a3a;
+  }
+
+  .section-fields {
+    margin-top: 20px;
+  }
+
+  .credentials {
+    .section-fields {
+      display: flex;
+      flex-direction: column;
+
+      .form-field {
+
+        &.grey {
+          background-color: #fcfcfc;
+        }
+      }
+
+      .form-label {
+        margin-top: 10px;
+        width: 100%;
+
+
+        &.username {
+          margin-top: 0px;
+        }
+      }
+
+    }
+  }
+
+  .name {
+    .section-fields {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .form-label {
+        width: 100%;
+        margin-top: 10px;
+
+        &.first {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .address {
+    .section-fields {
+      .form-label {
+        margin-top: 10px;
+        &.address {
+          margin-top: 0px;
+        }
+      }
+      .button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .update-account-info {
+    width: 630px;
+
+    .address-fields {
+      @include media-min(768) {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+      }
+    }
+
+    label {
+      display: block;
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    input {
+      display: block;
+      margin-top: 7px;
+    }
+
+    .account-info-error {
+      position: absolute;
+      top: 65px;
+      left: 3px;
+    }
+
+    button.enabled-button {
+      @include ui-enabled-button;
+    }
+  }
+  .save-section {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fcfcfc;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button.save {
+      margin-bottom: 15px;
+      margin-top: 15px;
+      width: 100px;
+    }
+  }
+}
+
+.validation-bar,
+.angucomplete-holder {
+  width: 100%;
+  display: block;
+
+  & input[type='text'],
+  & input[type='password'] {
+    width: 100% !important;
+  }
+}
+
+.address.settings-section {
+  border-bottom: none;
+}
+
+@include media-min(768px) {
+  .account-info-container .section-fields {
+      margin-top: 0px;
+  }
+
+  // size the main container to accomodate for the tooltips
+  // HaCKY!
+  .account-info-container .credentials .section-fields,
+  .account-info-container .name .section-fields,
+  .account-info-container .address .section-fields {
+    min-width: 400px;
+    width: 100%;
+    padding-right: 340px;
+  }
+
+  .tips {
+    left: 105%;
+  }
+}

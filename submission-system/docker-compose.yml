@@ -5,7 +5,7 @@ services:
         environment:
             POSTGRES_PASSWORD: "test"
             POSTGRES_USER: "postgres"
-            POSTGRES_DB: "test"
+            POSTGRES_DB: "submissions"
         ports:
             - "5432:5432"
     sqs:

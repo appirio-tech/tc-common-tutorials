@@ -1,0 +1,22 @@
+.copilot.design(ng-if="vm.track == 'COPILOT'")
+  .top
+    ul.horizontal-stats
+      li.stat
+        .value {{vm.typeStats.activeContests | empty}}
+        .name ACTIVE CHALLENGES
+
+      li.stat
+        .value {{vm.typeStats.activeProjects | empty}}
+        .name ACTIVE PROJECTS
+
+      li.stat
+        .value {{vm.typeStats.contests | empty}}
+        .name TOTAL CHALLENGES
+
+      li.stat
+        .value {{vm.typeStats.projects | empty}}
+        .name TOTAL PROJECTS
+
+      li.stat
+        .value {{vm.typeStats.fulfillment + '%' | empty}}
+        .name FULFILLMENT

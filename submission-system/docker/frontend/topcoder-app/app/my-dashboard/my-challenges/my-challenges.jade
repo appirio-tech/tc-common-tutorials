@@ -1,0 +1,29 @@
+header(ng-hide="vm.loading || !vm.userHasChallenges")
+  h1.section-title My Challenges
+
+  .challenge-view-toggle(ng-show="vm.userHasChallenges")
+    button.tile(ng-click="vm.toggleView('tile')", ng-class="{ disabled: vm.challengeView === 'tile' }") Grid
+
+    button.list(ng-click="vm.toggleView('list')", ng-class="{ disabled: vm.challengeView === 'list' }") List
+
+.section-loading(ng-show="vm.loading")
+
+section.noChallenges(ng-if="!vm.userHasChallenges && !vm.loading")
+  .never-participated(ng-if="vm.neverParticipated")
+    empty-state-placeholder(state-name="dashboard-challenges-never-participated", show="vm.neverParticipated", theme="black")
+  empty-state-placeholder(state-name="dashboard-challenges", show="!vm.userHasChallenges && !vm.neverParticipated", theme="black")
+
+section.hasChallenges(ng-if="vm.userHasChallenges && !vm.loading", ng-class="{ 'list-view-active': vm.challengeView === 'list' }")
+  .section-titles(ng-show="vm.challengeView === 'list'")
+    .challenge-title Challenges
+    .phase-title Phase
+    .regs-subs-title Registrations &amp; Submissions
+
+  .challenges(ng-class="vm.challengeView + '-view'")
+
+    challenge-tile(ng-repeat="challenge in vm.myChallenges | orderBy:registrationEndDate:true", challenge="challenge", view="vm.challengeView", ng-class="vm.challengeView + '-view'")
+
+.my-challenges-links(id="viewAllChallenges", ng-show="!vm.neverParticipated && !vm.loading")
+  a.active(ui-sref="my-challenges({status: 'active'})", ng-if="vm.userHasChallenges") View More
+
+  a.past(ui-sref="my-challenges({status: 'completed'})") Past Challenges

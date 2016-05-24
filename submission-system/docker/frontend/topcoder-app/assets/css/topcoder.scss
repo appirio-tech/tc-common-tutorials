@@ -1,0 +1,566 @@
+@import 'topcoder/tc-styles';
+@include glyphicons-halflings;
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-bold-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-bold-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-bold-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-bold-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-bold-webfont.svg') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-bold-italic-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-bold-italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-bold-italic-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-bold-italic-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-bold-italic-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-bold-italic-webfont.svg') format('svg');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-semibold-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-semibold-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-semibold-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-semibold-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-semibold-webfont.svg') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-semibold-italic-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-semibold-italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-semibold-italic-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-semibold-italic-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-semibold-italic-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-semibold-italic-webfont.svg') format('svg');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-medium-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-medium-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-medium-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-medium-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-medium-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-medium-webfont.svg') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-medium-italic-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-medium-italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-medium-italic-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-medium-italic-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-medium-italic-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-medium-italic-webfont.svg') format('svg');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-regular-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-regular-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-regular-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-regular-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-regular-webfont.svg') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-regular-italic-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-regular-italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-regular-italic-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-regular-italic-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-regular-italic-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-regular-italic-webfont.svg') format('svg');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-light-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-light-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-light-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-light-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-light-webfont.svg') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('../fonts/sofiapro/sofiapro-light-italic-webfont.eot');
+  src: url('../fonts/sofiapro/sofiapro-light-italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/sofiapro/sofiapro-light-italic-webfont.woff2') format('woff2'),
+       url('../fonts/sofiapro/sofiapro-light-italic-webfont.woff') format('woff'),
+       url('../fonts/sofiapro/sofiapro-light-italic-webfont.ttf') format('truetype'),
+       url('../fonts/sofiapro/sofiapro-light-italic-webfont.svg') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Merriweather Sans';
+  src: url('../fonts/merriweather-sans/merriweathersans-bold-webfont.eot');
+  src: url('../fonts/merriweather-sans/merriweathersans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/merriweather-sans/merriweathersans-bold-webfont.woff2') format('woff2'),
+       url('../fonts/merriweather-sans/merriweathersans-bold-webfont.woff') format('woff'),
+       url('../fonts/merriweather-sans/merriweathersans-bold-webfont.ttf') format('truetype'),
+       url('../fonts/merriweather-sans/merriweathersans-bold-webfont.svg') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Merriweather Sans';
+  src: url('../fonts/merriweather-sans/merriweathersans-bolditalic-webfont.eot');
+  src: url('../fonts/merriweather-sans/merriweathersans-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/merriweather-sans/merriweathersans-bolditalic-webfont.woff2') format('woff2'),
+       url('../fonts/merriweather-sans/merriweathersans-bolditalic-webfont.woff') format('woff'),
+       url('../fonts/merriweather-sans/merriweathersans-bolditalic-webfont.ttf') format('truetype'),
+       url('../fonts/merriweather-sans/merriweathersans-bolditalic-webfont.svg') format('svg');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Merriweather Sans';
+  src: url('../fonts/merriweather-sans/merriweathersans-regular-webfont.eot');
+  src: url('../fonts/merriweather-sans/merriweathersans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/merriweather-sans/merriweathersans-regular-webfont.woff2') format('woff2'),
+       url('../fonts/merriweather-sans/merriweathersans-regular-webfont.woff') format('woff'),
+       url('../fonts/merriweather-sans/merriweathersans-regular-webfont.ttf') format('truetype'),
+       url('../fonts/merriweather-sans/merriweathersans-regular-webfont.svg') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Merriweather Sans';
+  src: url('../fonts/merriweather-sans/merriweathersans-italic-webfont.eot');
+  src: url('../fonts/merriweather-sans/merriweathersans-italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/merriweather-sans/merriweathersans-italic-webfont.woff2') format('woff2'),
+       url('../fonts/merriweather-sans/merriweathersans-italic-webfont.woff') format('woff'),
+       url('../fonts/merriweather-sans/merriweathersans-italic-webfont.ttf') format('truetype'),
+       url('../fonts/merriweather-sans/merriweathersans-italic-webfont.svg') format('svg');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Merriweather Sans';
+  src: url('../fonts/merriweather-sans/merriweathersans-light-webfont.eot');
+  src: url('../fonts/merriweather-sans/merriweathersans-light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/merriweather-sans/merriweathersans-light-webfont.woff2') format('woff2'),
+       url('../fonts/merriweather-sans/merriweathersans-light-webfont.woff') format('woff'),
+       url('../fonts/merriweather-sans/merriweathersans-light-webfont.ttf') format('truetype'),
+       url('../fonts/merriweather-sans/merriweathersans-light-webfont.svg') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Merriweather Sans';
+  src: url('../fonts/merriweather-sans/merriweathersans-lightitalic-webfont.eot');
+  src: url('../fonts/merriweather-sans/merriweathersans-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/merriweather-sans/merriweathersans-lightitalic-webfont.woff2') format('woff2'),
+       url('../fonts/merriweather-sans/merriweathersans-lightitalic-webfont.woff') format('woff'),
+       url('../fonts/merriweather-sans/merriweathersans-lightitalic-webfont.ttf') format('truetype'),
+       url('../fonts/merriweather-sans/merriweathersans-lightitalic-webfont.svg') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+body {
+  @include font-with-weight('Merriweather Sans', 400);
+  background-color: $gray-lighter;
+
+  > svg {
+    display: none;
+  }
+}
+
+// TODO move hidden and visible classes to ui helpers kit
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.fold-wrapper {
+  margin: 0;
+  min-height: 100%;
+}
+
+.view-container {
+  min-height: 440px;
+  padding-bottom: 30px;
+}
+
+.page-container {
+  padding: 10px;
+  @media screen and (min-width:768px) {
+    padding: 30px 10px;
+  }
+}
+
+// Section loading and form styles
+.section-loading {
+  background: url(../images/ripple.gif) no-repeat center center;
+  width: 100%;
+  min-height: 50px;
+}
+
+#toast-container > div {
+  @include sofia-pro-light;
+  width: 400px;
+  opacity: .95;
+}
+
+
+
+// FORMS
+// ----------------------------------------------------------------------
+//
+.form-errors {
+  position: relative;
+  width: 380px;
+  line-height: 22px;
+  text-align: left;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  p {
+    margin: 2px 0 12px 5px;
+  }
+}
+
+.form-notice {
+  color: #58595b;
+  font-size: 13px;
+}
+
+.form-error {
+  @extend .form-notice;
+  color: #ed5d5d;
+}
+
+
+.form-input-error {
+  background-color: $error-lighter;
+  border: 1px solid $error-light;
+  color: $error;
+  font-size: 12px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+.form-label {
+  @include sofia-pro-medium;
+  color: $gray-darkest;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  text-transform: uppercase;
+  .mandatory {
+    color: $primary-light;
+    float: right;
+    text-transform: none;
+  }
+  .char-count {
+    float: right;
+    font-size: 11px;
+    padding-right: 5px;
+  }
+  .grey {
+    color: $accent-gray;
+  }
+}
+
+// Error and success styles
+.validation-bar {
+  position: relative;
+  &:before {
+    border-radius: 3px 0 0 3px;
+    content: '';
+    display: none;
+    height: 38px;
+    width: 2px;
+    left: 1px;
+    position: absolute;
+    top: 0;
+  }
+  &.error-bar:before {
+    background-color: $error;
+    display: block;
+  }
+  &.success-bar:before {
+    background-color: $success;
+    display: block;
+  }
+}
+
+// FORM TIPS
+// ----------------------------------------------------------------------
+// probably structure needs to be redone
+
+$tips-shadow: 0 1px 6px 1px rgba(0, 0, 0, .2);
+$tips-background: $gray-lighter;
+
+// Tip conatiner
+.tips {
+  background-color: $tips-background;
+  border-radius: 4px;
+  opacity: 1;
+  padding: 20px;
+  padding-bottom: 20px;
+  transition: all .1s ease-in-out;
+  z-index: 1000;
+  @media screen and (min-width: 915px) {
+    box-shadow: $tips-shadow;
+    width: 320px;
+    padding-bottom: 10px;
+    position: absolute;
+    text-align: left;
+    top: -10px;
+  }
+  // The tip container is hidden
+  &.ng-hide {
+    opacity: 0;
+  }
+  // Tip container arrow element
+  .arrow {
+    display: none;
+    @media screen and (min-width: 915px) {
+      display: block;
+      height: 34px;
+      width: 24px;
+      left: -24px;
+      overflow: hidden;
+      position: absolute;
+      top: 10px;
+      &:after {
+           -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+             -o-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        background-color: $tips-background;
+        box-shadow: $tips-shadow;
+        content: '';
+        display: block;
+        height: 12px;
+        width: 12px;
+        left: 18px;
+        position: absolute;
+        top: 10px;
+      }
+    }
+  }
+  h3 {
+    @include sofia-pro-medium;
+    font-size: 14px;
+    padding-bottom: 15px;
+    @media only screen and (max-width: 915px) {
+      font-size: 16px;
+    }
+  }
+  p {
+    color: $gray-darkest;
+    font-size: 13px;
+    line-height: 1.3;
+    padding-bottom: 10px;
+    position: relative;
+    text-align: left;
+  }
+  p:before {
+    // font-family: 'FontAwesome';
+    @include sofia-pro-medium;
+    content: '';
+    width: 20px;
+    font-size: 14px;
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+
+// Password tips show checkmark validation
+// TODO: refactor name to be context independent, like .validation-tips
+.password-tips {
+  p {
+    padding-left: 20px
+  }
+  p:before {
+    color: $success;
+    content: '\2713 ';
+    display: none;
+  }
+  .has-length-between-range:before,
+  .has-letter:before,
+  .has-symbol-or-number:before,
+  .has-number:before {
+    display: block;
+  }
+}
+
+
+// SWITCHES
+// ----------------------------------------------------------------------
+// TODO: Refactor
+
+// Switch parameters
+$switch-width: 44px;
+$switch-height: 24px;
+$switch-handle-offset: 3px;
+$switch-handle-size: $switch-height - (2 * $switch-handle-offset);
+$switch-active-color: $primary;
+$switch-inactive-color: $gray;
+
+@mixin switch-transition {
+  transition: all .15s ease-in-out;
+}
+
+// Parent container
+.onoffswitch {
+  @include switch-transition;
+  background-color: $switch-inactive-color;
+  border-radius: $switch-height;
+  box-sizing: border-box;
+  height: $switch-height;
+  width: $switch-width;
+  position: relative;
+
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+  display: none;
+}
+
+.onoffswitch-label {
+  border-radius: $switch-height;
+  cursor: pointer;
+  display: block;
+  width: $switch-width;
+  overflow: hidden;
+}
+
+.onoffswitch-inner {
+  @include switch-transition;
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+}
+
+// Pseudo-elements that slide to create background of the switch; TODO: Remove those
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+  box-sizing: border-box;
+  color: white;
+  display: block;
+  float: left;
+  height: $switch-height;
+  width: 50%;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: $switch-height;
+  padding: 0;
+}
+
+.onoffswitch-checkbox + .onoffswitch-label {
+  @include switch-transition;
+  background-color: $switch-inactive-color;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+  background-color: $switch-active-color;
+  & .onoffswitch-inner {
+    // margin-left: 0;
+    // background-color: $switch-active-color;
+  }
+  & .onoffswitch-switch {
+    right: 0;
+  }
+}
+
+
+// Switch is on
+.onoffswitch-inner:before {
+  background-color: transparent; //$switch-active-color;
+  color: transparent;// $switch-active-color;
+  content: '';
+  padding-left: 10px;
+}
+
+// switch is off
+.onoffswitch-inner:after {
+  background-color: transparent; // $switch-inactive-color;
+  color: transparent; // $switch-inactive-color;
+  content: '';
+  padding-right: 10px;
+  text-align: right;
+}
+
+// SWITCH HANDLE
+.onoffswitch-switch {
+  @include switch-transition;
+  background: $white;
+  background-color: $white;
+  border: none;
+  border-radius: $switch-height;
+  bottom: 0;
+  color: $white;
+  display: block;
+  height: $switch-handle-size;
+  width: $switch-handle-size;
+  margin: $switch-handle-offset;
+  position: absolute;
+  right: $switch-handle-offset + $switch-handle-size -1;
+  top: 0;
+}
+
+// DELETE when moving member search back
+// Also delete TypeKit fonts from index.html
+// Also delete redux-logger and babel-polyfill from npm modules
+// also delete babel-polyfill from index.js
+#member-search-wrapper {
+  font-family: Roboto !important;
+
+  .member-search-view {
+    background-color: transparent;
+  }
+
+  // Overrides old style guide
+  a {
+    cursor: auto !important;
+    transition: none !important;
+    text-decoration: none !important;
+    color: inherit !important;
+
+    &:visited, &:hover, &:active {
+      color: inherit !important;
+      cursor: auto !important;
+      text-decoration: none !important;
+    }
+  }
+}

@@ -1,0 +1,71 @@
+.skill-picker-container
+  h1 Welcome to Topcoder
+
+  p.instruction Hi {{vm.username}}! Your account is now active. To help other members get to know you, select your areas of interest and specify some of your skills. You can edit this information later on your Profile.
+
+  .communities(ng-show="!vm.loadingCommunities && vm.showCommunity")
+    .communities__title Communities
+    .communities__description Topcoder regularly establishes exclusive communities to help members develop expertise and earn money in particular technologies. Join a featured community to be notified of events and challenges.
+    .communities__list
+      .community(ng-repeat="(communityKey, community) in vm.communities", ng-class="{'community--disabled': !community.status}", ng-if="community.display")
+        .community__details
+          .community__icon(ng-class="{'community__icon--disabled': !community.status}")
+            img(ng-if="communityKey == 'ios' && community.status", src=require("../../assets/images/ico-ios-community.svg"))
+            img(ng-if="communityKey == 'ios' && !community.status", src=require("../../assets/images/ico-ios-community-grey.svg"))
+
+          .community__text
+            span.community__title(class="{{!community.status && 'disabled'}}") {{community.displayName}}
+            .community__description
+              span(ng-if="communityKey == 'ios'") Mobile app design and development for iOS, with Swift emphasis
+
+        onoff-switch(model="community.status", unique-id="'community-' + communityKey")
+
+  .tracks-container
+    .title tracks
+    .description Topcoder's three categories of challenges… please pick at least one based on your skills and interests.
+    .tracks
+      track-toggle(tracks="vm.tracks")
+
+  .skills-container
+    .title skills
+    .description Languages, environments, frameworks, libraries, platforms, tools, and any other technologies that you know well. Please select from some popular skills. You can add others later on you Profile.
+
+    .skills-section(ng-show="vm.tracks.DESIGN")
+      .track-title select design skills
+
+      .skills
+        .skill(ng-repeat="tag in vm.featuredSkills | filter:{categories: 'DESIGN'} | orderBy:'priority':true",
+          ng-class="{'selected-skill': vm.mySkills.indexOf(tag.id.toString()) > -1}")
+          a(ng-click="vm.toggleSkill(tag.id.toString())")
+            .icon
+              img(ng-src="{{vm.ASSET_PREFIX}}images/skills/id-{{tag.id}}.svg", fallback-src="{{vm.ASSET_PREFIX}}images/skills/id-design.svg")
+            .name {{tag.name}}
+
+    .skills-section(ng-show="vm.tracks.DEVELOP")
+      .track-title select development skills
+
+      .skills
+        .skill(ng-repeat="tag in vm.featuredSkills | filter:{categories: 'DEVELOP'} | orderBy:'priority':true",
+          ng-class="{'selected-skill': vm.mySkills.indexOf(tag.id.toString()) > -1}")
+          a(ng-click="vm.toggleSkill(tag.id.toString())")
+            .icon
+              img(ng-src="{{vm.ASSET_PREFIX}}images/skills/id-{{tag.id}}.svg", fallback-src="{{vm.ASSET_PREFIX}}images/skills/id-develop.svg")
+            .name {{tag.name}}
+
+    .skills-section(ng-show="vm.tracks.DATA_SCIENCE")
+      .track-title select data science skills
+
+      .skills
+        .skill(ng-repeat="tag in vm.featuredSkills | filter:{categories: 'DATA_SCIENCE'} | orderBy:'priority':true",
+          ng-class="{'selected-skill': vm.mySkills.indexOf(tag.id.toString()) > -1}")
+          a(ng-click="vm.toggleSkill(tag.id.toString())")
+            .icon
+              img(ng-src="{{vm.ASSET_PREFIX}}images/skills/id-{{tag.id}}.svg", fallback-src="{{vm.ASSET_PREFIX}}images/skills/id-data.svg")
+            .name {{tag.name}}
+
+
+  button.tc-btn.tc-btn-l.done-button(
+    type="button",
+    tc-busy-button, tc-busy-when="vm.saving",
+    ng-click="vm.submitSkills()",
+    ng-disabled="vm.disableDoneButton || !vm.isTracksDirty()") Done

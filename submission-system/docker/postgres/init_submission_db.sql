@@ -1,4 +1,4 @@
-CREATE TABLE public.submission
+CREATE TABLE public.submissions
 (
   legacy_id text,
   status text,
@@ -17,13 +17,13 @@ CREATE TABLE public.submission
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE public.submission
+ALTER TABLE public.submissions
   OWNER TO postgres;
 
-CREATE TABLE public.submission_file
+CREATE TABLE public.submission_files
 (
   id serial NOT NULL,
-  submission_id integer references public.submission(id),
+  submission_id integer references public.submissions(id),
   file_path text NOT NULL,
   file_name text NOT NULL,
   entry_type json NOT NULL,
@@ -35,6 +35,6 @@ WITH (
   OIDS=FALSE
 );
 
-ALTER TABLE public.submission_file
+ALTER TABLE public.submission_files
   OWNER TO postgres;
 

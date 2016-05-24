@@ -1,0 +1,117 @@
+@import 'topcoder/tc-includes';
+
+.programs {
+
+  .section-loading {
+    min-height: 200px;
+  }
+
+  h1.section-title {
+    margin-bottom: 30px;
+
+    span {
+      text-transform: none;
+    }
+  }
+
+  .unregistered {
+    .empty-state-placeholder {
+      .title {
+        text-transform: none;
+      }
+    }
+  }
+
+  .registered {
+    padding: 20px 15px 5px 15px;
+    border-top: 1px solid $gray-light;
+    border-bottom: 1px solid $gray-light;
+    background-color: $gray-lightest;
+
+    .badge-and-challenges {
+      @include horizontal-scroll;
+      @media only screen and (min-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        overflow: visible;
+        white-space: normal;
+        width: 555px;
+      }
+      @media only screen and (min-width: 870px) {
+        width: 840px;
+      }
+      @media only screen and (min-width: 1155px) {
+        width: 1125px;
+      }
+    }
+
+    .registered-badge {
+      display: inline;
+      vertical-align: top;
+      height: 370px;
+      min-width: 270px;
+      border: 1px solid #DCDCDC;
+      border-radius: 4px;
+      background-color: $white;
+      @media only screen and (max-width: 767px) {
+        display: inline-block;
+      }
+
+      .flex-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      p {
+        margin-top: 60px;
+        margin-bottom: 37px;
+        @include sofia-pro-light;
+        font-size: 20px;
+        color: $gray-darkest;
+      }
+
+      .badge-timeline {
+        width: 120px;
+      }
+
+      a {
+        display: block;
+        margin-top: 37px;
+        text-decoration: none;
+      }
+    }
+
+    ios-card {
+      display: inline;
+      margin-bottom: 15px;
+      @media only screen and (max-width: 767px) {
+        display: inline-block;
+        margin-left: 15px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+      @media only screen and (min-width: 768px) {
+        &:nth-child(2n) {
+          margin-left: 15px;
+        }
+      }
+      @media only screen and (min-width: 870px) {
+        margin-left: 15px;
+
+        &:nth-child(4n) {
+          margin-left: 0;
+        }
+      }
+      @media only screen and (min-width: 1155px) {
+        &:nth-child(4n) {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}

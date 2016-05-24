@@ -1,0 +1,102 @@
+.about-container
+  .profile-header-container(ng-cloak,id="affix", tc-sticky)
+    //- .sticky-container(sticky media-query="min-width: 780px" use-placeholder="true" offset="10" confine="true" sticky-class="sticked")
+      profile-widget(profile="profileVm.profile", edit-profile-link="profileVm.showEditProfileLink", num-wins="profileVm.numWins", profile-vm="profileVm")
+
+    //- .sticky-container(bs-affix data-offset-top="10" data-offset-bottom="400")
+    .sticky-container
+      profile-widget(profile="profileVm.profile", edit-profile-link="profileVm.showEditProfileLink", num-wins="profileVm.numWins", profile-vm="profileVm")
+
+  .profile-about-container
+
+    .empty-profile
+      .empty-state
+        empty-state-placeholder(state-name="profile-empty", show="profileVm.status.skills === 'ready' && profileVm.status.stats === 'ready' && profileVm.status.externalLinks === 'ready' && !profileVm.showEditProfileLink && !profileVm.showTCActivity && (!profileVm.skills || (profileVm.skills && profileVm.skills.length == 0)) && !vm.linkedExternalAccounts.length")
+          .sample-image
+            img(ng-src=require("../../../assets/images/robot.svg"))
+
+    #skills
+      tc-section(ng-show="vm.displaySection.skills", state="profileVm.status.skills")
+
+        .skills
+          h3.activity(ng-hide="!profileVm.skills || (profileVm.skills && profileVm.skills.length == 0)") Skills
+
+          .list(ng-show="profileVm.skills && profileVm.skills.length > 0")
+
+            .skill(ng-repeat="skill in vm.skills")
+              skill-tile(skill="skill")
+
+          button.tc-btn.tc-btn-s.more(ng-if="vm.skills.length < vm.fullSkills.length", ng-click="vm.skills = vm.fullSkills") VIEW ALL
+          button.tc-btn.tc-btn-s.more(ng-if="vm.skills.length > 10", ng-click="vm.skills = vm.someSkills") VIEW LESS
+
+          .empty-state
+            empty-state-placeholder(state-name="profile-skills", show="!profileVm.skills || (profileVm.skills && profileVm.skills.length == 0)")
+              .sample-skills
+                .skill(ng-repeat="skill in vm.sampleSkills")
+                  skill-tile(skill="skill")
+
+
+
+    #tcActivity
+      tc-section(ng-show="vm.displaySection.stats || profileVm.showTCActivity", state="profileVm.status.stats")
+
+        .categories
+
+          .empty-state
+            empty-state-placeholder(state-name="profile-topcoder-activity", show="!profileVm.showTCActivity", theme="offwhite")
+
+          .track(
+            ng-repeat="track in profileVm.tracks",
+            ng-if="profileVm.categories[track].showTrack",
+            id="{{track}}_TRACK"
+          )
+
+            div(class="name")
+              img(ng-if="track == 'DATA_SCIENCE'", src=require("../../../assets/images/ico-track-data.svg"))
+              img(ng-if="track == 'DEVELOP'", src=require("../../../assets/images/ico-track-develop.svg"))
+              img(ng-if="track == 'DESIGN'", src=require("../../../assets/images/ico-track-design.svg"))
+              img(ng-if="track == 'COPILOT'", src=require("../../../assets/images/ico-track-copilot.svg"))
+              span {{track | track | uppercase}} ACTIVITY
+
+            a.subtrack(
+              ng-repeat="subtrack in profileVm.categories[track]",
+              ui-sref="profile.subtrack({track: subtrack.track, subTrack: subtrack.subTrack})",
+              class="{{$index == 0 && 'first'}}"
+              ng-if="subtrack.showStats"
+            )
+              .name {{subtrack.subTrack | track}}
+
+              .ranking(ng-if="subtrack.statType == 'Rating'")
+                .number.rating(style="color: {{subtrack.rating | ratingColor}}")
+                  | {{subtrack.rating}}
+
+                .tag Rating
+
+              .ranking(ng-if="subtrack.statType == 'Ranking'")
+                .number {{subtrack.rank | ordinal}}
+
+                .tag Ranking
+
+              .ranking(ng-if="subtrack.statType === 'Wins'")
+                .number(style="color: #21B2F1") {{subtrack.wins}}
+
+                .tag Wins
+
+              .ranking(ng-if="subtrack.fulfillment")
+                .number {{subtrack.fulfillment + '%'}}
+
+                .tag Fulfillment
+
+              img.arrow(src=require("../../../assets/images/ico-arrow-big-right.svg"))
+
+    #externalLinks
+      tc-section(ng-show="vm.displaySection.externalLinks", state="profileVm.status.externalLinks")
+        .external-links
+
+          h3.activity(ng-if="vm.linkedExternalAccounts.length") on the web
+
+          external-links-data(ng-show="vm.linkedExternalAccounts.length", linked-accounts-data="vm.linkedExternalAccounts")
+
+          .empty-state
+            empty-state-placeholder(state-name="profile-external-links", show="!vm.linkedExternalAccounts.length")
+              external-accounts.external-account-container(linked-accounts="[]", links-data="{}", read-only="true")

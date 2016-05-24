@@ -1,0 +1,111 @@
+.edit-profile-container
+  form(name="vm.editProfile", ng-submit="vm.editProfile.$valid && vm.updateProfile()", autocomplete="off")
+    // Stops Chrome from autofilling and autocompleting (along with autocomplete="off" on the form)
+    input(autocomplete="false", name="hidden", type="text", style="display:none;")
+
+    .settings-section.about
+      .section-info
+        h2 About Me
+        .description The most important information that other community members should know about you.
+
+      .section-fields
+        .image
+          .form-label your profile image
+          .edit-image
+            img.profile-circle(ng-show="vm.userData.photoURL && vm.userData.photoURL.length", ng-src="{{vm.userData.photoURL}}")
+            img.profile-circle(ng-show="!vm.userData.photoURL || !vm.userData.photoURL.length", src=require("../../../assets/images/ico-user-default.svg"))
+
+            .buttons
+              button.file-upload.tc-btn.tc-btn-primary.tc-btn-s(ng-click="vm.changeImage()", type="button")
+                span(ng-show="vm.userData.photoURL && vm.userData.photoURL.length") Change Image
+                span(ng-show="!vm.userData.photoURL || !vm.userData.photoURL.length") Add Image
+              input(type="file", name="image", on-file-change="on-file-change", id="change-image-input", style="display: none;")
+
+              .file-delete(ng-show="vm.userData.photoURL && vm.userData.photoURL.length")
+                button.tc-btn.tc-btn-secondary.tc-btn-s(ng-click="vm.deleteImage()", type="button") Delete
+
+        .country
+          .form-label Country to represent
+          dropdown(
+            name="'location'",
+            options="vm.countries",
+            value="vm.countryObj",
+            on-change="vm.updateCountry",
+            placeholder="'Country'",
+            match-pos="'start'",
+            match-prop="'name'",
+            input-props="{'id':'countryId'}",
+            label-key="'name'",
+            value-key="'name'",
+            clearable="false"
+          )
+          span.error-message(ng-if="!vm.isValidCountry") This is a required field
+
+        .bio
+          .form-label(style="width: 100%;") short bio
+            span.char-count {{vm.userData.description.length || 0}}
+              span.grey &nbsp;/ 256
+          textarea.topcoder-input(name="description", ng-model="vm.userData.description", data-ng-trim="false", maxlength="256", placeholder="E.g., I'm a JS architect interested in creating new data interchange formats. I love sci-fi and riding my motorcycle.")
+
+    .settings-section.tracks
+      .section-info
+        h2 Tracks
+        .description Topcoder's three categories of challenges... please pick at least one based on your skills and interests.
+
+
+      .section-fields
+        track-toggle(tracks="vm.tracks")
+
+    .save-section
+      button.tc-btn.tc-btn-primary.tc-btn-wide(
+        type="submit",
+        tc-busy-button,
+        tc-busy-when="vm.profileFormProcessing",
+        ng-disabled="!vm.isValidCountry || !vm.countryObj || vm.editProfile.$invalid || vm.editProfile.$pristine",
+        ng-class="{'disabled': disabled}"
+      ) Save
+
+  .settings-section.skills
+    .section-info
+      h2 Skills
+      .description Languages, environments, frameworks, libraries, platforms, tools, and any other technologies that you know well.
+
+    .section-fields
+      .field-label Add a new skill
+      dropdown(
+        options="vm.tags",
+        on-change="vm.addSkill",
+        placeholder="'Start typing a skill then select from the list'",
+        match-pos="'start'",
+        match-prop="'name'",
+        name="'skill-input'",
+        input-props="{'id':'tagId'}",
+        label-key="'name'",
+        value-key="'name'",
+        clearable="false"
+        )
+
+      .list
+        .skill(ng-repeat="skill in vm.skills | orderBy:'-score' | orderBy:'-isNew'")
+          skill-tile(skill="skill" enable-hide="true")
+
+  .settings-section.links
+    .section-info
+      h2 External links
+      .description Show off your work and experience outside of Topcoder. Connect accounts from popular services and networks or add a link to any site.
+
+    .section-fields
+      .field-label Add a web link
+
+      .web-links
+        external-web-link(linked-accounts="vm.linkedExternalAccountsData", user-handle="{{vm.userData.handle}}")
+
+      .field-label Link Your Accounts
+
+      .external-links
+        external-accounts(linked-accounts="vm.linkedExternalAccountsData", read-only="false")
+
+      .field-label Linked Accounts
+
+      .existing-links
+        external-links-data(linked-accounts-data="vm.linkedExternalAccountsData", editable="true", user-handle="{{vm.userData.handle}}")
