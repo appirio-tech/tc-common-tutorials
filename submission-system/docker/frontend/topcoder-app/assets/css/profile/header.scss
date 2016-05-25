@@ -1,0 +1,15 @@
+@import 'topcoder/tc-includes';
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+}
+
+
+hr {
+  width: 100%;
+  border: 1px solid #dddddd;
+  margin-bottom: 15px;
+}

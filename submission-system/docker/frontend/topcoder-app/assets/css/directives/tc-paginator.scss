@@ -1,0 +1,26 @@
+@import 'topcoder/tc-includes';
+
+.tc-paginator {
+	display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-right: 10px;
+  margin-bottom: 10px;
+
+  a {
+    text-decoration: underline;
+
+    &.disabled {
+      text-decoration: none;
+      color: $dark-gray;
+      cursor: default;
+    }
+
+    &.prev {
+      text-transform: uppercase;
+    }
+    &.next {
+      text-transform: uppercase;
+    }
+  }
+}

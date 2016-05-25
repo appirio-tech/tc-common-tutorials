@@ -1,0 +1,214 @@
+@import 'topcoder/tc-includes';
+
+.my-srms-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include module-l;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+  hr {
+    @include horizontal-rule;
+    margin-bottom: 35px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    color: #4f4f4f;
+    text-align: center;
+  }
+
+  .has-srms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 15px 30px 15px;
+    background-color: $gray-lightest;
+  }
+
+  .content {
+
+    section.my-srms {
+      background: white;
+      align-self: center;
+      display: flex;
+      flex-flow: column wrap;
+      position: relative;
+      width: 100%;
+
+      .top {
+        /*position: relative;*/
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-top: 35px;
+        padding-bottom: 35px;
+        border-bottom: 1px solid $gray-light;
+
+        .filters {
+          position: initial;
+          /*bottom: 0;
+          left: 55px;*/
+          margin-left: 55px;
+          align-self: flex-start;
+          text-transform: uppercase;
+          a {
+            text-decoration: none;
+
+            &.disabled {
+              color: $dark-gray;
+              cursor: default;
+            }
+          }
+        }
+
+        .viewOptions {
+          position: initial;
+          /*bottom: 0;
+          right: 55px;*/
+          margin-right: 55px;
+          align-self: flex-end;
+          button {
+            margin-right: 17px;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            background-color: $white;
+            @include sofia-pro-light;
+            font-size: 11px;
+            line-height: 16px;
+            text-transform: uppercase;
+            color: #A3A3AE;
+            cursor: pointer;
+
+            &.disabled {
+              color: $black;
+              cursor: default;
+
+              &.tile:before {
+                background: url(../../images/grid-on.svg);
+              }
+              &.list:before {
+                background: url(../../images/list-on.svg);
+              }
+            }
+
+            &:before {
+              content: '';
+              display: inline-block;
+              margin-bottom: 2px;
+              margin-right: 4px;
+              vertical-align: middle;
+              @include background-image-size(12px, 12px);
+            }
+
+            &.tile:before {
+              background: url(../../images/grid-off.svg);
+            }
+            &.list:before {
+              background: url(../../images/list-off.svg);
+            }
+
+          }
+        }
+      }
+
+
+      .data {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 15px 0px;
+        margin: 0 auto;
+
+        &.list-view {
+          flex-flow: column wrap;
+          width: 100%;
+        }
+      }
+
+      .bottom {
+        border-top: 1px solid #F0F0F0;
+        padding: 35px 55px 15px 55px;
+      }
+
+      srm-tile {
+        display: inline;
+        margin-bottom: 15px;
+        &.tile-view {
+
+          margin-bottom: 20px;
+          @media only screen and (max-width: 767px) {
+            display: inline-block;
+            margin-left: 15px;
+
+            &:first-child {
+              margin-left: 0;
+            }
+          }
+          @media only screen and (min-width: 768px) {
+            &:nth-child(2n + 1) {
+              margin-right: 15px;
+            }
+          }
+          @media only screen and (min-width: 870px) {
+            margin-right: 15px;
+
+            &:nth-child(3n) {
+              margin-right: 0;
+            }
+          }
+          @media only screen and (min-width: 1155px) {
+            &:nth-child(3n) {
+              margin-right: 15px;
+            }
+            &:nth-child(4n) {
+              margin-right: 0;
+            }
+          }
+        }
+        &.list-view {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+}
+
+
+@media (min-width: 768px) {
+  .my-srms-container {
+    @include module-l;
+    margin-top: 30px;
+  }
+}
+
+@media (min-width: 870px) {
+  .my-srms-container {
+    section.my-srms {
+      .data {
+        max-width: 840px;
+      }
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .my-srms-container {
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 1155px) {
+  .my-srms-container {
+    section.my-srms {
+      .data {
+        max-width: 1125px;
+      }
+    }
+  }
+}

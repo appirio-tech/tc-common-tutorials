@@ -1,0 +1,15 @@
+.distribution-graph-directive(ng-show="graphState.show == 'distribution'")
+
+  .graph-viewer
+    .distribution-graph
+
+    .info-port
+      .coders(ng-if="displayCoders", style="background: {{highlightedRating || rating | ratingColor}}")
+        .num {{numCoders}}
+        .label CODERS
+      .coders(ng-if="!displayCoders", style="background: {{rating | ratingColor}}")
+        .num {{rating}}
+        .label RATING
+      button.tc-btn.tc-btn-s.compare(ng-click="graphState.show = 'history'")
+        | View Rating History
+

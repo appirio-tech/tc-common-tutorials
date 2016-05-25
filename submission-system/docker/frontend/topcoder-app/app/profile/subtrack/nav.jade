@@ -1,0 +1,56 @@
+.nav-top
+  .user
+    .avatar
+      img(ng-src="{{vm.profile.photoURL}}")
+
+    .handle(style="color: {{vm.handleColor}}") {{vm.profile.handle}}
+
+  .exit(ng-click="vm.closeDialog()")
+    img(src=require("../../../assets/images/x-mark-gray.svg"))
+
+hr
+.categoryNav
+  .track(
+    ng-repeat="track in vm.profile.tracks",
+    ng-if="vm.categories[track].length > 0"
+  )
+
+    div(class="name")
+      img(ng-if="track == 'DATA_SCIENCE'", src=require("../../../assets/images/ico-track-data.svg"))
+      img(ng-if="track == 'DEVELOP'", src=require("../../../assets/images/ico-track-develop.svg"))
+      img(ng-if="track == 'DESIGN'", src=require("../../../assets/images/ico-track-design.svg"))
+      img(ng-if="track == 'COPILOT'", src=require("../../../assets/images/ico-track-copilot.svg"))
+      span {{track | track | uppercase}}
+
+    .subtrack(
+      ng-repeat="subtrack in vm.categories[track]",
+      ui-sref="profile.subtrack({track: subtrack.track, subTrack: subtrack.subTrack})",
+      ng-click="vm.closeDialog()",
+      class="{{$index == 0 && 'first'}}"
+    )
+      .name {{subtrack.subTrack | track}}
+
+      .ranking(ng-if="subtrack.rating")
+        .number.rating(style="color: {{subtrack.rating | ratingColor}}")
+          | {{subtrack.rating}}
+
+        .tag Rating
+
+      .ranking(ng-if="subtrack.rank && !subtrack.rating")
+        .number {{subtrack.rank | ordinal}}
+
+        .tag Ranking
+
+      .ranking(ng-if="subtrack.wins && !subtrack.rank && !subtrack.rating")
+        .number(style="color: #21B2F1") {{subtrack.wins}}
+
+        .tag Wins
+
+      .ranking(ng-if="subtrack.fulfillment")
+        .number {{subtrack.fulfillment + '%'}}
+
+        .tag Fulfillment
+
+      img.arrow(src=require("../../../assets/images/ico-arrow-big-right.svg"))
+
+

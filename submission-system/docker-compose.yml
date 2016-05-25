@@ -1,10 +1,13 @@
 version: '2'
 services:
-    dynamodb:
-        image: "appiriodevops/submissions:dynamodb"
-        command: "-inMemory -port 7777"
+    postgres:
+        image: "appiriodevops/submissions:postgres-1.0"
+        environment:
+            POSTGRES_PASSWORD: "test"
+            POSTGRES_USER: "postgres"
+            POSTGRES_DB: "submissions"
         ports:
-            - "7777:7777"
+            - "5432:5432"
     sqs:
         image: "appiriodevops/submissions:sqs"
         ports:
@@ -14,7 +17,6 @@ services:
         environment:
             IP: "$DOCKER_IP"
         depends_on:
-            - dynamodb
             - sqs
         command: "/bin/bash -c /data/init.sh"
     informix:
@@ -51,5 +53,6 @@ services:
             - nginx
             - informix
             - kafka
+            - postgres
         ports:
             - "3000:3000"

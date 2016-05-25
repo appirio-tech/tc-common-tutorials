@@ -1,0 +1,193 @@
+@import 'topcoder/tc-includes';
+
+.panel-body {
+  @media screen and (max-width: 767px) {
+    // Not showing the mobile version of the page at all
+    // Uncomment the line below to hide the desktop page
+    // display: none;
+  }
+}
+
+.form-blocks div:nth-last-of-type(2) {
+  .form-block__fields {
+    border-bottom: none;
+  }
+}
+
+.panel-footer {
+  text-align: center;
+
+  p:first-child {
+    margin-bottom: 30px;
+    @include font-with-weight('Merriweather Sans', 300);
+    font-size: 13px;
+    line-height: 24px;
+    color: $gray-darkest;
+    text-align: left;
+  }
+
+  .tc-error-messages {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .checkbox {
+    label {
+      margin-left: 10px;
+      @include font-with-weight('Sofia Pro', 500);
+      font-size: 16px;
+      color: $gray-darkest;
+      text-transform: uppercase;
+    }
+  }
+
+  button.tc-btn {
+    margin-top: 30px;
+  }
+}
+
+.tc-error-messages {
+  max-width: 500px;
+}
+
+tc-file-input {
+  .tc-file-field__label, .tc-file-field__inputs {
+    margin: 0 auto;
+    @media screen and (min-width: 1000px) {
+      margin: 0;
+    }
+  }
+
+  & + .tc-error-messages {
+    max-width: 407px;
+  }
+
+  .tc-label__asterisk {
+    color: $primary;
+  }
+}
+
+
+.submitterRank {
+  width: 100px;
+  margin-top: 10px;
+}
+
+.tc-textarea {
+  max-width: 500px;
+}
+
+tc-form-fonts, tc-form-stockart {
+  width: 500px;
+  display: block;
+  margin: 0 auto;
+  @media screen and (min-width: 1000px) {
+    margin: 0;
+    display: inline;
+  }
+  .fieldset {
+    max-width: 500px;
+    position: relative;
+  }
+}
+
+.remove-section {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 15px;
+  right: -35px;
+  background-image: url(../../images/x-mark-gray.svg);
+  background-size: 20px;
+  outline: 0;
+  @media screen and (min-width: 1000px) {
+    top: -5px;
+  }
+}
+
+.Select {
+  margin-bottom: 20px;
+}
+
+modal {
+  > button {
+    display: none;
+  }
+}
+.upload-progress {
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+
+  .upload-progress__title {
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    @include font-with-weight('Sofia Pro', 500);
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .upload-progress__image,
+  .upload-progress__image--error {
+    margin-top: 30px;
+  }
+
+  .upload-progress__message,
+  .upload-progress__message--error {
+    @include font-with-weight('Merriweather Sans', 400);
+    font-size: 15px;
+    line-height: 19px;
+    color: $accent-gray;
+    margin-top: 40px;
+  }
+
+  .upload-progress__progress-bar {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 760px;
+  }
+
+  .upload-progress__preparing,
+  .upload-progress__finishing,
+  .upload-progress__error {
+    @include font-with-weight('Sofia Pro', 500);
+    font-size: 12px;
+    line-height: 14px;
+    color: $accent-gray-dark;
+    text-align: center;
+  }
+
+  .upload-progress__error {
+    color: $error;
+  }
+
+  .upload-progress__error-action {
+    margin-top: 40px;
+  }
+
+  &.upload-progress--error {
+    .upload-progress__progress-bar {
+      .progress-bar__bar--completed {
+        background-color: $error;
+      }
+    }
+  }
+}
+
+.upload-progess__links {
+  margin-top: 40px;
+
+  a {
+    display: inline-block;
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
