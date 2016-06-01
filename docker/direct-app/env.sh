@@ -1,0 +1,1 @@
+export BUILT_JBOSS_DIR=./run/deploy/jboss-4.2.3.GA

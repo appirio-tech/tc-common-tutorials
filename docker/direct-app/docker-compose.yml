@@ -1,0 +1,16 @@
+version: '2'
+services:
+  tc-informix:
+    image: "appiriodevops/informix:1.2"
+  tc-direct:
+    image: "appiriodevops/direct-app:latest"
+    links:
+      - "tc-informix"
+
+    # please comment this out if the built jboss-4.2.3.GA is copied to the docker image
+    volumes:
+      - "${BUILT_JBOSS_DIR}:/root/jboss-4.2.3.GA"
+    ports:
+      - "443:443"
+      - "8180:8180"
+
