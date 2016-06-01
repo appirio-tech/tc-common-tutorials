@@ -15,4 +15,4 @@ VOLUME ["/root/jboss-4.2.3.GA"]
 ENTRYPOINT ["./run.sh", "-b", "0.0.0.0"]
 
 # expose jboss ports
-EXPOSE 8180 443
+EXPOSE 8180 443 1198 1199 3973
