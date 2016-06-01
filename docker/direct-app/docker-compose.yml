@@ -7,19 +7,27 @@ services:
     volumes:
       - "${DIRECT_APP_SRC_ROOT}:/root/direct"
       - "${BUILT_DATA}:/data"
-  tc-direct:
-    image: "appiriodevops/direct-app:latest"
+  tc-direct-with-volume:
+    image: "appiriodevops/direct-app:run-volume"
     links:
       - "tc-informix"
-      - "tc-direct-build"
     hostname: cockpit.cloud.topcoder.com
-    # please comment this out if the built jboss-4.2.3.GA is copied to the docker image
     volumes:
-      - "${BUILT_DATA}/jboss-4.2.3.GA:/root/jboss-4.2.3.GA"
+      - "${BUILT_JBOSS_DIR}:/root/jboss-4.2.3.GA"
     ports:
       - "443:443"
       - "8180:8180"
       - "1198:1198"
       - "1199:1199"
       - "3937:3937"
-
+  tc-direct:
+    image: "appiriodevops/direct-app:run"
+    links:
+      - "tc-informix"
+    hostname: cockpit.cloud.topcoder.com
+    ports:
+      - "443:443"
+      - "8180:8180"
+      - "1198:1198"
+      - "1199:1199"
+      - "3937:3937"
