@@ -19,6 +19,7 @@ COPY topcoder_global.properties /root/topcoder_global.properties
 # copy deploy script
 COPY deploy.sh /root/
 RUN dos2unix /root/deploy.sh
+RUN chmod 777 /root/deploy.sh
 
 VOLUME ["/root/direct", "/data"]
 
