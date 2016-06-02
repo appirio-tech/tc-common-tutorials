@@ -2,6 +2,8 @@ version: '2'
 services:
   tc-informix:
     image: "appiriodevops/informix:1.2"
+    ports:
+      - "2021:2021"
   tc-direct-build:
     image: "appiriodevops/direct-app:build"
     volumes:
@@ -19,7 +21,8 @@ services:
       - "8180:8180"
       - "1198:1198"
       - "1199:1199"
-      - "3937:3937"
+      - "3973:3973"
+      - "5446:5446"
   tc-direct:
     image: "appiriodevops/direct-app:run"
     links:
@@ -30,4 +33,5 @@ services:
       - "8180:8180"
       - "1198:1198"
       - "1199:1199"
-      - "3937:3937"
+      - "3973:3973"
+      - "5446:5446"
