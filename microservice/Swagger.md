@@ -7,7 +7,7 @@ git clone https://github.com/swagger-api/swagger-ui
 cd swagger-ui/dist
 http-server --cors -p 3000
 ```
-3. Copy the `swagger.json` to swagger-ui/dist
+3. Put the `swagger.json` you are going to verify to swagger-ui/dist
 4. Install and enable Allow-Control-Allow-Origin extension (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi/related) for Chrome
 5. Open Chrome and visit http://localhost:3000/
 6. Enter http://localhost:3000/swagger.yaml and click the Explore button
