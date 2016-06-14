@@ -191,7 +191,7 @@ function* getMemberChallenges() {
         "updatedBy": "8547899",
         "technologies": "",
         "status": "ACTIVE",
-        "track": "DESIGN",
+        "track": "DEVELOP",
         "subTrack": "DESIGN_FIRST_2_FINISH",
         "name": "Submission Test Challenge",
         "reviewType": "INTERNAL",
