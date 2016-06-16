@@ -55,6 +55,7 @@ docker logs -f build-direct-app
 
 ### 2.3 Build `run` Docker Image and Run it to Run Direct App
 There are two options to run the direct app in this docker image:
+
 1. Mount the generated `jboss-4.2.3.GA` directory above to the docker image
 2. Copy the generated `jboss-4.2.3.GA` directory above to the docker image
 
@@ -81,6 +82,7 @@ docker build -t appiriodevops/direct-app:run .
 
 ## Build and Run with Docker compose
 If you choose option 1 (which is the default option as well). You need to edit the mapping in `env.sh` file
+
 1. DIRECT_APP_SRC_ROOT - path to the git clone of https://github.com/appirio-tech/direct-app
 2. BUILT_DATA - the root path for built pieces, better be an empty directory
 
