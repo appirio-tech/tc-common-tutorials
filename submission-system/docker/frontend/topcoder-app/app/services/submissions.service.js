@@ -14,7 +14,8 @@ import angular from 'angular'
       getPresignedURL: getPresignedURL,
       uploadSubmissionFileToS3: uploadSubmissionFileToS3,
       updateSubmissionStatus: updateSubmissionStatus,
-      recordCompletedSubmission: recordCompletedSubmission
+      recordCompletedSubmission: recordCompletedSubmission,
+      getSubmissionStatus: getSubmissionStatus
     }
 
     return service
@@ -127,7 +128,7 @@ import angular from 'angular'
       .then(function(response) {
         logger.info('Successfully made file record. Beginning processing')
 
-        progressCallback.call(progressCallback, 'FINISH', 100)
+        progressCallback.call(progressCallback, 'FINISH', {progress: 100, submissionId: response.id})
       })
       .catch(function(err) {
         logger.error('Could not start processing', err)
@@ -135,5 +136,17 @@ import angular from 'angular'
         progressCallback.call(progressCallback, 'ERROR', err)
       })
     }
+
+    function getSubmissionStatus(submissionId, progressCallback) {
+      return api.one('submissions', submissionId).get()
+      .then(function(response) {
+        logger.info('Got submission status: ' + response.status)
+        progressCallback.call(progressCallback, 'STATUS', {status: response.status})
+      })
+      .catch(function(err) {
+        logger.error('Could not get submission status', err)
+        progressCallback.call(progressCallback, 'ERROR', err)
+      })
+    } 
   }
 })()

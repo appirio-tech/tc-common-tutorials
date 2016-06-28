@@ -29,6 +29,8 @@ angular.module('CONSTANTS', []).constant('CONSTANTS', {
   'MAILCHIMP_NL_DESIGN'     : process.env.MAILCHIMP_NL_DESIGN,
   'MAILCHIMP_NL_DATA'       : process.env.MAILCHIMP_NL_DATA,
 
+  'SUBMISSION_STATUS_POLL_INTERVAL': process.env.SUBMISSION_STATUS_POLL_INTERVAL,
+
   'NEW_CHALLENGES_URL'     : 'https://www.topcoder.com/challenges/develop/upcoming/',
   'SWIFT_PROGRAM_ID'       : 3445,
   'UPCOMING_SRMS_URL'      : 'https://www.topcoder.com/challenges/data/upcoming/',

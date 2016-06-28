@@ -160,16 +160,25 @@ modal.transition(show="vm.showProgress", background-click-close="false", style="
 
     img.upload-progress__image(src=require("../../../assets/images/skills/id-180.svg"), ng-hide="vm.errorInUpload")
     img.upload-progress__image--error(src=require("../../../assets/images/robot-embarresed.svg"), ng-show="vm.errorInUpload")
+    img.submission-status__image--error(src=require("../../../assets/images/robot-embarresed.svg"), ng-show="vm.errorInSubmissionStatusPoll")
 
     p.upload-progress__message(ng-hide="vm.errorInUpload") Hey, your work is AWESOME! Please don’t close the window while the upload is in progress, or you’ll lose all files!
 
     p.upload-progress__message--error(ng-show="vm.errorInUpload") Oh, that’s embarrassing! One of the files couldn’t be uploaded, I’m so sorry.
+    p.submission-status__message--error(ng-show="vm.errorInSubmissionStatusPoll") An error occurred processing your submission, please contact support
 
     progress-bar.upload-progress__progress-bar(completed="vm.uploadProgress", message="of 3 files uploaded")
 
     .upload-progress__preparing(ng-show="vm.preparing && !vm.errorInUpload") #[span Preparing...]
     .upload-progress__finishing(ng-show="vm.finishing && !vm.errorInUpload")
-      p Finished!
+      p Upload Finished!
+    .submission-status__pending(ng-show="vm.submissionStatus === 'PROCESS_PENDING' && !vm.errorInSubmissionStatusPoll")
+      p Submission waiting to be processed
+    .submission-status__processing(ng-show="vm.submissionStatus === 'PROCESSING' && !vm.errorInSubmissionStatusPoll")
+      p Submission processing
+    .submission-status__submitted(ng-show="vm.submissionStatus === 'SUBMITTED' && !vm.errorInSubmissionStatusPoll")
+      p Submission processing completed successfully
+    
 
       .upload-progess__links
         a.tc-btn.tc-btn-s(ng-href="https://www.{{DOMAIN}}/challenge-details/{{submissions.challengeId}}/?type={{submissions.track}}") Back to the challenge
