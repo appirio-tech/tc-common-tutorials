@@ -48,7 +48,7 @@ services:
         ports:
             - "80:80"
     submissions:
-        image: appiriodevops/submissions:frontend-1.0
+        image: appiriodevops/submissions:frontend-filestack
         depends_on:
             - nginx
             - informix
