@@ -106,7 +106,7 @@ docker-compose up tc-direct-with-volume
 or 
 
 ```
-docker-compose up tc-direct-without-volume
+docker-compose up tc-direct
 ```
 
 ## Verificaition
