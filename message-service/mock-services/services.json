@@ -1,0 +1,121 @@
+{
+    "members": [
+        {
+            "id": "magrathean",
+            "result": {
+                "success": true,
+                "status": 200,
+                "metadata": null,
+                "content": {
+                    "maxRating": {
+                        "rating": 1114,
+                        "track": "DATA_SCIENCE",
+                        "subTrack": "SRM"
+                    },
+                    "createdBy": "40011578",
+                    "updatedBy": "40011578",
+                    "userId": 40011578,
+                    "firstName": "Firstname",
+                    "lastName": "Lastname",
+                    "quote": "It is a mistake to think you can solve any major problems just with potatoes.",
+                    "description": null,
+                    "otherLangName": null,
+                    "handle": "magrathean",
+                    "handleLower": "magrathean",
+                    "status": "ACTIVE",
+                    "email": "email@email.com",
+                    "addresses": [{
+                        "streetAddr1": "100 Main Street",
+                        "streetAddr2": "",
+                        "city": "Chicago",
+                        "zip": "60601",
+                        "stateCode": "IL",
+                        "type": "HOME",
+                        "updatedAt": null,
+                        "createdAt": null,
+                        "createdBy": null,
+                        "updatedBy": null
+                    }],
+                    "homeCountryCode": "USA",
+                    "competitionCountryCode": "USA",
+                    "photoURL": null,
+                    "tracks": ["DEVELOP"],
+                    "updatedAt": "2015-12-02T14:00Z",
+                    "createdAt": "2014-04-10T10:55Z"
+                }
+            },
+            "version": "v3"
+        }
+    ],
+    "submissions": [
+        {
+            "id": 455,
+            "success": true,
+            "status": 200,
+            "metadata": null,
+            "result": {
+                "content": {
+                    "createdAt": 1468017122,
+                    "createdBy": 40011578,
+                    "data": {
+                        "files": [
+                            {
+                                "mediaType": "application/zip",
+                                "name": "SUB-Hestia.B2B.Mobile.Error-404.Screen.v1.zip",
+                                "path": "submissions/455/SUB-Hestia.B2B.Mobile.Error-404.Screen.v1.zip",
+                                "preSignedUploadUrl": "https://www.topcoder.com",
+                                "size": 150739,
+                                "stagedFileContainer": "submission-staging-dev",
+                                "stagedFilePath": "SUBMISSION_ZIP/40011578-SUBMISSION_ZIP-1468017092289.zip",
+                                "status": "STAGED",
+                                "type": "SUBMISSION_ZIP"
+                            },
+                            {
+                                "mediaType": "application/zip",
+                                "name": "SRC-Hestia.B2B.Mobile.Error-404.Screen.v1.zip",
+                                "path": "submissions/455/SRC-Hestia.B2B.Mobile.Error-404.Screen.v1.zip",
+                                "preSignedUploadUrl": "https://www.topcoder.com",
+                                "size": 944023,
+                                "stagedFileContainer": "submission-staging-dev",
+                                "stagedFilePath": "SOURCE_ZIP/40011578-SOURCE_ZIP-1468017092294.zip",
+                                "status": "STAGED",
+                                "type": "SOURCE_ZIP"
+                            },
+                            {
+                                "mediaType": "image/png",
+                                "name": "Preview.png",
+                                "path": "submissions/455/Preview.png",
+                                "preSignedUploadUrl": "https://www.topcoder.com",
+                                "size": 160682,
+                                "stagedFileContainer": "submission-staging-dev",
+                                "stagedFilePath": "DESIGN_COVER/ipUw7yFSCGP1hM1l8ius_Preview.png",
+                                "status": "STAGED",
+                                "type": "DESIGN_COVER"
+                            }
+                        ],
+                        "fonts": [],
+                        "method": "DESIGN_CHALLENGE_FILE_PICKER_ZIP_FILE",
+                        "stockArts": [],
+                        "submissionId": null,
+                        "submitterComments": "",
+                        "submitterRank": 1
+                    },
+                    "errorDescription": null,
+                    "id": "455",
+                    "legacyId": "204610",
+                    "reference": {
+                        "id": "30049552",
+                        "phaseId": 733716,
+                        "phaseType": "SUBMISSION",
+                        "type": "CHALLENGE"
+                    },
+                    "referenceLookup": "CHALLENGE30049552",
+                    "status": "SUBMITTED",
+                    "updatedAt": 1468017154,
+                    "updatedBy": 40011578,
+                    "userId": 40011578
+                }
+            }
+        }
+    ]
+}
