@@ -134,8 +134,8 @@ insert into "referenceLookups" (reference, endpoint, "createdAt", "updatedAt") v
 We need to set the following 2 environment variables:
 
 ```
-export DISCOURSE_API_KEY="SYSTEM USER API KEY" 
-export DEFAULT_DISCOURSE_PW="supersecretpw"
+export DISCOURSE_API_KEY=<<SYSTEM USER API KEY>> 
+export DEFAULT_DISCOURSE_PW=supersecretpw
 ```
 
 To obtain the system user's API key, connect to your discourse container:
@@ -182,7 +182,7 @@ Note: The signature key used for the local environment is "secret", which is con
 The following curl command will check if the user has access to the submission 455, fetch a thread, creating the thread if necessary, and provisioning a new user in discourse if necessary:
 
 ```
-curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJhZG1pbmlzdHJhdG9yIl0sImlzcyI6Imh0dHBzOi8vYXBpLnRvcGNvZGVyLWRldi5jb20iLCJoYW5kbGUiOiJtYWdyYXRoZWFuIiwiZXhwIjoxNzY2Mjg5MjQ2LCJ1c2VySWQiOiIxMzI0NTYiLCJpYXQiOjE0NTA5MjkyNDYsImVtYWlsIjpudWxsLCJqdGkiOiIxMzY5YzYwMC1lMGExLTQ1MjUtYTdjNy01NmJlN2Q4MTNmNTEifQ.n_gFPaAVca300AZqjVdHETzNGexcsJsh1ePSAaMtJxk" "http://localhost:3000/v4/threads?filter=reference%3Dsubmission%26referenceId%3D455
+curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJhZG1pbmlzdHJhdG9yIl0sImlzcyI6Imh0dHBzOi8vYXBpLnRvcGNvZGVyLWRldi5jb20iLCJoYW5kbGUiOiJtYWdyYXRoZWFuIiwiZXhwIjoxNzY2Mjg5MjQ2LCJ1c2VySWQiOiIxMzI0NTYiLCJpYXQiOjE0NTA5MjkyNDYsImVtYWlsIjpudWxsLCJqdGkiOiIxMzY5YzYwMC1lMGExLTQ1MjUtYTdjNy01NmJlN2Q4MTNmNTEifQ.n_gFPaAVca300AZqjVdHETzNGexcsJsh1ePSAaMtJxk" "http://localhost:3000/v4/threads?filter=reference%3Dsubmission%26referenceId%3D455"
 ```
 
 You can also create messages in existing threads by doing the following:
