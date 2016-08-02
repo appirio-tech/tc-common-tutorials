@@ -20,6 +20,7 @@ module.exports = {
   download,
   members,
   getMemberChallenges,
+  getProject,
   authorizations
 };
 
@@ -633,6 +634,95 @@ function* getMemberChallenges() {
   }
 }
 
+function* getProject() {
+  this.body = {
+    "createdAt": "2016-07-20T23:09:45.000Z",
+    "updatedAt": "2016-07-20T23:09:45.000Z",
+    "terms": [],
+    "id": 1,
+    "billingAccountId": "1",
+    "title": "test1",
+    "description": "test project",
+    "type": "app_dev",
+    "details": {
+        "features": [
+        {
+            "id": null,
+            "title": "feature1",
+            "description": "desc1",
+            "notes": "explanation1",
+            "custom": true,
+            "fileIds": []
+        },
+        {
+            "id": "121",
+            "title": "feature2",
+            "description": "desc2",
+            "notes": "",
+            "custom": false,
+            "fileIds": [
+            "123456"
+            ]
+        }
+        ],
+        "designNotes": "my design"
+    },
+    "createdBy": 40135978,
+    "updatedBy": 40135978,
+    "challengeEligibility": [],
+    "external": null,
+    "status": "draft",
+    "members": [
+        {
+          "createdAt": "2016-07-20T23:09:45.000Z",
+          "updatedAt": "2016-07-20T23:09:45.000Z",
+          "id": 2,
+          "isPrimary": true,
+          "role": "topcoder_manager",
+          "userId": 123,
+          "updatedBy": 123,
+          "createdBy": 123,
+          "projectId": 1
+        },
+        {
+          "createdAt": "2016-07-20T23:09:45.000Z",
+          "updatedAt": "2016-07-20T23:09:45.000Z",
+          "id": 2,
+          "isPrimary": true,
+          "role": "manager",
+          "userId": 456,
+          "updatedBy": 456,
+          "createdBy": 456,
+          "projectId": 1
+        },
+        {
+          "createdAt": "2016-07-20T23:09:45.000Z",
+          "updatedAt": "2016-07-20T23:09:45.000Z",
+          "id": 2,
+          "isPrimary": true,
+          "role": "customer",
+          "userId": 789,
+          "updatedBy": 789,
+          "createdBy": 789,
+          "projectId": 1
+        },
+        {
+          "createdAt": "2016-07-20T23:09:45.000Z",
+          "updatedAt": "2016-07-20T23:09:45.000Z",
+          "id": 2,
+          "isPrimary": true,
+          "role": "copilot",
+          "userId": 1,
+          "updatedBy": 1,
+          "createdBy": 1,
+          "projectId": 1
+        }
+    ],
+    "directProjectId": null,
+    "estimatedPrice": null,
+    "actualPrice": null
+    } 
+}
 
 function* authorizations() {
   this.body = {

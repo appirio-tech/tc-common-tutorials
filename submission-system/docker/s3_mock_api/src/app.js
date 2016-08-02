@@ -60,6 +60,9 @@ router.del('/v3/files', routes.deleteFile);
 router.get('/mock-download', routes.download);
 
 // Challenge routes
+router.get("/v4/projects/:id", routes.getProject);
+
+// Challenge routes
 router.get("/v3/members/:handle/challenges", routes.getMemberChallenges);
 
 // Member routes
