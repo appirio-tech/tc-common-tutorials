@@ -203,3 +203,11 @@ curl -X POST -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJy
 ```
 
 
+# Unit test
+Please update test environment configurations in `config/config.json`.
+```
+export NODE_ENV=test
+sequelize db:migrate
+npm test
+```
+Then you can check coverage report in coverage folder.
