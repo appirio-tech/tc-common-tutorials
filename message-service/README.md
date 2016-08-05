@@ -94,6 +94,12 @@ Go into the message-service folder of this repository and start the docker servi
 ```
 docker-compose up
 ```
+## Install Dependent Packages
+In the tc-message-service folder and issue the following command:
+```
+npm install
+```
+Note: npm install only has to be executed the first time when you set up the service, and whenever changes are made to the packages.json file
 
 ## Creating the Database Schema
 
@@ -152,14 +158,11 @@ rake api_key:get
 
 # Running the Service
 
-To run the service, go into the tc-message-service folder and issue the following commands
+To run the service, go into the tc-message-service folder and issue the following command:
 
 ```
-npm install
 npm start
 ```
-
-Note: npm install only has to be executed the first time when you set up the service, and whenever changes are made to the packages.json file
 
 # Testing the service
 
