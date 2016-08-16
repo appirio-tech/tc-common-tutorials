@@ -1,0 +1,35 @@
+version: '2'
+services:
+  tc-informix:
+    image: appiriodevops/informix:1b3d4ef
+    container_name: tc-informix
+    ports:
+      - "2021:2021"
+  tc-direct:
+    image: "appiriodevops/direct-app:run"
+    container_name: tc-direct
+    links:
+      - "tc-informix"
+    ports:
+      - "443:443"
+      - "8180:8180"
+      - "1198:1198"
+      - "1199:1199"
+      - "3973:3973"
+      - "5446:5446"
+  run-auto-pilot:
+    image: appiriodevops/online-review:autopilot
+    container_name: run-auto-pilot
+    links:
+      - tc-informix:db
+  run-online-review:
+    image: appiriodevops/online-review
+    container_name: run-online-review
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1024m
+    links:
+      - tc-informix:db
+    ports:
+      - "80:8080"
+
+    
