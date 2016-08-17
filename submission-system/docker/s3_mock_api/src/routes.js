@@ -634,93 +634,73 @@ function* getMemberChallenges() {
   }
 }
 
+function* getProject404() {
+    this.body = {
+        "id": "2eb5550a-f761-4923-baf6-942782488023",
+        "result": {
+            "success": false,
+            "status": 404,
+            "content": {
+            "message": "project not found for id 13"
+            },
+            "debug": "Error: project not found for id 13\n    at null.<anonymous> (/usr/src/app/dist/routes/projects/get.js:57:20)\n    at wrapped (/usr/src/app/node_modules/newrelic/lib/transaction/tracer/index.js:161:28)\n    at Promise.linkTransaction (/usr/src/app/node_modules/newrelic/lib/instrumentation/promise.js:289:65)\n    at Promise.wrapped (/usr/src/app/node_modules/newrelic/lib/transaction/tracer/index.js:161:28)\n    at Promise.proxyWrapper (/usr/src/app/node_modules/newrelic/lib/instrumentation/promise.js:300:23)\n    at __NR_wrappedThenHandler (/usr/src/app/node_modules/newrelic/lib/instrumentation/promise.js:461:26)\n    at null.<anonymous> (/usr/src/app/node_modules/continuation-local-storage/context.js:76:17)\n    at wrapped (/usr/src/app/node_modules/newrelic/lib/transaction/tracer/index.js:161:28)\n    at Promise.linkTransaction (/usr/src/app/node_modules/newrelic/lib/instrumentation/promise.js:289:65)\n    at Promise.wrapped (/usr/src/app/node_modules/newrelic/lib/transaction/tracer/index.js:161:28)\n    at Promise.proxyWrapper (/usr/src/app/node_modules/newrelic/lib/instrumentation/promise.js:300:23)\n    at __NR_wrappedThenHandler (/usr/src/app/node_modules/newrelic/lib/instrumentation/promise.js:461:26)\n    at tryCatcher (/usr/src/app/node_modules/bluebird/js/release/util.js:16:23)\n    at Promise._settlePromiseFromHandler (/usr/src/app/node_modules/bluebird/js/release/promise.js:504:31)\n    at Promise._settlePromise (/usr/src/app/node_modules/bluebird/js/release/promise.js:561:18)\n    at Promise._settlePromise0 (/usr/src/app/node_modules/bluebird/js/release/promise.js:606:10)"
+        }
+    }
+}
+
 function* getProject() {
   this.body = {
-    "createdAt": "2016-07-20T23:09:45.000Z",
-    "updatedAt": "2016-07-20T23:09:45.000Z",
-    "terms": [],
-    "id": 1,
-    "billingAccountId": "1",
-    "title": "test1",
-    "description": "test project",
-    "type": "app_dev",
-    "details": {
-        "features": [
-        {
-            "id": null,
-            "title": "feature1",
-            "description": "desc1",
-            "notes": "explanation1",
-            "custom": true,
-            "fileIds": []
+    "id": "62317aa2-24a7-4c8f-af32-aa2f66a5ef2a",
+    "version": "v4",
+    "result": {
+        "success": true,
+        "status": 200,
+        "content": {
+        "id": 139,
+        "directProjectId": null,
+        "billingAccountId": null,
+        "name": "Tony Test 1",
+        "description": "efesr sdfsd fsfsf sdf s",
+        "external": null,
+        "estimatedPrice": null,
+        "actualPrice": null,
+        "terms": [],
+        "type": "visual_prototype",
+        "status": "draft",
+        "details": {
+            "appType": "ios",
+            "devices": [
+            "phone",
+            "desktop"
+            ],
+            "utm": {
+            "code": ""
+            }
         },
-        {
-            "id": "121",
-            "title": "feature2",
-            "description": "desc2",
-            "notes": "",
-            "custom": false,
-            "fileIds": [
-            "123456"
-            ]
-        }
+        "challengeEligibility": [],
+        "createdAt": "2016-08-09T02:22:31.000Z",
+        "updatedAt": "2016-08-09T02:22:31.000Z",
+        "createdBy": 8547899,
+        "updatedBy": 8547899,
+        "members": [
+            {
+            "id": 268,
+            "userId": 8547899,
+            "role": "customer",
+            "isPrimary": true,
+            "createdAt": "2016-08-09T02:22:31.000Z",
+            "updatedAt": "2016-08-09T02:22:31.000Z",
+            "createdBy": 8547899,
+            "updatedBy": 8547899,
+            "projectId": 139
+            }
         ],
-        "designNotes": "my design"
-    },
-    "createdBy": 40135978,
-    "updatedBy": 40135978,
-    "challengeEligibility": [],
-    "external": null,
-    "status": "draft",
-    "members": [
-        {
-          "createdAt": "2016-07-20T23:09:45.000Z",
-          "updatedAt": "2016-07-20T23:09:45.000Z",
-          "id": 2,
-          "isPrimary": true,
-          "role": "topcoder_manager",
-          "userId": 123,
-          "updatedBy": 123,
-          "createdBy": 123,
-          "projectId": 1
+        "attachments": []
         },
-        {
-          "createdAt": "2016-07-20T23:09:45.000Z",
-          "updatedAt": "2016-07-20T23:09:45.000Z",
-          "id": 2,
-          "isPrimary": true,
-          "role": "manager",
-          "userId": 456,
-          "updatedBy": 456,
-          "createdBy": 456,
-          "projectId": 1
-        },
-        {
-          "createdAt": "2016-07-20T23:09:45.000Z",
-          "updatedAt": "2016-07-20T23:09:45.000Z",
-          "id": 2,
-          "isPrimary": true,
-          "role": "customer",
-          "userId": 789,
-          "updatedBy": 789,
-          "createdBy": 789,
-          "projectId": 1
-        },
-        {
-          "createdAt": "2016-07-20T23:09:45.000Z",
-          "updatedAt": "2016-07-20T23:09:45.000Z",
-          "id": 2,
-          "isPrimary": true,
-          "role": "copilot",
-          "userId": 1,
-          "updatedBy": 1,
-          "createdBy": 1,
-          "projectId": 1
+        "metadata": {
+        "totalCount": 1
         }
-    ],
-    "directProjectId": null,
-    "estimatedPrice": null,
-    "actualPrice": null
+    }
     } 
 }
 
