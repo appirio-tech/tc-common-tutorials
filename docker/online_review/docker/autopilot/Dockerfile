@@ -10,8 +10,6 @@ WORKDIR /root/online_review/scripts/auto_pilot
 RUN cp build.properties.docker build.properties
 RUN ant clean dist deploy
 
-RUN rm -rf /root/online_review
-
 WORKDIR /root/auto_pilot
 
 CMD ant test_ap
