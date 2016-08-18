@@ -4,5 +4,5 @@ export DOCKER_IP=192.168.99.100
 export HOST_IP=192.168.1.71
 
 # For Linux
-#export DOCKER_IP=192.168.1.75
+#export DOCKER_IP=192.168.1.74
 #export HOST_IP=$DOCKER_IP

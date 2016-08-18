@@ -24,7 +24,7 @@ services:
         ports:
             - "2021:2021"
     mock-services:
-        image: appiriodevops/submissions:mock-services-dev
+        build: docker/s3_mock_api
         environment:
             BASE_URL: "http://$DOCKER_IP"
         ports:
@@ -38,7 +38,7 @@ services:
             - "2181:2181"
             - "9092:9092"
     nginx:
-        image: appiriodevops/submissions:nginx-1.0
+        build: docker/nginx
         depends_on:
             - aws-init
             - mock-services

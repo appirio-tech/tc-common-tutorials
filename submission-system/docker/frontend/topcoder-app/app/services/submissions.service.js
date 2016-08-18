@@ -11,21 +11,20 @@ import angular from 'angular'
     var api = ApiService.getApiServiceProvider('SUBMISSIONS')
 
     var service = {
-      startSubmission: startSubmission,
-      processSubmission: processSubmission
-      // uploadSubmissionFileToS3: uploadSubmissionFileToS3,
-      // updateSubmissionStatus: updateSubmissionStatus,
-      // recordCompletedSubmission: recordCompletedSubmission
+      getPresignedURL: getPresignedURL,
+      uploadSubmissionFileToS3: uploadSubmissionFileToS3,
+      updateSubmissionStatus: updateSubmissionStatus,
+      recordCompletedSubmission: recordCompletedSubmission
     }
 
     return service
 
-    function startSubmission(body, progressCallback) {
+    function getPresignedURL(body, files, progressCallback) {
       return api.all('submissions').customPOST(body)
       .then(function(response) {
         progressCallback.call(progressCallback, 'PREPARE', 100)
 
-        // uploadSubmissionFileToS3(response, response.data.files, files, progressCallback)
+        uploadSubmissionFileToS3(response, response.data.files, files, progressCallback)
       })
       .catch(function(err) {
         logger.error('Could not get presigned url', err)
@@ -36,7 +35,6 @@ import angular from 'angular'
       })
     }
 
-    /**
     function uploadSubmissionFileToS3(presignedURLResponse, filesWithPresignedURL, files, progressCallback) {
 
       var promises = filesWithPresignedURL.map(function(fileWithPresignedURL) {
@@ -122,9 +120,8 @@ import angular from 'angular'
         progressCallback.call(progressCallback, 'ERROR', err)
       })
     }
-    */
 
-    function processSubmission(body, progressCallback) {
+    function recordCompletedSubmission(body, progressCallback) {
       // Once all uploaded, make record and begin processing
       return api.one('submissions', body.id).customPOST(body, 'process')
       .then(function(response) {

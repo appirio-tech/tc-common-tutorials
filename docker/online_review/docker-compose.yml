@@ -1,7 +1,7 @@
 version: '2'
 services:
   tc-informix:
-    image: appiriodevops/informix:1.1
+    image: appiriodevops/informix:1b3d4ef
   tc-online-review:
     image: appiriodevops/online-review:env
     working_dir: /root/online_review

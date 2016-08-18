@@ -1,0 +1,8 @@
+version: '2'
+services:
+    informix:
+        build: 'informix'
+        ports:
+            - '2021:2021'
+        environment:
+            RABBITMQ_IP: '192.168.99.100'
