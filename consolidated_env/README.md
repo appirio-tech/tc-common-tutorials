@@ -40,25 +40,3 @@ docker exec -it tc-informix bash
 onmode -ky
 oninit
 ```
-
-
-### run-online-review Docker Image Bug Fix
-
-Please do the following steps to fix the bugs in run-online-review docker image. 
-(If the copilot corrects this in the docker image later, it won't be necessary.)
-
-1.Download the latest online_review codebase from svn: https://coder.topcoder.com/tcs/clients/cronos/applications/online_review/trunk
-
-2.Execute the command below to copy the `conf` directory in online_review codebase to run-online-review container:
-```
-# go to online_review codebase directory first
-docker cp conf run-online-review:/root/online_review
-```
-
-3.Log into the run-online-review docker container, and create a directory for submissions. 
-```
-docker exec -it run-online-review bash
-
-# then create the directory for submissions uploading and downloading
-mkdir /root/downloads
-```
