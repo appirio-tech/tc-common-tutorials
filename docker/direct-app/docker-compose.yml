@@ -2,6 +2,7 @@ version: '2'
 services:
   tc-informix:
     image: "appiriodevops/informix:1b3d4ef"
+    hostname: informix.cloud.topcoder.com
     ports:
       - "2021:2021"
   tc-direct-build:
@@ -24,7 +25,7 @@ services:
       - "3973:3973"
       - "5446:5446"
   tc-direct:
-    image: "appiriodevops/direct-app:run"
+    image: "appiriodevops/direct-app:04680b3"
     links:
       - "tc-informix"
     hostname: cockpit.cloud.topcoder.com
