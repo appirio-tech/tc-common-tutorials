@@ -1,7 +1,15 @@
 version: '2'
 services:
+  elasticsearch14:
+    image: itzg/elasticsearch:1.4
+    ports:
+       - '9200:9200'
+       - '9300:9300'
+    environment:
+      CLUSTER: elasticsearch
+      NODE_NAME: elasticsearch
   tc-informix:
-    image: "appiriodevops/informix:1b3d4ef"
+    image: "appiriodevops/informix:6f3884d"
     hostname: informix.cloud.topcoder.com
     ports:
       - "2021:2021"
