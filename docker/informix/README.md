@@ -13,7 +13,7 @@ or other supported SQL client tool
 ## How to update the informix docker with latest scripts svn
 1. run a container for the informix
 ```
-docker run -it appiriodevops/informix:1b3d4ef bash
+docker run -it appiriodevops/informix:6f3884d bash
 ```
 
 2. cd trunk
