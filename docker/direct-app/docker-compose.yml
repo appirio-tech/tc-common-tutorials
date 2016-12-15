@@ -9,7 +9,7 @@ services:
       CLUSTER: elasticsearch
       NODE_NAME: elasticsearch
   tc-informix:
-    image: "appiriodevops/informix:6f3884d"
+    image: "appiriodevops/informix:cbbd0fa"
     hostname: informix.cloud.topcoder.com
     ports:
       - "2021:2021"
