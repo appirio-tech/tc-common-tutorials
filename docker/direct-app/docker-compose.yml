@@ -4,8 +4,16 @@ services:
     image: "redis:3.2.5"
     ports:
       - "6379:6379"
+  elasticsearch14:
+    image: itzg/elasticsearch:1.4
+    ports:
+       - '9200:9200'
+       - '9300:9300'
+    environment:
+      CLUSTER: elasticsearch
+      NODE_NAME: elasticsearch
   tc-informix:
-    image: "appiriodevops/informix:1b3d4ef"
+    image: "appiriodevops/informix:cbbd0fa"
     hostname: informix.cloud.topcoder.com
     ports:
       - "2021:2021"
