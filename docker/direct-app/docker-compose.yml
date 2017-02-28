@@ -13,10 +13,18 @@ services:
       CLUSTER: elasticsearch
       NODE_NAME: elasticsearch
   tc-informix:
-    image: "appiriodevops/informix:cbbd0fa"
+    image: "appiriodevops/tc-database-scripts:73b37cb39abc55ba4456a3773b7c56b9aec2dacf"
     hostname: informix.cloud.topcoder.com
+    container_name: iif_developer_edition
+    environment: 
+      LICENSE: accept
     ports:
       - "2021:2021"
+      - "2022:2022"
+      - "27017:27017"
+      - "27018:27018"
+      - "27883:27883"
+    tty: true
   tc-direct-build:
     image: "appiriodevops/direct-app:build"
     volumes:
