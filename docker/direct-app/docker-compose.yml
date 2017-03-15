@@ -4,16 +4,8 @@ services:
     image: "redis:3.2.5"
     ports:
       - "6379:6379"
-  elasticsearch14:
-    image: itzg/elasticsearch:1.4
-    ports:
-       - '9200:9200'
-       - '9300:9300'
-    environment:
-      CLUSTER: elasticsearch
-      NODE_NAME: elasticsearch
   tc-informix:
-    image: "appiriodevops/tc-database-scripts:9a09c5ab3538b9f37b81beeea11a574ea4a464d1"
+    image: "appiriodevops/tc-database-scripts:latest"
     hostname: informix.cloud.topcoder.com
     container_name: iif_innovator_c
     environment: 
@@ -25,6 +17,13 @@ services:
       - "27018:27018"
       - "27883:27883"
     tty: true
+  docker-elasticsearch-feeder:
+    image: "appiriodevops/docker-elasticsearch:local"
+    links:
+      - "tc-informix"
+    ports:
+       - '9200:9200'
+       - '9300:9300'
   tc-direct-build:
     image: "appiriodevops/direct-app:build"
     volumes:
@@ -46,7 +45,7 @@ services:
       - "3973:3973"
       - "5446:5446"
   tc-direct:
-    image: "appiriodevops/direct-app:04680b3"
+    image: "appiriodevops/direct-app:latest"
     links:
       - "tc-informix"
       - "tc-cache"
