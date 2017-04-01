@@ -3,22 +3,21 @@ We have created a informix docker for use locally, see https://hub.docker.com/r/
 
 So basically, can run it like 
 ```
-docker run -p 2021:2021 -it appiriodevops/informix:1b3d4ef
+docker run -p 2021:2021 -it appiriodevops/informix:6f3884d
 ```
 then you can connect this informix server by using [ServerStudio](https://www.serverstudio.com/)
 or other supported SQL client tool
 
-1b3d4ef tag is the latest version by https://github.com/appirio-tech/tc-database-scripts, if there are new changes, please do as following
+6f3884d tag is the latest version by https://github.com/appirio-tech/tc-database-scripts, if there are new changes, please do as following
 
 ## How to update the informix docker with latest scripts svn
 1. run a container for the informix
 ```
-docker run -it appiriodevops/informix:1b3d4ef bash
+docker run -it appiriodevops/informix:6f3884d bash
 ```
 
 2. cd trunk
-3. svn update (you need to enter your svn username and password)
-make necessory change if you want
+3. make necessory change if you want
 4. oninit
 5. ant reinstall_db
 6. onmode -ky

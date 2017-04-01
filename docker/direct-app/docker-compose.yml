@@ -1,10 +1,29 @@
 version: '2'
 services:
+  tc-cache:
+    image: "redis:3.2.5"
+    ports:
+      - "6379:6379"
   tc-informix:
-    image: "appiriodevops/informix:1b3d4ef"
+    image: "appiriodevops/tc-database-scripts:latest"
     hostname: informix.cloud.topcoder.com
+    container_name: iif_innovator_c
+    environment: 
+      LICENSE: accept
     ports:
       - "2021:2021"
+      - "2022:2022"
+      - "27017:27017"
+      - "27018:27018"
+      - "27883:27883"
+    tty: true
+  docker-elasticsearch-feeder:
+    image: "appiriodevops/docker-elasticsearch:local"
+    links:
+      - "tc-informix"
+    ports:
+       - '9200:9200'
+       - '9300:9300'
   tc-direct-build:
     image: "appiriodevops/direct-app:build"
     volumes:
@@ -14,6 +33,7 @@ services:
     image: "appiriodevops/direct-app:run-volume"
     links:
       - "tc-informix"
+      - "tc-cache"
     hostname: cockpit.cloud.topcoder.com
     volumes:
       - "${BUILT_JBOSS_DIR}:/root/jboss-4.2.3.GA"
@@ -25,9 +45,10 @@ services:
       - "3973:3973"
       - "5446:5446"
   tc-direct:
-    image: "appiriodevops/direct-app:04680b3"
+    image: "appiriodevops/direct-app:latest"
     links:
       - "tc-informix"
+      - "tc-cache"
     hostname: cockpit.cloud.topcoder.com
     ports:
       - "443:443"
@@ -36,3 +57,17 @@ services:
       - "1199:1199"
       - "3973:3973"
       - "5446:5446"
+  run-auto-pilot:
+    image: appiriodevops/online-review:autopilot-1.0
+    container_name: run-auto-pilot
+    links:
+      - tc-informix:db
+  run-online-review:
+    image: appiriodevops/online-review:jboss-1.1
+    container_name: run-online-review
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1024m
+    links:
+      - tc-informix:db
+    ports:
+      - "80:8080"
