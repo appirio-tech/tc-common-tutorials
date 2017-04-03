@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<paymentConfiguration>
+  <paymentRange>
+    <projectCategory>
+      <reliabilityAbove reliability=".95" paymentPercentage=".2"/>
+      <reliabilityAbove reliability=".90" paymentPercentage=".15"/>
+      <reliabilityAbove reliability=".80" paymentPercentage=".10"/>
+    </projectCategory>
+  </paymentRange>
+  <paymentRange startDate="2007-04-24 09:00 AM">
+    <projectCategory>
+      <reliabilityAbove reliability=".95" paymentPercentage=".5"/>
+      <reliabilityAbove reliability=".90" paymentPercentage=".2"/>
+      <reliabilityAbove reliability=".80" paymentPercentage=".1"/>
+    </projectCategory>
+  </paymentRange>
+  <paymentRange startDate="2009-01-07 00:00 AM">
+    <projectCategory>
+      <reliabilityAbove reliability=".95" paymentPercentage=".2"/>
+      <reliabilityAbove reliability=".90" paymentPercentage=".15"/>
+      <reliabilityAbove reliability=".80" paymentPercentage=".10"/>
+    </projectCategory>
+  </paymentRange>
+  <paymentRange startDate="2009-09-12 00:00 AM">
+    <projectCategory>
+      <reliabilityAbove reliability=".95" paymentPercentage=".20"/>
+      <reliabilityAbove reliability=".90" paymentPercentage=".15"/>
+      <reliabilityAbove reliability=".80" paymentPercentage=".10"/>
+    </projectCategory>
+    <projectCategory category="2">
+      <reliabilityAbove reliability=".95" paymentPercentage=".40"/>
+      <reliabilityAbove reliability=".90" paymentPercentage=".20"/>
+      <reliabilityAbove reliability=".80" paymentPercentage=".10"/>
+    </projectCategory>
+    <projectCategory category="13">
+      <reliabilityAbove reliability=".95" paymentPercentage=".40"/>
+      <reliabilityAbove reliability=".90" paymentPercentage=".20"/>
+      <reliabilityAbove reliability=".80" paymentPercentage=".10"/>
+    </projectCategory>
+    <projectCategory category="14">
+      <reliabilityAbove reliability=".95" paymentPercentage=".40"/>
+      <reliabilityAbove reliability=".90" paymentPercentage=".20"/>
+      <reliabilityAbove reliability=".80" paymentPercentage=".10"/>
+    </projectCategory>
+  </paymentRange>
+</paymentConfiguration>
+

@@ -1,0 +1,241 @@
+<project name="topcoder" default="main" basedir=".">
+    <property environment="env"/>
+    <property name="Name" value="TopCoder"/>
+    <property name="build" value="build"/>
+    <property name="war.dir" value="${build}/wars"/>
+    <property name="ejb_jars" value="${build}/ejb_jars"/>
+    <property name="classes" value="${build}/classes"/>
+    <property name="testclasses" value="${build}/testcases"/>
+    <property name="build.javadocs" value="${build}/javadocs"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="jars.dir" value="${lib.dir}/jars"/>
+    <property name="bin" value="lib/bin"/>
+    <property name="src.dir" value="src"/>
+    <property name="java" value="${src.dir}/main"/>
+    <property name="shared" value="../shared/src/main"/>
+    <property name="shared.build" value="${basedir}/../shared"/>
+    <property name="global-dist.dir" value="${basedir}/../dist/artifacts"/>
+    <property name="testjava" value="${src.dir}/testcases"/>
+    <property name="resources" value="resources"/>
+    <property name="conf" value="conf"/>
+    <property name="taglib" value="${resources}/taglib"/>
+    <property name="images" value="images"/>
+    <property name="shared.jar" value="${bin}/shared.jar"/>
+    <property name="common.jar" value="${bin}/tcwebcommon.jar"/>
+    <property name="tccache.jar" value="${jars.dir}/tcs/tc_cache/1.0.0/tc_cache.jar"/>
+    <property name="web" value="src/main/com/topcoder/web"/>
+    <property name="jboss_home" value="${env.JBOSS_HOME}"/>
+    <property name="jboss_deploy" value="${jboss_home}/server/all/deploy"/>
+    <property name="jboss_lib" value="${jboss_home}/server/all/lib"/>
+    <property name="jboss_conf" value="${jboss_home}/server/all/conf"/>
+
+    <property name="deprecation" value="true"/>
+    <property name="debug" value="true"/>
+    <property name="junitsummary" value="on"/>
+
+    <target name="main" depends="compile">
+    </target>
+
+
+    <path id="class.path">
+        <pathelement location="${classes}"/>
+        <pathelement location="${shared.jar}"/>
+        <pathelement location="${testclasses}"/>
+        <pathelement location="${resources}"/>
+        <pathelement location="${resources}/hibernate"/>
+        <pathelement location="${images}"/>
+        <pathelement location="${jars.dir}/log4j-1.2.7.jar"/>
+        <pathelement location="${jars.dir}/ifxjdbc.jar"/>
+        <pathelement location="${jars.dir}/bfograph.jar"/>
+        <pathelement location="${jars.dir}/activation.jar"/>
+
+        <pathelement location="${jars.dir}/jboss/javax.servlet.jar"/>
+        <pathelement location="${jars.dir}/jboss/javax.servlet.jsp.jar"/>
+        <pathelement location="${jars.dir}/jboss/jbossall-client.jar"/>
+        <pathelement location="${jars.dir}/jboss/xalan.jar"/>
+        <pathelement location="${jars.dir}/jboss/xercesImpl.jar"/>
+        <pathelement location="${jars.dir}/jboss/xml-apis.jar"/>
+        <pathelement location="${jars.dir}/jboss/mail.jar"/>
+        <pathelement location="${jars.dir}/jboss/jboss-system.jar"/>
+        <pathelement location="${jars.dir}/jboss/jboss-cache.jar"/>
+        <pathelement location="${jars.dir}/jboss/jgroups.jar"/>
+
+        <pathelement location="${jars.dir}/idgenerator.jar"/>
+        <pathelement location="${jars.dir}/tcs/id_generator/3.0/id_generator.jar"/>
+        <pathelement location="${jars.dir}/tcs/base_exception/2.0.0/base_exception.jar"/>
+        <pathelement location="${jars.dir}/tcs/file_upload/2.0.2.0/file_upload.jar"/>
+        <pathelement location="${jars.dir}/tcs/configuration_manager/2.1.5/configuration_manager.jar"/>
+        <pathelement location="${jars.dir}/object_formatter.jar"/>
+
+        <!-- hibernate files -->
+        <pathelement location="${jars.dir}/hibernate-3.1/hibernate3.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.1/commons-logging-1.0.4.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.1/ehcache-1.2.2.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.1/cglib-2.1.3.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.1/asm.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.1/ant-antlr-1.6.5.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.1/antlr-2.7.6rc1.jar"/>
+        
+        <pathelement location="${jars.dir}/httpunit.jar"/>
+
+
+
+    </path>
+    <!-- adding this here because i can't figure out how to use the above path element in other path elements-->
+    <property name="class.path" refid="class.path"/>
+
+    <target name="init">
+        <mkdir dir="${classes}"/>
+        <mkdir dir="${testclasses}"/>
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${ejb_jars}"/>
+        <mkdir dir="${war.dir}"/>
+    </target>
+
+    <target name="compile_common" depends="init" unless="compile_common_set">
+        <ant antfile="build_common.xml" target="build-dist"/>
+        <property name="compile_common_set" value="true"/>
+    </target>
+
+    <target name="compile" depends="init,compile_common" unless="compile_set">
+        <ant antfile="build_security.xml" target="build-security"/>
+        <javac
+                srcdir="${java}"
+                destdir="${classes}"
+                classpathref="class.path"
+                deprecation="${deprecation}"
+                debug="${debug}"
+                source="1.5"
+                target="1.5" memoryMaximumSize="380m" memoryInitialSize="380m" fork="true">
+            <include name="com/topcoder/web/distui/**"/>
+        </javac>
+        <property name="compile_set" value="true"/>
+    </target>
+
+    <target name="javadocs">
+        <mkdir dir="${build.javadocs}"/>
+        <javadoc
+                packagenames="com.topcoder.common.*,com.topcoder.ejb.*,com.topcoder.security.*,com.topcoder.utilities.*,com.topcoder.web.*"
+                sourcepath="${java}"
+                classpathref="class.path"
+                destdir="${build.javadocs}"
+                windowtitle="${Name} API"
+                doctitle="${Name} API"
+                maxmemory="256M"
+                >
+        </javadoc>
+    </target>
+
+    <target name="clean">
+        <!-- kill the entire build dir -->
+        <delete dir="${build}"/>
+        <delete dir="${bin}"/>
+    </target>
+
+    <target name="war" depends="compile">
+        <ant antfile="build_security.xml" target="build-security"/>
+
+        <war warfile="${war.dir}/distui.war" webxml="${resources}/distui/web.xml">
+            <fileset dir="${java}/com/topcoder/web/jsp">
+                <include name="errorPage.jsp"/>
+                <include name="foot.jsp"/>
+                <include name="date_time.jsp"/>
+                <include name="script.jsp"/>
+                <include name="style.jsp"/>
+                <include name="body_top.jsp"/>
+                <include name="page_title.jsp"/>
+                <include name="menu.jsp"/>
+                <include name="includes/global_left.jsp"/>
+                <include name="includes/modules/simpleSearch.jsp"/>
+                <include name="calendar.jsp"/>
+                <include name="public_right.jsp"/>
+            </fileset>
+            <fileset dir="${java}/com/topcoder/web/distui/view">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/distui/**/*.class"/>
+            </classes>
+            <webinf dir="${resources}/taglib">
+                <include name="nav.tld"/>
+                <include name="tc-webtags.tld"/>
+            </webinf>
+            <webinf dir="${resources}/distui">
+                <include name="jboss-web.xml"/>
+            </webinf>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+                <include name="taconite.jar"/>
+                <include name="object_formatter.jar"/>
+                <include name="jedis-2.8.1.jar" />
+                <include name="commons-pool2-2.4.2.jar" />
+
+            </lib>
+            <lib dir="${bin}">
+                <include name="shared.jar"/>
+                <include name="tcwebcommon.jar"/>
+            </lib>
+            <lib dir="${jars.dir}//tcs/tc_cache/1.0.0">
+                <include name="tc_cache.jar"/>
+            </lib>
+<!--
+            <lib dir="${ejb_jars}">
+                <include name="security.jar"/>
+            </lib>
+-->
+            <lib dir="${jars.dir}/tcs">
+                <include name="base_exception.jar"/>
+            </lib>
+        </war>
+        <unwar src="${war.dir}/distui.war" dest="${jboss_deploy}/distui.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/distui.war/META-INF"/>
+    </target>
+
+
+    <target name="deploy">
+        <antcall target="war"/>
+        <antcall target="expand"/>
+        <copy todir="${jboss_deploy}" file="${build}/ears/security.ear" overwrite="yes"/>
+
+    </target>
+
+    <target name="expand">
+        <copy todir="${jboss_conf}">
+            <fileset dir="${resources}">
+                <include name="ApplicationServer.properties"/>
+                <include name="cache.properties"/>
+                <include name="DBMS.properties"/>
+                <include name="DataAccess.properties"/>
+            </fileset>
+
+        </copy>
+        <mkdir dir="${jboss_conf}/com/topcoder/security"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/util/config"/>
+        <copy todir="${jboss_conf}/com/topcoder/security">
+            <fileset dir="${resources}/com/topcoder/security">
+                <include name="Util.properties"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/util/config">
+            <fileset dir="${resources}/com/topcoder/util/config">
+                <include name="ConfigManager.properties"/>
+            </fileset>
+        </copy>
+
+        <unwar src="${war.dir}/distui.war" dest="${jboss_deploy}/distui.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/distui.war/META-INF"/>
+    </target>
+
+</project>
+
+
+
+
+
+
+
+
+
+
+
