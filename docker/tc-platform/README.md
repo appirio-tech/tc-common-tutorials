@@ -1,3 +1,5 @@
+# Topcoder Website Local Deployment Using Docker
+
 ## Build LDAP Image
 Use an existing docker file on [GitHub](https://github.com/appirio-tech/tc-common-tutorials/tree/master/docker) (use commit hash cfc5b80ead7f83a7d592e406ef3bd160889683c1). 
 The README contains instructions on how to build the docker image.
@@ -21,19 +23,22 @@ docker build -t tc-website:run run
 
 ## Prepare tc-website Codebase
 Pull following repos into a directory (e.g. tc-platform):
-https://github.com/topcoder-platform/tc-website   (with commit hash: f5e9ec2e9e7d99f012e308b530947ab034948ad6)
-https://github.com/topcoder-platform/tc-website-external-artifacts  (with commit hash: 33100ff8b102ee8a386c4200d571b6c31c33fad1)
-https://github.com/topcoder-platform/tc-website-glue  (with commit hash: 61849f3601a25efc40390a59eedd8d1dc92eb4ef)
-https://github.com/topcoder-platform/tc-website-shared (with commit hash: fbbc0e49893bf972e46d7c73192a5592e39dab3b)
-https://github.com/topcoder-platform/tc-website-static (with commit hash: fc26666a6ee3a323cdd8de9e849a2e576352a656)
+- https://github.com/topcoder-platform/tc-website   (with commit hash: f5e9ec2e9e7d99f012e308b530947ab034948ad6)
+- https://github.com/topcoder-platform/tc-website-external-artifacts  (with commit hash: 33100ff8b102ee8a386c4200d571b6c31c33fad1)
+- https://github.com/topcoder-platform/tc-website-glue  (with commit hash: 61849f3601a25efc40390a59eedd8d1dc92eb4ef)
+- https://github.com/topcoder-platform/tc-website-shared (with commit hash: fbbc0e49893bf972e46d7c73192a5592e39dab3b)
+- https://github.com/topcoder-platform/tc-website-static (with commit hash: fc26666a6ee3a323cdd8de9e849a2e576352a656)
 
-Then rename the folders in tc-platform as below:
-tc-platform
-- tc-website - corresponding to tc-website repo (no renaming needed)
-- external-artifacts - corresponding to tc-website-external-artifacts repo
-- glue - corresponding to tc-website-glue repo
-- shared - corresponding to tc-website-shared repo
-- static - corresponding to tc-website-static repo
+## Checkout tc-website
+```
+mkdir -p /home/tc/tc-platform
+cd /home/tc/tc-platform
+git clone https://github.com/topcoder-platform/tc-website tc-website
+git clone https://github.com/topcoder-platform/tc-website-external-artifacts external-artifacts
+git clone https://github.com/topcoder-platform/tc-website-glue glue
+git clone https://github.com/topcoder-platform/tc-website-shared shared
+git clone https://github.com/topcoder-platform/tc-website-static static
+```
 
 ## Deployment
 Update the configuration values in env.sh file from the submission:
@@ -43,21 +48,23 @@ Update the configuration values in env.sh file from the submission:
 Run `source env.sh` to create the environment variables. 
 
 Then run `docker-compose up build-tc-website` to build the code and create jboss and tc-website wars. 
+
 Finally run `docker-compose up run-tc-website` to run the jboss created above and setup apache. 
 
 The console is like this: http://take.ms/wPZwi when it's ready to access the tc-website. 
 
 ## Verification
-Add the following entries to your hosts file: 
-docker-ip	local.tc.cloud.topcoder.com
+Add the following entry to your hosts file: 
+`<docker-ip>	local.tc.cloud.topcoder.com`
 
-Where docker-ip is the ip address of your docker box. It should be 127.0.0.1 on Linux. 
+Where `<docker-ip>` is the ip address of your docker box. It should be set to `127.0.0.1` on Linux or `192.168.99.100` on Windows/macOS if you are using Docker Toolbox.
 
-Open: https://local.tc.cloud.topcoder.com/tc, the page is like: http://take.ms/r5A9U
-Open: https://local.tc.cloud.topcoder.com/tc?module=Login, the page is like http://take.ms/uxt4K
 
-Login with: heffan/password, and after logged-in successfully, it will redirect user to page like: http://take.ms/O3AaE
-and finally to the official topcoder.com page.
+### Authentication
+1. Visit https://local.tc.cloud.topcoder.com/tc - accept the self-signed SSL certificate. See http://take.ms/r5A9U
+2. Now visit https://local.tc.cloud.topcoder.com/tc?&module=Login - login with `heffan/password`. See http://take.ms/uxt4K
+3. You will be redirected to an interstitial page then the main site (https://www.topcoder.com/my-dashboard/). See http://take.ms/O3AaE
+4. Now visit https://local.tc.cloud.topcoder.com/tc?module=MyHome - to switch from the main site back to docker.
 
 You can now try the following pages:
 TC WAR: 
