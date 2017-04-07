@@ -1,0 +1,43 @@
+version: '2'
+services:
+  tc-cache:
+    image: "redis:3.2.5"
+    ports:
+      - "6379:6379"
+  tc-informix:
+    image: "appiriodevops/tc-database-scripts:latest"
+    hostname: informix.cloud.topcoder.com
+    container_name: iif_innovator_c
+    environment: 
+      LICENSE: accept
+    ports:
+      - "2021:2021"
+      - "2022:2022"
+      - "27017:27017"
+      - "27018:27018"
+      - "27883:27883"
+    tty: true
+  tc-ldap:
+    image: "appiriodevops/ldap"
+    ports:
+      - "389:389"
+    tty: true
+
+  build-tc-website:
+    image: "tc-website:build"
+    volumes:
+      - "${TC_PLATFORM_SRC_ROOT}:/root/tc-platform"
+      - "${DEPLOYMENT_DIR}:/root/deployment"
+
+  run-tc-website:
+    image: "tc-website:run"
+    links:
+      - "tc-cache"
+      - "tc-informix"
+      - "tc-ldap"
+    volumes:
+      - "${TC_PLATFORM_SRC_ROOT}:/root/tc-platform"
+      - "${DEPLOYMENT_DIR}:/root/deployment"
+    ports:
+      - "443:443"
+      - "80:80"
