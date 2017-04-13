@@ -29,7 +29,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - "${TC_PLATFORM_SRC_ROOT}:/root/tc-platform"
+      - "${TC_WEBSITE_HOME}:/root/tc-platform"
     tty: true
     links:
       - "run-tc-website:tc-website"
@@ -39,14 +39,14 @@ services:
   build-tc-website:
     image: "tc-website:build"
     volumes:
-      - "${TC_PLATFORM_SRC_ROOT}:/root/tc-platform"
-      - "${DEPLOYMENT_DIR}:/root/deployment"
+      - "${TC_WEBSITE_HOME}:/root/tc-platform"
+      - "${JBOSS_DEPLOYMENT_DIR}:/root/deployment"
 
   run-tc-website:
     image: "tc-website:run"
     hostname: local.tc.cloud.topcoder.com
     volumes:
-      - "${DEPLOYMENT_DIR}:/root/deployment"
+      - "${JBOSS_DEPLOYMENT_DIR}:/root/deployment"
     ports:
       - "8009:8009"
     extra_hosts:

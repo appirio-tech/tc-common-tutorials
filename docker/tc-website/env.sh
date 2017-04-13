@@ -1,3 +1,3 @@
-export TC_PLATFORM_SRC_ROOT=/root/tc-app
-export DEPLOYMENT_DIR=/root/deployment
+export TC_WEBSITE_HOME=/root/tc-platform
+export JBOSS_DEPLOYMENT_DIR=/root/deployment
 

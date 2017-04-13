@@ -1,4 +1,4 @@
-FROM tc-website:base
+FROM appiriodevops/tc-website:base
  
 WORKDIR /root/deployment/jboss-4.0.4.GA/bin
  

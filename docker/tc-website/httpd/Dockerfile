@@ -1,4 +1,4 @@
-FROM tc-website:base
+FROM appiriodevops/tc-website:base
 
 RUN yum install -y gcc libtool httpd-devel-2.2.15 httpd-2.2.15 mod_ssl
 
