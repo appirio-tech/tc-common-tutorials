@@ -24,7 +24,7 @@ services:
     tty: true
 
   tc-httpd:
-    image: "tc-website:httpd"
+    image: "appiriodevops/tc-website:httpd"
     ports:
       - "80:80"
       - "443:443"
@@ -37,13 +37,13 @@ services:
       - "run-tc-website"
   
   build-tc-website:
-    image: "tc-website:build"
+    image: "appiriodevops/tc-website:build"
     volumes:
       - "${TC_WEBSITE_HOME}:/root/tc-platform"
       - "${JBOSS_DEPLOYMENT_DIR}:/root/deployment"
 
   run-tc-website:
-    image: "tc-website:run"
+    image: "appiriodevops/tc-website:run"
     hostname: local.tc.cloud.topcoder.com
     volumes:
       - "${JBOSS_DEPLOYMENT_DIR}:/root/deployment"
