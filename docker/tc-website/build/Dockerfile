@@ -1,4 +1,4 @@
-FROM deedee/tc:base
+FROM appiriodevops/tc-website:base
 
 WORKDIR /root
 
