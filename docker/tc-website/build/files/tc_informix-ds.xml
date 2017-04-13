@@ -12,7 +12,7 @@
 <datasources>
   <local-tx-datasource>
     <jndi-name>InformixDS</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -31,7 +31,7 @@
 
   <no-tx-datasource>
     <jndi-name>OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -51,7 +51,7 @@
 
   <no-tx-datasource>
     <jndi-name>SCREENING_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/screening_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/screening_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -70,7 +70,7 @@
 
   <local-tx-datasource>
     <jndi-name>JTS_SCREENING_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/screening_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/screening_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -90,7 +90,7 @@
 
   <no-tx-datasource>
     <jndi-name>DS</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/common_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/common_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -110,7 +110,7 @@
 
   <no-tx-datasource>
     <jndi-name>DW</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/topcoder_dw:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/topcoder_dw:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -129,7 +129,7 @@
 
   <local-tx-datasource>
     <jndi-name>JTS_STUDIO_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/studio_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/studio_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -151,7 +151,7 @@
   <local-tx-datasource>
     <jndi-name>BUGS</jndi-name>
 
-<connection-url>jdbc:informix-sqli://tc-informix:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+<connection-url>jdbc:informix-sqli://env.topcoder.com:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -172,7 +172,7 @@
 
   <no-tx-datasource>
     <jndi-name>GOOGLE_CHINA_DW</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/topcoder_dw:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/topcoder_dw:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -194,7 +194,7 @@
 
   <no-tx-datasource>
     <jndi-name>TCS_DW</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/tcs_dw:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/tcs_dw:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -215,7 +215,7 @@
 
   <no-tx-datasource>
     <jndi-name>TCS_CATALOG</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -233,7 +233,7 @@
   </no-tx-datasource>
   <local-tx-datasource>
     <jndi-name>JTS_TCS_CATALOG</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -253,7 +253,7 @@
 
   <no-tx-datasource>
     <jndi-name>CORP_DS</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/corporate_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/corporate_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -271,7 +271,7 @@
   </no-tx-datasource>
   <local-tx-datasource>
     <jndi-name>JTS_CORP_DS</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/corporate_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/corporate_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -294,7 +294,7 @@
 
   <local-tx-datasource>
     <jndi-name>JTS_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -314,7 +314,7 @@
 
   <local-tx-datasource>
     <jndi-name>JTS_GOOGLE_INDIA_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/gcji06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/gcji06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -333,7 +333,7 @@
 
   <no-tx-datasource>
     <jndi-name>GOOGLE_INDIA_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/gcji06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/gcji06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -352,7 +352,7 @@
 
   <local-tx-datasource>
     <jndi-name>JTS_GOOGLE_EUROPE_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/gcje06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/gcje06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -371,7 +371,7 @@
 
   <no-tx-datasource>
     <jndi-name>GOOGLE_EUROPE_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/gcje06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/gcje06_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -431,7 +431,7 @@
 
   <local-tx-datasource>
     <jndi-name>JTS_VERISIGN_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/vsign_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/vsign_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -450,7 +450,7 @@
 
   <no-tx-datasource>
     <jndi-name>VERISIGN_OLTP</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/vsign_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/vsign_oltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -469,7 +469,7 @@
 
   <local-tx-datasource>
     <jndi-name>JTS_TCS_CATALOG_NEW</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -489,7 +489,7 @@
 
   <local-tx-datasource>
     <jndi-name>jbossServicesDS</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/informixoltp:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>
@@ -508,7 +508,7 @@
 
 <no-tx-datasource>
     <jndi-name>JiveDS</jndi-name>
-    <connection-url>jdbc:informix-sqli://tc-informix:2021/jive:INFORMIXSERVER=informixoltp_tcp</connection-url>
+    <connection-url>jdbc:informix-sqli://env.topcoder.com:2021/jive:INFORMIXSERVER=informixoltp_tcp</connection-url>
     <driver-class>com.informix.jdbc.IfxDriver</driver-class>
     <user-name>informix</user-name>
     <password>1nf0rm1x</password>

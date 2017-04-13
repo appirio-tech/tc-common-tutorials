@@ -23,6 +23,19 @@ services:
       - "389:389"
     tty: true
 
+  tc-httpd:
+    image: "tc-website:httpd"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "${TC_PLATFORM_SRC_ROOT}:/root/tc-platform"
+    tty: true
+    links:
+      - "run-tc-website:tc-website"
+    depends_on:
+      - "run-tc-website"
+  
   build-tc-website:
     image: "tc-website:build"
     volumes:
@@ -31,13 +44,23 @@ services:
 
   run-tc-website:
     image: "tc-website:run"
-    links:
-      - "tc-cache"
-      - "tc-informix"
-      - "tc-ldap"
+    hostname: local.tc.cloud.topcoder.com
     volumes:
-      - "${TC_PLATFORM_SRC_ROOT}:/root/tc-platform"
       - "${DEPLOYMENT_DIR}:/root/deployment"
     ports:
-      - "443:443"
-      - "80:80"
+      - "8009:8009"
+    extra_hosts:
+      - "env.topcoder.com:172.16.100.1"
+    depends_on:
+      - "tc-informix"
+      - "tc-ldap"
+      - "tc-cache"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.100.0/24
+        gateway: 172.16.100.1

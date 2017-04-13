@@ -16,20 +16,17 @@ RUN cd tomcat-connectors-1.2.42-src/native; \
 RUN rm tomcat-connectors-1.2.42-src.tar.gz
 RUN rm -rf tomcat-connectors-1.2.42-src
 
-COPY run.sh /root
-RUN dos2unix /root/run.sh
-RUN chmod +x /root/run.sh
-
-COPY apache-conf /root/apache-conf
-RUN cp -rf /root/apache-conf/* /etc/httpd/conf
+COPY apache-conf /etc/httpd/conf
 
 # generate ssl cert
 RUN openssl req -new -newkey rsa:2048 -days 36500 -nodes -x509 \
-	-subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" \
+	-subj "/C=US/ST=Connecticut/L=Hartford/O=Cloud/CN=local.tc.cloud.topcoder.com" \
 	-keyout /etc/httpd/conf/server.key -out /etc/httpd/conf/server.crt
-
-ENV JAVA_OPTS '-Djavax.net.ssl.trustStore=TC.prod.ldap.keystore -Djavax.net.ssl.trustStorePassword=secret'
 
 EXPOSE 80 443
 
-ENTRYPOINT ["/root/run.sh"]
+RUN chown 701 /root
+RUN ln -s /root/tc-platform/tc-website-static /var/www/tc-website-static
+
+# start Apache
+CMD apachectl -k start -DFOREGROUND
