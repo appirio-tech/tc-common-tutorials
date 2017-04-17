@@ -1,4 +1,4 @@
-FROM tc-website:base
+FROM appiriodevops/tc-website:base
 
 WORKDIR /root
 
@@ -16,5 +16,17 @@ RUN dos2unix /root/build.sh
 RUN chmod +x /root/build.sh
 
 ENV JBOSS_HOME /root/deployment/jboss-4.0.4.GA
+
+RUN mkdir -p /export/home/web
+RUN ln -s /root/tc-platform/tc-website /export/home/web/web
+
+RUN mkdir -p /home/tc
+RUN ln -s /root/deployment/jboss-4.0.4.GA /home/tc/jboss-4.0.4.GA
+RUN ln -s /root/tc-platform/tc-website /home/tc/web
+
+RUN mkdir -p /mnt/apache
+RUN ln -s /root/tc-platform/tc-website-static /mnt/apache/tcdocs
+
+ENV SHARED_DIR /root/tc-platform/shared
 
 ENTRYPOINT ["/root/build.sh"]

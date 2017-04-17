@@ -1,7 +1,7 @@
 FROM centos:6.8
 
 # install tools
-RUN yum install -y unzip wget dos2unix
+RUN yum update -y && yum install -y unzip wget dos2unix
 
 WORKDIR /root
 
@@ -22,9 +22,10 @@ ENV JAVA_HOME /usr/java/jdk1.7.0_79
 ENV ANT_HOME /root/apache-ant-1.7.1
 ENV PATH $JAVA_HOME/bin:$GRAILS_HOME/bin:$ANT_HOME/bin:$PATH
 
+RUN chmod 701 /root
+
 # remove useless files
 RUN rm /root/jdk-7u79-linux-x64.rpm
 RUN rm /root/apache-ant-1.7.1-bin.zip
 RUN rm /root/ant-contrib-1.0b2-bin.tar.gz
 RUN rm -rf /root/ant-contrib
-
