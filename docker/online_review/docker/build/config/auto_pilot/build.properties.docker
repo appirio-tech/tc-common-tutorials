@@ -8,7 +8,7 @@
 online_review_home=/root/online_review
 
 # A deployment directory for Auto Pilot tool
-deploy-dir=/root/auto_pilot
+deploy-dir=/root/deployment/auto_pilot
 
 
 # A path to file to signal to Auto Pilot to stop the job

@@ -1,7 +1,7 @@
 # TopCoder Software Component Development Environment
 
 ## Used by CatalogBean.properties and Project_Phase_Template_Config.xml
-@JBOSS_HOME@=/root/jboss-4.0.2
+@JBOSS_HOME@=/root/deployment/jboss-4.0.2
 @jdk_home@=/opt/jdk1.7.0_79
 
 ## Used by tcs_informix-ds.xml
@@ -73,8 +73,8 @@
 @localFileUploadDir@=/root/downloads
 @catalogOutputDir@=/mnt/shared/temp_files
 @distributionToolOutputDir@=/mnt/shared/temp_files/tmp_dist
-@distributionScriptsBase@=/root/online_review/conf/distribution_scripts/unix
-@exttemplatesdir@=/root/online_review/conf/templates
+@distributionScriptsBase@=/root/deployment/jboss-4.0.2/online-review-conf/distribution_scripts/unix
+@exttemplatesdir@=/root/deployment/jboss-4.0.2/online-review-conf/templates
 @adminUsers@=132456
 @thurgood.api.key@=
 @thurgood.username@=

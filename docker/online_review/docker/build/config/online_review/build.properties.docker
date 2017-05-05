@@ -8,7 +8,7 @@ jnp_port=1099
 jboss_heap_size=512m
 
 # The location of the deployment directory for JBoss server.
-JBOSS_HOME=/root/jboss-4.0.2
+JBOSS_HOME=/root/deployment/jboss-4.0.2
 
 # remote deploy information
 #scp_path=scp

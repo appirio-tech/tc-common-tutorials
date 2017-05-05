@@ -1,62 +1,51 @@
-# Prepare Codebase and Environemnt
-## Install Docker and Docker Compose
-## Get the Source Code Ready
-Please send request to support@topcoder.com to grant you access to online review repository and related components
-* svn co https://coder.topcoder.com/tcs/clients/cronos/applications/online_review/trunk
-* ant checkout-components (you need to update *build.properties* to include your svn username and password)
 
-## Merge Docker Build Related Files
-Copy the docker related files (all files in https://github.com/appirio-tech/tc-common-tutorials/tree/master/docker/online_review) into online_review folder
+## Prepare Codebase
+Download the online-review codebase from https://github.com/topcoder-platform/tc-online-review.
+I'm testing with dev branch with commit hash: 0131012a5493cb3162599fd27add81407d8116d1.
 
-# Prepare the base image for build and running
+And then download the components from the contest forum, and extract to the root directory of online-review codebase. 
+
+## Build Image
+In the extracted submission directory, execute the command below to build the image
 ```
-docker pull appiriodevops/online-review:env
-```
-*OR*
-```
-docker build -f docker/env/Dockerfile -t appiriodevops/online-review:env .
+docker build -t appiriodevops/online-review:build local
 ```
 
-# Prepare the image for autopilot without source code
-```
-docker build -f docker/autopilot/Dockerfile -t appiriodevops/online-review:autopilot .
-```
+## Defined Services
+The `env.sh` file in the submission defined the following variables:
+* ONLINE_REVIEW_SOURCE_ROOT - the root directory of the online-review codebase
+* ONLINE_REVIEW_DEPLOYMENT_DIR - the deployment directory that will contain the build the results
 
-# Prepare the image for online review without source code
-```
-docker build -f docker/online_review/Dockerfile -t appiriodevops/online-review .
-```
-# Use Docker Compose to Run different services
-## Run the online review
-### Build and Run From Source Code
-```
-docker-compose up tc-online-review
-```
-### Run without Source Code
-```
-docker-compose up run-online-review
-```
-## Run AutoPilot
-### Build and Run From Source Code
-```
-docker-compose up tc-online-review-auto-pilot
-```
-### Run Without Source Code
-```
-docker-compose up run-auto-pilot
-```
+The `docker-compose.yml` file in the submission defined the following services:
+* tc-informix - the topcoder informix database server
+* build-online-review - it will build the online-review and create a `jboss-4.0.2` directory containing the jboss and online-review deployment files in the configured deployment directory 
+* build-auto-pilot - it will build the auto-pilot and create a `auto_pilot` directory containing the auto-pilot deployment files in the configured deployment directory 
+* build-online-review-auto-pilot - it will build both online-review and auto-pilot as the `build-online-review` and `build-auto-pilot` services above.
+* run-online-review - it will run the online-review
+* run-auto-pilot - it will run auto-pilot
+* run-online-review-auto-pilot - it will run both the online-review and auto-pilot.
 
-## Shutdown 
-```
-docker-compose down
-```
+You need to update the variables' values in `env.sh` files, and then execute `source env.sh`. 
+Then execute the following commands: 
+* `docker-compose up build-online-review` to build online review
+* `docker-compose up build-auto-pilot` to build auto pilot
+* `docker-compose up build-online-review-auto-pilot` to build both online review and auto pilot
 
-# Verification
+After they are built successfully, execute the following commands:
+* `docker-compose up run-online-review` to run online review (the online review must built first)
+* `docker-compose up run-auto-pilot` to run auto pilot (the auto pilot must be built first)
+* `docker-compose up run-online-review-auto-pilot` to run both online review and auto pilot (the online review and auto pilot must be built first)
+
+## Verification
 Update your hosts file with appropriate IP address
-* Linux
+* On Linux
 ```
 127.0.0.1 local.topcoder.com
 ```
 * For Windows or Mac, replace 127.0.0.1 with docker-machine ip address.
 
-Now go to http://local.topcoder.com:8080/review to verify application
+Now go to http://local.topcoder.com:8080/review to go to the login page: http://take.ms/JhO4p
+Login with heffan/password, and the page will be like this: http://take.ms/NFkBI
+Click a contest to open it: http://take.ms/o48Kha
+Edit this contest to turn on auto-pilot and set registration start date to a value in near future: http://take.ms/y6GIG and http://take.ms/jLCZT
+Save the changes, and if the auto-pilot is running, after a while, you will see the registration and submission phase are open: http://take.ms/H9gdn
