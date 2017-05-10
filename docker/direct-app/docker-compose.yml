@@ -25,12 +25,14 @@ services:
        - '9200:9200'
        - '9300:9300'
   tc-direct-build:
-    image: "appiriodevops/direct-app:build"
+    image: "appiriodevops/direct-app:build2"
     volumes:
       - "${DIRECT_APP_SRC_ROOT}:/root/direct"
       - "${BUILT_DATA}:/data"
+    entrypoint: /root/scripts/build.sh
+
   tc-direct-with-volume:
-    image: "appiriodevops/direct-app:run-volume"
+    image: "appiriodevops/direct-app:build2"
     links:
       - "tc-informix"
       - "tc-cache"
@@ -44,6 +46,8 @@ services:
       - "1199:1199"
       - "3973:3973"
       - "5446:5446"
+    entrypoint: /root/jboss-4.2.3.GA/bin/start.sh
+    
   tc-direct:
     image: "appiriodevops/direct-app:latest"
     links:
