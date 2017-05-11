@@ -1,7 +1,5 @@
 #! /bin/bash
 
-rm -rf /root/deployment
-
 if [ "$DISABLE_ONLINE_REVIEW" = "0"  ]
 then
     root/scripts/build-online-review.sh
@@ -12,7 +10,7 @@ then
     /root/scripts/build-auto-pilot.sh
 fi
 
-if [ "$DISABLE_LATE_DELIVERABLE_TRACKER" = "0"  ]
+if [ "$DISABLE_LATE_DELIVERABLES_TRACKER" = "0"  ]
 then
     /root/scripts/build-late-deliverables-tracker.sh
 fi
