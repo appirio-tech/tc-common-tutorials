@@ -1,4 +1,5 @@
 #! /bin/bash
+echo 'build online-review'
 rm -rf /root/deployment/jboss-4.0.2
 
 cp -n /root/config/online_review/build.properties.docker /root/online_review/build.properties

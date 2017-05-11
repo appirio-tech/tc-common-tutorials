@@ -1,4 +1,5 @@
 #! /bin/bash
+echo 'build auto-pilot'
 rm -rf /root/deployment/auto_pilot
 
 cp -n /root/config/online_review/build.properties.docker /root/online_review/build.properties
