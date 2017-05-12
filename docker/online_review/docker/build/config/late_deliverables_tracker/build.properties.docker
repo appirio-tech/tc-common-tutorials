@@ -1,0 +1,22 @@
+#######################################################
+# Build parameters for Late Deliverables Tracker tool #
+#######################################################
+
+# The online_review_home is the directory where the development distribution for
+# Online Review application is checked to
+online_review_home=/root/online_review
+
+# A deployment directory for Late Deliverables Tracker tool
+deploy-dir=/root/deployment/late_deliverables_tracker
+
+# A path to file to signal to Late Deliverables Tracker to stop the job
+guard_file=@late_deliverables_tracker_guard_file@
+
+# A path to file to signal to Late Deliverables Tracker that there is another tool instance already running
+running_file=@late_deliverables_tracker_running_file@
+
+# An interval (in seconds) between Late Deliverables Tracker job executions
+tracking_interval=@late_deliverables_tracking_interval@
+
+# An interval (in seconds) between sending PM emails about unresolved late deliverables
+pm_notification_interval=@late_deliverables_pm_notification_interval@

@@ -15,26 +15,20 @@ docker build -t appiriodevops/online-review:build local
 The `env.sh` file in the submission defined the following variables:
 * ONLINE_REVIEW_SOURCE_ROOT - the root directory of the online-review codebase
 * ONLINE_REVIEW_DEPLOYMENT_DIR - the deployment directory that will contain the build the results
+* DISABLE_ONLINE_REVIEW - disable online review or not. 1 - disabled, 0 - enabled.
+* DISABLE_AUTO_PILOT - disable auto pilot or not. 1 - disabled, 0 - enabled.
+* DISABLE_LATE_DELIVERABLES_TRACKER - disable the late deliverables tracker or not. 1 - disabled, 0 - enabled.
+* DISABLE_REVIEW_ASSIGNMENT - disable review assignment or not. 1 - disabled, 0 - enabled.
 
 The `docker-compose.yml` file in the submission defined the following services:
 * tc-informix - the topcoder informix database server
-* build-online-review - it will build the online-review and create a `jboss-4.0.2` directory containing the jboss and online-review deployment files in the configured deployment directory 
-* build-auto-pilot - it will build the auto-pilot and create a `auto_pilot` directory containing the auto-pilot deployment files in the configured deployment directory 
-* build-online-review-auto-pilot - it will build both online-review and auto-pilot as the `build-online-review` and `build-auto-pilot` services above.
-* run-online-review - it will run the online-review
-* run-auto-pilot - it will run auto-pilot
-* run-online-review-auto-pilot - it will run both the online-review and auto-pilot.
+* build-online-review - it will build services depending upon the DISABBLE_XXX flags
+* run-online-review - it will run services depending upon the DISABBLE_XXX flags
 
 You need to update the variables' values in `env.sh` files, and then execute `source env.sh`. 
 Then execute the following commands: 
-* `docker-compose up build-online-review` to build online review
-* `docker-compose up build-auto-pilot` to build auto pilot
-* `docker-compose up build-online-review-auto-pilot` to build both online review and auto pilot
-
-After they are built successfully, execute the following commands:
-* `docker-compose up run-online-review` to run online review (the online review must built first)
-* `docker-compose up run-auto-pilot` to run auto pilot (the auto pilot must be built first)
-* `docker-compose up run-online-review-auto-pilot` to run both online review and auto pilot (the online review and auto pilot must be built first)
+* `docker-compose up build-online-review` to build various services
+* `docker-compose up run-online-review` to run various services
 
 ## Verification
 Update your hosts file with appropriate IP address
@@ -49,3 +43,5 @@ Login with heffan/password, and the page will be like this: http://take.ms/NFkBI
 Click a contest to open it: http://take.ms/o48Kha
 Edit this contest to turn on auto-pilot and set registration start date to a value in near future: http://take.ms/y6GIG and http://take.ms/jLCZT
 Save the changes, and if the auto-pilot is running, after a while, you will see the registration and submission phase are open: http://take.ms/H9gdn
+
+For late deliverables tracker and review assignment tool, you can login into the running container, and check their processes are running. 
