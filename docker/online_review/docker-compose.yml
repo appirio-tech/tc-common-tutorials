@@ -19,29 +19,12 @@ services:
     volumes:
       - "${ONLINE_REVIEW_SOURCE_ROOT}:/root/online_review"
       - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
-    entrypoint: /root/scripts/build-online-review.sh
-
-  build-auto-pilot:
-    image: "appiriodevops/online-review:build"
-    volumes:
-      - "${ONLINE_REVIEW_SOURCE_ROOT}:/root/online_review"
-      - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
-    entrypoint: /root/scripts/build-auto-pilot.sh
-
-  build-online-review-auto-pilot:
-    image: "appiriodevops/online-review:build"
-    volumes:
-      - "${ONLINE_REVIEW_SOURCE_ROOT}:/root/online_review"
-      - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
+    environment:
+      - DISABLE_ONLINE_REVIEW=${DISABLE_ONLINE_REVIEW}
+      - DISABLE_AUTO_PILOT=${DISABLE_AUTO_PILOT}
+      - DISABLE_LATE_DELIVERABLES_TRACKER=${DISABLE_LATE_DELIVERABLES_TRACKER}
+      - DISABLE_REVIEW_ASSIGNMENT=${DISABLE_REVIEW_ASSIGNMENT}
     entrypoint: /root/scripts/build.sh
-
-  run-auto-pilot:
-    image: "appiriodevops/online-review:build"
-    volumes:
-      - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
-    links:
-      - tc-informix:db
-    entrypoint: /root/scripts/run-auto-pilot.sh
 
   run-online-review:
     image: "appiriodevops/online-review:build"
@@ -49,25 +32,18 @@ services:
       - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
     environment:
       - JAVA_OPTS=-Xms256m -Xmx512m
-    ports:
-      - "8080:8080"
-      - "443:443"
-    links:
-      - tc-informix:db
-    entrypoint: /root/scripts/run-online-review.sh
-
-  run-online-review-auto-pilot:
-    image: "appiriodevops/online-review:build"
-    volumes:
-      - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
-    environment:
-      - JAVA_OPTS=-Xms256m -Xmx512m
+      - DISABLE_ONLINE_REVIEW=${DISABLE_ONLINE_REVIEW}
+      - DISABLE_AUTO_PILOT=${DISABLE_AUTO_PILOT}
+      - DISABLE_LATE_DELIVERABLES_TRACKER=${DISABLE_LATE_DELIVERABLES_TRACKER}
+      - DISABLE_REVIEW_ASSIGNMENT=${DISABLE_REVIEW_ASSIGNMENT}
     ports:
       - "8080:8080"
       - "443:443"
     links:
       - tc-informix:db
     entrypoint: /root/scripts/run.sh
+
+
 
 
 

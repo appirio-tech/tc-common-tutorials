@@ -1,0 +1,19 @@
+#######################################################
+# Build parameters for Review Assignment tool        #
+#######################################################
+
+# The online_review_home is the directory where the development distribution for
+# Online Review application is checked to
+online_review_home=/root/online_review
+
+# A deployment directory for Review Assignment tool
+deploy-dir=/root/deployment/review_assignment
+
+# A path to file to signal to Review Assignment to stop the job
+guard_file=@review_assignment_guard_file@
+
+# A path to file to signal to Review Assignment that there is another tool instance already running
+running_file=@review_assignment_running_file@
+
+# An interval (in seconds) between Review Assignment executions
+tracking_interval=@review_assignment_interval@
