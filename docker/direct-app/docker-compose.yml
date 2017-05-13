@@ -18,7 +18,7 @@ services:
       - "27883:27883"
     tty: true
   docker-elasticsearch-feeder:
-    image: "appiriodevops/docker-elasticsearch:local"
+    image: "appiriodevops/docker-elasticsearch:local-es-2.3"
     links:
       - "tc-informix"
     ports:
@@ -61,17 +61,16 @@ services:
       - "1199:1199"
       - "3973:3973"
       - "5446:5446"
-  run-auto-pilot:
-    image: appiriodevops/online-review:autopilot-1.0
-    container_name: run-auto-pilot
-    links:
-      - tc-informix:db
   run-online-review:
-    image: appiriodevops/online-review:jboss-1.1
-    container_name: run-online-review
+    image: "appiriodevops/online-review:run"
     environment:
-      - JAVA_OPTS=-Xms512m -Xmx1024m
-    links:
-      - tc-informix:db
+      - JAVA_OPTS=-Xms256m -Xmx512m
+      - DISABLE_ONLINE_REVIEW=0
+      - DISABLE_AUTO_PILOT=0
+      - DISABLE_LATE_DELIVERABLES_TRACKER=1
+      - DISABLE_REVIEW_ASSIGNMENT=1
     ports:
       - "80:8080"
+    links:
+      - tc-informix:db
+    entrypoint: /root/scripts/run.sh

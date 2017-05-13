@@ -27,6 +27,6 @@ ADD scripts /root/scripts
 RUN chmod +x /root/scripts/*.sh
 RUN dos2unix /root/scripts/*.sh
 
-RUN mkdir /root/downloads
+RUN mkdir /root/downloads && mkdir /root/deployment
 
 EXPOSE 8080 443
