@@ -1,5 +1,10 @@
 version: '2'
 services:
+  elasticsearch:
+    image: elasticsearch:2.3
+    ports:
+      - 9200:9200
+      - 9300:9300
   tc-cache:
     image: "redis:3.2.5"
     ports:
@@ -17,13 +22,29 @@ services:
       - "27018:27018"
       - "27883:27883"
     tty: true
-  docker-elasticsearch-feeder:
-    image: "appiriodevops/docker-elasticsearch:local-es-2.3"
+  all-challenges-es-initial-load:
+    image: appiriodevops/tc-logstash-conf-public:dev
     links:
       - "tc-informix"
-    ports:
-       - '9200:9200'
-       - '9300:9300'
+      - "elasticsearch"
+    environment:
+      DB_CONNECTION: jdbc:informix-sqli://172.18.0.1:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp;IFX_LOCK_MODE_WAIT=5;OPTCOMPIND=0;STMT_CACHE=1;
+      DB_USER: informix
+      DB_PASSWORD: 1nf0rm1x
+      ES_HOST_PORT: 172.18.0.1:9200
+      CONF_FILENAME: "all-challenges-es-initial-load"
+  all-challenges-es-feeder:
+    image: appiriodevops/tc-logstash-conf-public:dev
+    links:
+      - "tc-informix"
+      - "elasticsearch"
+    environment:
+      DB_CONNECTION: jdbc:informix-sqli://172.18.0.1:2021/tcs_catalog:INFORMIXSERVER=informixoltp_tcp;IFX_LOCK_MODE_WAIT=5;OPTCOMPIND=0;STMT_CACHE=1;
+      DB_USER: informix
+      DB_PASSWORD: 1nf0rm1x
+      ES_HOST_PORT: 172.18.0.1:9200
+      INDEX_NAME: all_challenges
+      CONF_FILENAME: "all-challenges-es-feeder"
   tc-direct-build:
     image: "appiriodevops/direct-app:build2"
     volumes:
