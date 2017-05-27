@@ -1,0 +1,1727 @@
+<project name="topcoder" default="main" basedir=".">
+    <property environment="env"/>
+    <property name="Name" value="TopCoder"/>
+    <property name="build" value="build"/>
+    <property name="war.dir" value="${build}/wars"/>
+    <property name="ear.dir" value="${build}/ears"/>
+    <property name="sar.dir" value="${build}/sars"/>
+    <property name="ejb_jars" value="${build}/ejb_jars"/>
+    <property name="classes" value="${build}/classes"/>
+    <property name="testclasses" value="${build}/testcases"/>
+    <property name="global-dist.dir" value="${basedir}/../dist/artifacts"/>
+    <property name="external.jars.dir" location="../external-artifacts"/>
+    <property name="build.javadocs" value="${build}/javadocs"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="jars.dir" value="${lib.dir}/jars"/>
+    <property name="openid4java.dir" value="${jars.dir}/openid4java" />
+    <property name="poi.dir" value="${jars.dir}/poi-3.9"/>
+    <property name="jive.dir" value="lib/jars/jive"/>
+    <property name="struts.dir" value="${lib.dir}/jakarta-struts-1.1/lib"/>
+    <property name="bin" value="lib/bin"/>
+    <property name="src.dir" value="src"/>
+    <property name="java" value="${src.dir}/main"/>
+    <property name="shared.build" value="${basedir}/../shared"/>
+    <property name="shared" value="../shared/src/main"/>
+    <property name="testjava" value="${src.dir}/testcases"/>
+    <property name="resources" value="resources"/>
+    <property name="conf" value="conf"/>
+    <property name="taglib" value="${resources}/taglib"/>
+    <property name="images" value="images"/>
+    <property name="shared.jar" value="${bin}/shared.jar"/>
+    <property name="common.jar" value="${bin}/tcwebcommon.jar"/>
+    <property name="tccache.jar" value="${jars.dir}/tcs/tc_cache/1.0.0/tc_cache.jar"/>
+    <property name="long.jar" value="${bin}/long.jar"/>
+    <property name="web" value="src/main/com/topcoder/web"/>
+    <property name="jboss_home" value="${env.JBOSS_HOME}"/>
+    <property name="jboss_deploy" value="${jboss_home}/server/all/deploy"/>
+    <property name="jboss_lib" value="${jboss_home}/server/all/lib"/>
+    <property name="jboss_conf" value="${jboss_home}/server/all/conf"/>
+
+    <property name="deprecation" value="true"/>
+    <property name="debug" value="true"/>
+    <property name="junitsummary" value="on"/>
+
+    <target name="main" depends="compile">
+    </target>
+
+    <path id="openid4java.path">
+        <pathelement location="${openid4java.dir}/openid4java-0.9.6.jar"/>
+        <pathelement location="${openid4java.dir}/commons-codec-1.3.jar"/>
+        <pathelement location="${openid4java.dir}/guice-2.0.jar"/>
+        <pathelement location="${openid4java.dir}/httpclient-4.0.jar"/>
+        <pathelement location="${openid4java.dir}/httpcore-4.0.1.jar"/>
+        <pathelement location="${openid4java.dir}/nekohtml-1.9.14.jar"/>
+        <pathelement location="${openid4java.dir}/xercesImpl-2.8.1.jar"/>
+        <pathelement location="${openid4java.dir}/socialauth-2.0-beta3.jar"/>
+        <pathelement location="${openid4java.dir}/json-20080701.jar"/>
+    </path>
+    <path id="spring.3.1.2.path">
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.aop-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.asm-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.aspects-3.1.2.RELEASE.jar"/>
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.beans-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.context-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.context.support-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.core-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.expression-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.instrument-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.instrument.tomcat-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.jdbc-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.orm-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.transaction-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.web-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.web.servlet-3.1.2.RELEASE.jar" />
+        <pathelement location="${jars.dir}/spring/3.1.2/org.springframework.web.struts-3.1.2.RELEASE.jar" />
+    </path>
+    <path id="struts.2.3.15.1.path">                        
+        <pathelement location="${jars.dir}/struts/2.3.15.1/commons-beanutils-1.8.0.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/commons-lang-2.4.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/commons-lang3-3.1.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/ezmorph-1.0.6.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/commons-fileupload-1.3.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/commons-io-2.0.1.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/commons-logging-1.1.3.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/freemarker-2.3.19.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/ognl-3.0.6.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/struts2-core-2.3.15.1.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/struts2-spring-plugin-2.3.15.1.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/xwork-core-2.3.15.1.jar" />
+        <pathelement location="${jars.dir}/struts/2.3.15.1/struts2-json-plugin-2.3.15.1.jar" />
+    </path>
+
+    <path id="class.path">
+        <pathelement location="${classes}"/>
+        <pathelement location="${shared.jar}"/>
+        <pathelement location="${tccache.jar}"/>
+        <pathelement location="${testclasses}"/>
+        <pathelement location="${resources}"/>
+        <pathelement location="${resources}/hibernate"/>
+        <pathelement location="${images}"/>
+        <pathelement location="${jars.dir}/log4j-1.2.7.jar"/>
+        <pathelement location="${jars.dir}/ifxjdbc.jar"/>
+        <pathelement location="${jars.dir}/bfograph.jar"/>
+        <pathelement location="${jars.dir}/activation.jar"/>
+        <pathelement location="${jars.dir}/axis_dok.jar"/>
+
+        <pathelement location="${jars.dir}/jboss/javax.servlet.jar"/>
+        <pathelement location="${jars.dir}/jboss/javax.servlet.jsp.jar"/>
+        <pathelement location="${jars.dir}/jboss/jbossall-client.jar"/>
+        <pathelement location="${jars.dir}/jboss/xalan.jar"/>
+        <pathelement location="${jars.dir}/jboss/xercesImpl.jar"/>
+        <pathelement location="${jars.dir}/jboss/xml-apis.jar"/>
+        <pathelement location="${jars.dir}/jboss/mail.jar"/>
+        <pathelement location="${jars.dir}/jboss/jboss-system.jar"/>
+        <pathelement location="${jars.dir}/jboss/jboss-cache.jar"/>
+        <pathelement location="${jars.dir}/jboss/jboss-jaxws.jar"/>
+        <pathelement location="${jars.dir}/jboss/jboss-ejb3x.jar"/>
+        <pathelement location="${jars.dir}/jboss/jgroups.jar"/>
+        <pathelement location="${jars.dir}/jboss/scheduler-plugin.jar"/>
+
+        <pathelement location="${jive.dir}/jivebase.jar"/>
+        <pathelement location="${jive.dir}/jiveforums.jar"/>
+        <pathelement location="${jive.dir}/xwork.jar"/>
+        <pathelement location="${jive.dir}/htmlparser.jar"/>
+
+
+
+        <pathelement location="${jars.dir}/rome-1.0.jar"/>
+        <pathelement location="${jars.dir}/jdom-1.1.3.jar"/>
+
+        <pathelement location="${jars.dir}/imgscalr-lib-4.2.jar"/>
+
+        <pathelement location="${struts.dir}/commons-beanutils.jar"/>
+        <pathelement location="${struts.dir}/commons-collections.jar"/>
+
+
+        <pathelement location="${jars.dir}/super-csv-2.1.0.jar"/>
+
+        <!-- Apache POI -->
+        <pathelement location="${poi.dir}/poi-3.9.jar"/>
+        <pathelement location="${poi.dir}/dom4j-1.6.1.jar"/>
+        <pathelement location="${poi.dir}/poi-ooxml-3.9.jar"/>
+        <pathelement location="${poi.dir}/poi-ooxml-schemas-3.9.jar"/>
+        <pathelement location="${poi.dir}/stax-api-1.0.1.jar"/>
+        <pathelement location="${poi.dir}/xmlbeans-2.3.0.jar"/>
+        
+        <pathelement location="${jars.dir}/cxf/jsr311-api-1.1.1.jar"/>
+        <pathelement location="${jars.dir}/cxf/cxf-2.6.10.jar"/>
+
+        <!-- TCS Components -->
+
+        <pathelement location="${jars.dir}/tcs/configuration_manager/2.1.5/configuration_manager.jar"/>
+        <pathelement location="${jars.dir}/object_formatter.jar"/>
+        <pathelement location="${jars.dir}/tcs/id_generator/3.0/id_generator.jar"/>
+        <pathelement location="${jars.dir}/tcs/db_connection_factory/1.1/db_connection_factory.jar"/>
+        <pathelement location="${jars.dir}/tcs/excel_utility/2.0/excel_utility.jar"/>
+        <pathelement location="${jars.dir}/tcs/file_upload/2.2.0/file_upload.jar"/>
+        <pathelement location="${jars.dir}/tcs/json_object/1.0/json_object.jar"/>
+        <pathelement location="${jars.dir}/tcs/base_exception/2.0.0/base_exception.jar"/>
+        <pathelement location="${jars.dir}/tcs/email_engine/3.2.0/email_engine.jar"/>
+        <pathelement location="${jars.dir}/tcs/workdays/1.0/workdays.jar"/>
+        <pathelement location="${jars.dir}/tcs/document_generation.jar"/>
+        <pathelement location="${jars.dir}/tcs/refreshable_cache.jar"/>
+        <pathelement location="${jars.dir}/tcs/project_phases/2.0/project_phases.jar"/>
+        <pathelement location="${jars.dir}/tcs/job_scheduling.jar"/>
+        <pathelement location="${jars.dir}/tcs/math_matrix.jar"/>
+        <pathelement location="${jars.dir}/tcs/project_phase_template/1.2.0/project_phase_template.jar"/>
+        <pathelement location="${jars.dir}/tcs/file_class/1.0/file_class.jar"/>
+        <pathelement location="${jars.dir}/tcs/typesafe_enum/1.0/typesafe_enum.jar"/>
+        <pathelement location="${jars.dir}/tcs/simple_cache.jar"/>
+        <pathelement location="${jars.dir}/tcs/workdays/1.0/workdays.jar"/>
+        <pathelement location="${jars.dir}/tcs/contest_eligibility_validation_client/1.0.0/contest_eligibility_validation_client.jar"/>
+        <pathelement location="${jars.dir}/tcs/pipeline_service_persistence/1.0.0/pipeline_service_persistence.jar"/>
+        <pathelement location="${jars.dir}/tcs/pipeline_service/1.0.0/pipeline_service.jar"/>
+        <pathelement location="${jars.dir}/tcs/pipeline_service_facade/1.0.0/pipeline_service_facade.jar"/>
+        <pathelement location="${jars.dir}/tcs/copilot_pool_and_profiles_common.jar"/>
+        <pathelement location="${jars.dir}/tcs/copilot_pool_and_profiles_services.jar"/>
+        <pathelement location="${jars.dir}/tcs/pipeline_service_facade/1.0.0/pipeline_service_facade.jar"/>
+        <pathelement location="${jars.dir}/tcs/review_application_management/1.0.2/review_application_management.jar"/>
+        <pathelement location="${jars.dir}/tcs/database_abstraction/2.0.0/database_abstraction.jar"/>
+        <pathelement location="${jars.dir}/tcs/search_builder/1.4.0/search_builder.jar"/>
+        <pathelement location="${jars.dir}/tcs/class_associations/1.0.0/class_associations.jar"/>
+        <pathelement location="${jars.dir}/tcs/object_factory_configuration_api_plugin/1.0.0/object_factory_configuration_api_plugin.jar"/>
+        <pathelement location="${jars.dir}/tcs/project_payment_calculator/1.1.0/project_payment_calculator.jar"/>
+        
+        <pathelement location="${jars.dir}/tcs/member_photo_manager/2.0.0/member_photo_manager.jar"/>
+        <pathelement location="${jars.dir}/tcs/document_generator/3.1.0/document_generator.jar"/>
+        <pathelement location="${jars.dir}/tcs/configuration_api/1.1.0/configuration_api.jar"/>
+        <pathelement location="${jars.dir}/tcs/configuration_persistence/1.0.2/configuration_persistence.jar"/>
+        <pathelement location="${jars.dir}/tcs/terms_of_use/1.1.0/terms_of_use.jar"/>
+        <pathelement location="${jars.dir}/tcs/logging_wrapper/2.0.0/logging_wrapper.jar"/>
+        <pathelement location="${jars.dir}/tcs/object_factory/2.0.1/object_factory.jar"/>
+
+        <pathelement location="${jars.dir}/tcs/image_manipulation/1.0.1/image_manipulation.jar"/>
+        <pathelement location="${jars.dir}/tcs/image_overlay/1.0.0/image_overlay.jar"/>
+        <pathelement location="${jars.dir}/tcs/image_resizing/1.0.0/image_resizing.jar"/>
+        <pathelement location="${jars.dir}/tcs/random_string_generator/1.0.0/random_string_generator.jar"/>
+        <pathelement location="${jars.dir}/tcs/random_string_image/1.0.0/random_string_image.jar"/>
+        <pathelement location="${jars.dir}/tcs/spell_check/1.0.0/spell_check.jar"/>
+        <pathelement location="${jars.dir}/tcs/topcoder_commons_utility/1.0.0/topcoder_commons_utility.jar"/>
+
+        <!--required for aol alerts only -->
+        <pathelement location="${jars.dir}/tcs/alerts_wrapper/1.0/java_alerts_wrapper.jar"/>
+
+        <!-- TCS Other -->
+        <pathelement location="${jars.dir}/tcs/catalog.jar"/>
+        <pathelement location="${jars.dir}/tcs/user.jar"/>
+
+        <!-- LDAP SDK -->
+        <pathelement location="${jars.dir}/tcs/ldap_sdk_interface/1.0.2/ldap_sdk_interface.jar"/>
+        <pathelement location="${jars.dir}/netscape_ldap_sdk.jar"/>
+        <pathelement location="${jars.dir}/ldap.jar"/>
+
+        <!-- file conversion component -->
+        <pathelement location="${jars.dir}/fileconvert.jar"/>
+        <pathelement location="${jars.dir}/httpunit.jar"/>
+        <pathelement location="${jars.dir}/itext-1.1.jar"/>
+
+        <!-- hibernate files -->
+        <pathelement location="${jive.dir}/velocity-dep.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.2/hibernate3.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.2/commons-logging-1.0.4.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.2/ehcache-1.2.3.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.2/cglib-2.1.3.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.2/asm.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.2/ant-antlr-1.6.5.jar"/>
+        <pathelement location="${jars.dir}/hibernate-3.2/antlr-2.7.6.jar"/>
+
+        <pathelement location="${jars.dir}/hibernate-3.0/hibernate-validator.jar"/>
+        
+        <pathelement location="${jars.dir}/hibernate-3.1/hibernate-commons-annotations.jar"/>
+
+        <pathelement location="${jars.dir}/hibernate-annotations-3.3.0.GA/hibernate-annotations.jar"/>
+        <pathelement location="${jars.dir}/hibernate-annotations-3.3.0.GA/hibernate-entitymanager.jar"/>
+        <pathelement location="${jars.dir}/hibernate-annotations-3.3.0.GA/ejb3-persistence.jar"/>
+
+        <pathelement location="${jars.dir}/commons-httpclient-3.0.1.jar"/>
+        <pathelement location="${jars.dir}/jackson/1.9.7/jackson-core-asl.jar"/>
+        <pathelement location="${jars.dir}/jackson/1.9.7/jackson-mapper-asl.jar"/>
+        <pathelement location="${jars.dir}/json-lib-2.3-jdk15.jar"/>
+        <pathelement location="${jars.dir}/commons-io-2.0.1.jar"/>
+        <pathelement location="${jars.dir}/commons-lang-2.4.jar"/>
+        <pathelement location="${jars.dir}/commons-collections-3.2.jar"/>
+        <pathelement location="${jars.dir}/commons-beanutils-1.8.0.jar"/>
+        <pathelement location="${jars.dir}/super-csv-2.1.0.jar"/>
+
+        <!-- docusign lib dependencies -->
+        <pathelement location="${jars.dir}/jackson/2.1.5/jackson-annotations-2.1.5.jar"/>
+        <pathelement location="${jars.dir}/jackson/2.1.5/jackson-core-2.1.5.jar"/>
+        <pathelement location="${jars.dir}/jackson/2.1.5/jackson-databind-2.1.5.jar"/>
+        <pathelement location="${jars.dir}/docusign/eSignJavaLib.jar"/>
+
+        <pathelement location="${jars.dir}/TestServices.jar"/>
+        <pathelement location="${jars.dir}/asyncservices.jar"/>
+        <!-- app side dependencies...get rid of this if possible it's bad long contest design -->
+        <pathelement location="${jars.dir}/tc.jar"/>
+        <!--OpenID-->
+        <path refid="openid4java.path" />
+        <path refid="struts.2.3.15.1.path" />
+        <path refid="spring.3.1.2.path" />
+        <pathelement location="${jars.dir}/spring.jar"/>
+        <pathelement location="${struts.dir}/struts.jar"/>
+
+        <!-- twitter API -->
+        <pathelement location="${jars.dir}/twitter4j-core-3.0.6.jar"/>
+    </path>
+    <!-- adding this here because i can't figure out how to use the above path element in other path elements-->
+    <property name="class.path" refid="class.path"/>
+
+    <target name="init">
+        <mkdir dir="${classes}"/>
+        <mkdir dir="${testclasses}"/>
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${ejb_jars}"/>
+        <mkdir dir="${war.dir}"/>
+        <mkdir dir="${ear.dir}"/>
+        <mkdir dir="${sar.dir}"/>
+    </target>
+
+    <target name="compile_common" depends="init" unless="compile_common_set">
+        <ant antfile="build_common.xml" target="build-dist"/>
+        <property name="compile_common_set" value="true"/>
+    </target>
+    <target name="compile" depends="init,compile_common" unless="compile_set">
+        <depend srcdir="${java}" destdir="${classes}" cache="${build}/cache"/>
+        <javac
+                srcdir="${java}"
+                destdir="${classes}"
+                classpathref="class.path"
+                deprecation="${deprecation}"
+                debug="${debug}"
+                source="1.5"
+                target="1.5" memoryMaximumSize="380m" memoryInitialSize="380m" fork="true">
+            <include name="com/topcoder/ejb/**"/>
+            <include name="com/topcoder/security/**"/>
+            <include name="com/topcoder/utilities/**"/>
+            <include name="com/topcoder/web/**"/>
+            <include name="com/topcoder/www/**"/>
+            <include name="com/atlassian/**"/>
+            <include name="com/topcoder/apps/review/**"/>
+            <include name="com/topcoder/util/idgenerator/bean/**"/>
+            <include name="com/topcoder/reg/**"/>
+
+            <exclude name="com/topcoder/web/csf/**"/>
+            <exclude name="com/topcoder/web/wiki/**"/>
+            <exclude name="com/topcoder/web/studio/**"/>
+            <exclude name="com/topcoder/web/openaim/**"/>
+            <exclude name="com/topcoder/web/truveo/**"/>
+            <exclude name="com/topcoder/web/aolicq/**"/>
+            <exclude name="com/topcoder/web/winformula/**"/>
+            <exclude name="com/topcoder/web/forums/**"/>
+            <exclude name="com/topcoder/web/onsite/**"/>
+            <exclude name="com/topcoder/web/ejb/security/**"/>
+        </javac>
+        <property name="compile_set" value="true"/>
+    </target>
+
+    <target name="javadocs">
+        <mkdir dir="${build.javadocs}"/>
+        <javadoc
+                packagenames="com.topcoder.common.*,com.topcoder.ejb.*,com.topcoder.security.*,com.topcoder.utilities.*,com.topcoder.web.*"
+                sourcepath="${java}"
+                classpathref="class.path"
+                destdir="${build.javadocs}"
+                windowtitle="${Name} API"
+                doctitle="${Name} API"
+                maxmemory="256M"
+                >
+        </javadoc>
+    </target>
+
+    <target name="clean">
+        <!-- kill the entire build dir -->
+        <delete dir="${build}"/>
+        <delete dir="${bin}"/>
+        <ant dir="${shared.build}" target="clean"/>
+    </target>
+
+    <target name="package-EJB-FileConversionBean" depends="compile">
+        <jar jarfile="${ejb_jars}/FileConversion.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/file/convert/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/fileconversion/**"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/fileconversion" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-QueryServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/QueryServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/query/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/query" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-JobPostingServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/JobPostingServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/jobposting/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/jobposting" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ResumeServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/ResumeServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/tc/model/Resume.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/resume/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/resume" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ReportingBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Reporting.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/ejb/Reporting/*.class"/>
+            <metainf dir="${java}/com/topcoder/ejb/Reporting" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-PactsServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/PactsServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/tc/controller/legacy/pacts/common/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/payments/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/assignmentdocuments/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/pacts" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-PactsClientServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/PactsClientServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/*Payment*.class"/>
+            <zipfileset dir="${classes}"
+                        includes="com/topcoder/web/ejb/pacts/DeleteAffirmedAssignmentDocumentException.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/Constants.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/PactsClient*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/payments/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/pacts/assignmentdocuments/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/tc/controller/legacy/pacts/bean/DataInterfaceBean.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/tc/controller/legacy/pacts/common/PactsConstants.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/common/model/AssignmentDocumentType.class"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-JavaDocServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/JavaDocServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/ejb/JavaDocServices/*.class"/>
+            <metainf dir="${java}/com/topcoder/ejb/JavaDocServices" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-EmailServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/EmailServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/shared/ejb/EmailServices/*.class"/>
+            <metainf dir="${shared}/com/topcoder/shared/ejb/EmailServices" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-UtilBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Util.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/ejb/AuthenticationServices/User.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/ejb/Util/*.class"/>
+            <metainf dir="${java}/com/topcoder/ejb/Util" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-CoderBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Coder.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/shared/util/logging/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/shared/util/DBMS.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/coder/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/coder" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ImageBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Image.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/shared/util/logging/*.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/shared/util/DBMS.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/image/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/image" includes="*.xml"/>
+        </jar>
+    </target>
+
+
+    <target name="package-EJB-DemographicBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Demographic.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/demographic/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/demographic" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-UserBean" depends="compile">
+        <jar jarfile="${ejb_jars}/User.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/user/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/user" includes="*.xml"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/user" includes="wsdl"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-UserServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/UserServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/userservices/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/userservices" includes="*.xml"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/userservices" includes="wsdl/*.wsdl"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-SchoolBean" depends="compile">
+        <jar jarfile="${ejb_jars}/School.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/school/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/school" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-RatingBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Rating.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/rating/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/rating" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-SurveyBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Survey.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/survey/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/survey" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ProblemRatingBean" depends="compile">
+        <jar jarfile="${ejb_jars}/ProblemRatingServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/problemrating/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/problemrating" includes="*.xml"/>
+        </jar>
+    </target>
+
+
+    <target name="package-EJB-EmailBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Email.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/email/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/email" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-AddressBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Address.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/address/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/address" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-PhoneBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Phone.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/phone/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/phone" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ProductBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Product.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/product/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/product" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ProjectBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Project.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/project/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/project" includes="*.xml"/>
+        </jar>
+    </target>
+
+
+    <target name="package-EJB-UserEvent" depends="compile">
+        <jar jarfile="${ejb_jars}/UserEvent.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/userevent/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/userevent" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-NoteBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Note.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/note/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/note" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-SessionBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Session.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/session/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/session" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-SessionProfileBean" depends="compile">
+        <jar jarfile="${ejb_jars}/SessionProfile.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/sessionprofile/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/sessionprofile" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-CompanyBean" depends="compile">
+        <jar jarfile="${ejb_jars}/Company.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/company/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/company" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ScreeningCoderBean" depends="compile">
+        <jar jarfile="${ejb_jars}/ScreeningCoder.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/corp/ejb/coder/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/corp/ejb/coder" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-PasswordBean" depends="compile">
+        <jar
+                jarfile="${ejb_jars}/Password.jar"
+                basedir="${classes}"
+                includes="com/topcoder/web/ejb/password/**">
+            <metainf dir="${java}/com/topcoder/web/ejb/password" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-PreferenceLevelBean" depends="compile">
+        <jar jarfile="${ejb_jars}/PreferenceLevel.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/preferencelevel/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/preferencelevel" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-CoderSkillBean" depends="compile">
+        <jar jarfile="${ejb_jars}/CoderSkill.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/coderskill/*"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/coderskill/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/coderskill" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ComponentRegistrationServicesBean" depends="compile">
+        <jar jarfile="${ejb_jars}/ComponentRegistrationServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/BaseEJB.class"/>
+            <zipfileset dir="${classes}" includes="com/topcoder/web/ejb/ComponentRegistrationServices/*.class"/>
+            <metainf dir="${java}/com/topcoder/web/ejb/ComponentRegistrationServices" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="package-EJB-ContestAdminServices" depends="compile">
+        <jar jarfile="${ejb_jars}/ContestAdminServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/ejb/ContestAdminServices/*.class"/>
+            <metainf dir="${java}/com/topcoder/ejb/ContestAdminServices" includes="*.xml"/>
+        </jar>
+    </target>
+
+    <target name="deploy" depends="compile">
+        <antcall target="deploy-tc"/>
+        <antcall target="deploy-admin"/>
+        <antcall target="deploy-query"/>
+        <antcall target="deploy-email"/>
+        <antcall target="deploy-corp"/>
+        <antcall target="deploy-privatelabel"/>
+        <antcall target="deploy-reg"/>
+        <antcall target="deploy-reg2"/>
+        <antcall target="deploy-ep"/>
+
+        <antcall target="deploy-security"/>
+        <antcall target="move-libs"/>
+        <antcall target="move-conf"/>
+    </target>
+
+    <target name="expand">
+        <antcall target="expand-tc"/>
+        <antcall target="expand-admin"/>
+        <antcall target="expand-query"/>
+        <antcall target="expand-email"/>
+        <antcall target="expand-corp"/>
+        <antcall target="expand-privatelabel"/>
+        <antcall target="expand-reg"/>
+        <antcall target="expand-reg2"/>
+        <antcall target="expand-ep"/>
+
+        <antcall target="move-libs"/>
+        <antcall target="move-conf"/>
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ear.dir}">
+                <include name="security.ear"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="move-conf">
+        <copy todir="${jboss_conf}">
+            <fileset dir="${resources}">
+                <include name="CorpConstants.properties"/>
+                <include name="ApplicationServer.properties"/>
+                <include name="DBMS.properties"/>
+                <include name="DataAccess.properties"/>
+                <include name="PrivateLabel*.properties"/>
+                <include name="problem.xsd"/>
+                <include name="ProblemParser.properties"/>
+                <include name="Resume.properties"/>
+                <include name="Registration.properties"/>
+                <include name="EP.properties"/>
+                <include name="TC.properties"/>
+                <include name="PactsInternalServlet.properties"/>
+                <include name="cache.properties"/>
+                <include name="Email.properties"/>
+                <include name="EmailEngineConfig.properties"/>
+                <include name="LDAP.properties"/>
+                <include name="CloudSpokes.properties"/>
+                <include name="twitter4j.properties"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}">
+            <fileset dir="${resources}/stat">
+                <include name="statServlet.xml"/>
+            </fileset>
+        </copy>
+        <mkdir dir="${jboss_conf}/com/topcoder/security"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/util/config"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/util/file"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/message/email"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/servlet/request"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/web/tc/controller"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/web/tc/controller/request/contest"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/management/review/application/impl"/>
+        <mkdir dir="${jboss_conf}/com/topcoder/management/payment/calculator/impl"/>
+
+        <copy todir="${jboss_conf}/com/topcoder/management/review/application/impl">
+            <fileset dir="${resources}/com/topcoder/management/review/application/impl">
+                <include name="ReviewApplicationManagerImpl.properties"/>
+                <include name="ReviewAuctionManagerImpl.properties"/>
+                <include name="ReviewApplicationManagement.xml"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${jboss_conf}/com/topcoder/management/payment/calculator/impl">
+            <fileset dir="${resources}/com/topcoder/management/payment/calculator/impl">
+                <include name="ProjectPaymentAdjustmentCalculator.properties"/>
+                <include name="ProjectPaymentAdjustmentCalculator.xml"/>
+                <include name="DefaultProjectPaymentCalculator.properties"/>
+                <include name="DefaultProjectPaymentCalculator.xml"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${jboss_conf}/com/topcoder/search/builder">
+            <fileset dir="${resources}/com/topcoder/search/builder">
+                <include name="SearchBundleManager.xml"/>
+            </fileset>
+        </copy>
+        
+        <copy todir="${jboss_conf}/com/cronos/termsofuse/dao">
+            <fileset dir="${resources}/com/cronos/termsofuse/dao">
+                <include name="TermsOfUse.xml"/>
+            </fileset>
+        </copy>
+        
+        <copy todir="${jboss_conf}/com/topcoder/security">
+            <fileset dir="${resources}/com/topcoder/security">
+                <include name="Util.properties"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/util/config">
+            <fileset dir="${resources}/com/topcoder/util/config">
+                <include name="ConfigManager.properties"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/util/file">
+            <fileset dir="${resources}/com/topcoder/util/file">
+                <include name="DocumentManager.xml"/>
+            </fileset>
+        </copy>        
+        <copy todir="${jboss_conf}/com/topcoder/message/email">
+            <fileset dir="${resources}/com/topcoder/message/email">
+                <include name="EmailEngine.xml"/>
+            </fileset>
+        </copy>        
+        <copy todir="${jboss_conf}/com/topcoder/servlet/request">
+            <fileset dir="${resources}/com/topcoder/servlet/request">
+                <include name="FileUpload.xml"/>
+                <include name="MimeTypeAndFileExtensionValidator.xml"/>
+                <include name="PhotoFileUpload.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/db/connectionfactory">
+            <fileset dir="${resources}/com/topcoder/db/connectionfactory">
+                <include name="DBConnectionFactoryImpl.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/web/tc/controller/request/contest">
+            <fileset dir="${resources}/com/topcoder/web/tc/controller/request/contest">
+                <include name="ProjectDetail.properties"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/web/tc/controller">
+            <fileset dir="${resources}/com/topcoder/web/tc/controller">
+                <include name="payoneer.xml"/>
+                <include name="paypal.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/web/tc/controller/request/docusign">
+            <fileset dir="${resources}/com/topcoder/web/tc/controller/request/docusign">
+                <include name="docusign.xml"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_conf}/com/topcoder/web/tc/controller/request/portal">
+            <fileset dir="${resources}/com/topcoder/web/tc/controller/request/portal">
+                <include name="DeveloperPortal.xml"/>
+            </fileset>
+        </copy>
+        <!--
+        <copy todir="${jboss_conf}/com/topcoder/randomstringimg">
+            <fileset dir="${resources}/com/topcoder/randomstringimg">
+                <include name="*.xml"/>
+            </fileset>
+        </copy>
+        -->
+        <!--
+        <copy todir="${jboss_conf}">
+            <fileset dir="scripts/pacts">
+                <include name="paymentRanges.xml"/>
+            </fileset>
+        </copy>
+        -->
+    </target>
+    <target name="move-libs">
+        <copy todir="${jboss_lib}">
+            <fileset dir="${bin}">
+                <include name="tcwebcommon.jar"/>
+                <include name="tc.jar"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_lib}" file="${shared.jar}"/>
+        <copy todir="${jboss_lib}" file="${tccache.jar}"/>
+
+        <copy todir="${jboss_lib}">
+            <fileset dir="${jars.dir}">
+                <include name="ifxjdbc.jar"/>
+                <include name="bfograph.jar"/>
+                <include name="object_formatter.jar"/>
+                <include name="tcsUtil.jar"/>
+                <include name="fileconvert.jar"/>
+                <include name="httpunit.jar"/>
+                <include name="itext-1.1.jar"/>
+                <include name="jedis-2.8.1.jar" />
+                <include name="commons-pool2-2.4.2.jar" />
+                <!-- don't deploy this on the main site anymore
+                <include name="tc.jar"/>
+                <include name="TestServices.jar"/>
+                <include name="asyncservices.jar"/>
+                -->
+            </fileset>
+            <fileset dir="${jars.dir}/tcs/id_generator/3.0">
+                <include name="id_generator.jar"/>
+            </fileset>
+            <fileset dir="${jars.dir}/tcs/db_connection_factory/1.1">
+                <include name="db_connection_factory.jar"/>
+            </fileset>
+            <fileset dir="${jars.dir}/tcs/alerts_wrapper/1.0">
+                <include name="java_alerts_wrapper.jar"/>
+            </fileset>
+            <fileset dir="${jars.dir}/tcs/object_factory/2.0.1">
+                <include name="object_factory.jar"/>
+            </fileset>
+            <fileset dir="${jars.dir}/tcs/json_object/1.0">
+                <include name="json_object.jar"/>
+            </fileset>
+            <fileset dir="${jars.dir}/tcs">
+                <include name="ldap_sdk_interface.jar"/>
+            </fileset>
+            <fileset dir="${jars.dir}">
+                <include name="netscape_ldap_sdk.jar"/>
+                <include name="ldap.jar"/>
+            </fileset>
+        </copy>
+        
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/file_upload/2.2.0/file_upload.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/excel_utility/2.0/excel_utility.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/configuration_manager/2.1.5/configuration_manager.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/data_validation/1.0/data_validation.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/file_system_server/1.0/file_system_server.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/guid_generator/1.0/guid_generator.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/heartbeat/1.0/heartbeat.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/ip_server/2.0.1/ip_server.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/typesafe_enum/1.0/typesafe_enum.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/contest_eligibility_validation_client/1.0.0/contest_eligibility_validation_client.jar"/>
+        
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.2/hibernate3.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.2/antlr-2.7.6.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.2/asm.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.2/cglib-2.1.3.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.2/slf4j-api-1.5.8.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.2/slf4j-log4j12-1.5.8.jar"/>
+
+        <copy todir="${jboss_lib}" file="${jars.dir}/commons-httpclient-3.0.1.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/jackson/1.9.7/jackson-core-asl.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/jackson/1.9.7/jackson-mapper-asl.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/json-lib-2.3-jdk15.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/commons-io-2.0.1.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/commons-collections-3.2.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/commons-beanutils-1.8.0.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/commons-lang-2.4.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/super-csv-2.1.0.jar"/>
+
+        <!-- docusign lib dependencies -->
+        <copy todir="${jboss_lib}" file="${jars.dir}/jackson/2.1.5/jackson-annotations-2.1.5.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/jackson/2.1.5/jackson-core-2.1.5.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/jackson/2.1.5/jackson-databind-2.1.5.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/docusign/eSignJavaLib.jar"/>
+
+        <copy todir="${jboss_lib}" file="${jars.dir}/twitter4j-core-3.0.6.jar"/>
+
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.0/hibernate-validator.jar"/>
+        
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-3.1/hibernate-commons-annotations.jar"/>
+
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-annotations-3.3.0.GA/hibernate-annotations.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-annotations-3.3.0.GA/hibernate-entitymanager.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/hibernate-annotations-3.3.0.GA/ejb3-persistence.jar"/>
+
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/pipeline_service_persistence/1.0.0/pipeline_service_persistence.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/pipeline_service/1.0.0/pipeline_service.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/pipeline_service_facade/1.0.0/pipeline_service_facade.jar"/>
+        
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/logging_wrapper/2.0.0/logging_wrapper.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/document_generator/3.1.0/document_generator.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/member_photo_manager/2.0.0/member_photo_manager.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/email_engine/3.2.0/email_engine.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/configuration_persistence/1.0.2/configuration_persistence.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/terms_of_use/1.1.0/terms_of_use.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/topcoder_commons_utility/1.0.0/topcoder_commons_utility.jar"/>
+
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/base_exception/2.0.0/base_exception.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/project_payment_calculator/1.1.0/project_payment_calculator.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/review_application_management/1.0.2/review_application_management.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/database_abstraction/2.0.0/database_abstraction.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/search_builder/1.4.0/search_builder.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/object_factory_configuration_api_plugin/1.0.0/object_factory_configuration_api_plugin.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/class_associations/1.0.0/class_associations.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/configuration_api/1.1.0/configuration_api.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/random_string_image/1.0.0/random_string_image.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/random_string_generator/1.0.0/random_string_generator.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/spell_check/1.0.0/spell_check.jar"/>
+        <copy todir="${jboss_lib}" file="${jars.dir}/tcs/terms_of_use/1.1.0/terms_of_use.jar"/>
+
+        <copy todir="${jboss_lib}">
+            <fileset dir="${jars.dir}/tcs">
+                <include name="catalog.jar"/>
+                <include name="user.jar"/>
+            </fileset>
+        </copy>
+        <copy todir="${jboss_lib}">
+            <fileset dir="${ejb_jars}">
+                <include name="security.jar"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="war-query" depends="compile">
+        <war warfile="${war.dir}/query.war" webxml="${resources}/query/web.xml">
+            <fileset dir="${java}/com/topcoder/web/query/servlet/jsp">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/query/**"/>
+                <include name="com/topcoder/security/**/*.class"/>
+            </classes>
+            <webinf dir="${resources}/query">
+                <include name="query-taglib.tld"/>
+            </webinf>
+            <webinf dir="${resources}/query">
+                <include name="jboss-web.xml"/>
+            </webinf>
+        </war>
+        <unwar src="${war.dir}/query.war" dest="${jboss_deploy}/query.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/query.war/META-INF"/>
+    </target>
+
+    <target name="deploy-query" depends="compile">
+        <antcall target="package-EJB-QueryServicesBean"/>
+        <antcall target="war-query"/>
+        <antcall target="expand-query"/>
+
+    </target>
+
+    <target name="expand-query">
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ejb_jars}">
+                <include name="QueryServices.jar"/>
+            </fileset>
+        </copy>
+        <unwar src="${war.dir}/query.war" dest="${jboss_deploy}/query.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/query.war/META-INF"/>
+
+    </target>
+
+
+    <target name="war-email" depends="compile">
+        <war warfile="${war.dir}/email.war" webxml="${resources}/email/web.xml">
+            <fileset dir="${java}/com/topcoder/web/email/servlet/jsp">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/email/**"/>
+            </classes>
+            <webinf dir="${resources}/email">
+                <include name="email-taglib.tld"/>
+            </webinf>
+            <webinf dir="${resources}/taglib">
+                <include name="tc-webtags.tld"/>
+            </webinf>
+            <zipfileset dir="${java}/com/topcoder/web/email/servlet/jsp">
+                <include name="**/*.jpg"/>
+            </zipfileset>
+            <webinf dir="${resources}/email">
+                <include name="jboss-web.xml"/>
+            </webinf>
+        </war>
+        <unwar src="${war.dir}/email.war" dest="${jboss_deploy}/email.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/email.war/META-INF"/>
+    </target>
+
+    <target name="deploy-email" depends="compile">
+        <antcall target="package-EJB-EmailServicesBean"/>
+        <antcall target="war-email"/>
+
+        <antcall target="expand-email"/>
+    </target>
+
+    <target name="expand-email">
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ejb_jars}">
+                <include name="EmailServices.jar"/>
+            </fileset>
+        </copy>
+        <unwar src="${war.dir}/email.war" dest="${jboss_deploy}/email.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/email.war/META-INF"/>
+
+    </target>
+
+
+    <!-- begin corp targets -->
+
+    <target name="war-corp" depends="compile">
+        <war warfile="${war.dir}/corp.war" webxml="${resources}/corp/web.xml">
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/corp/**"/>
+                <include name="com/topcoder/web/ejb/**"/>
+                <include name="com/topcoder/security/**/*.class"/>
+                <include name="com/topcoder/web/privatelabel/model/Base.class"/>
+                <include name="com/topcoder/web/privatelabel/model/DemographicAnswer.class"/>
+                <include name="com/topcoder/web/privatelabel/model/DemographicQuestion.class"/>
+                <include name="com/topcoder/web/privatelabel/model/DemographicResponse.class"/>
+                <include name="com/topcoder/web/privatelabel/view/tag/DemographicQuestionIteratorTagInfo.class"/>
+                <include name="com/topcoder/web/privatelabel/view/tag/DemographicAnswerIteratorTagInfo.class"/>
+                <include name="com/topcoder/web/privatelabel/view/tag/DemographicResponseIteratorTagInfo.class"/>
+                <include name="com/topcoder/web/privatelabel/view/tag/DemographicInput.class"/>
+                <include name="com/topcoder/web/privatelabel/Constants.class"/>
+                <include name="com/fx4m/**/*.class"/>
+                <exclude name="**/*Bean.class"/>
+                <exclude name="**/*Impl.class"/>
+            </classes>
+            <webinf dir="${resources}/taglib">
+                <include name="tc-webtags.tld"/>
+                <include name="screening.tld"/>
+                <include name="tces-taglib.tld"/>
+                <include name="rsc-taglib.tld"/>
+            </webinf>
+
+            <webinf dir="${resources}/corp">
+                <include name="jboss-web.xml"/>
+            </webinf>
+            <fileset dir="${java}/com/topcoder/web/jsp">
+                <include name="errorPage.jsp"/>
+                <include name="date_time.jsp"/>
+                <include name="script.jsp"/>
+                <include name="menu.jsp"/>
+                <include name="corpMenu.jsp"/>
+            </fileset>
+            <fileset dir="${java}/com/topcoder/web/corp/view">
+                <include name="**/*"/>
+            </fileset>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+            </lib>
+
+
+        </war>
+        <unwar src="${war.dir}/corp.war" dest="${jboss_deploy}/corp.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/corp.war/META-INF"/>
+    </target>
+
+    <target name="deploy-corp" depends="war-corp">
+        <antcall target="package-EJB-AddressBean"/>
+        <antcall target="package-EJB-CompanyBean"/>
+        <antcall target="package-EJB-EmailBean"/>
+        <antcall target="package-EJB-NoteBean"/>
+        <antcall target="package-EJB-PhoneBean"/>
+        <antcall target="package-EJB-PreferenceLevelBean"/>
+        <antcall target="package-EJB-ProductBean"/>
+        <antcall target="package-EJB-ResumeServicesBean"/>
+        <antcall target="package-EJB-ScreeningCoderBean"/>
+        <antcall target="package-EJB-SessionBean"/>
+        <antcall target="package-EJB-SessionProfileBean"/>
+        <antcall target="package-EJB-UserBean"/>
+        <antcall target="expand-corp"/>
+    </target>
+
+    <target name="expand-corp">
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ejb_jars}">
+                <include name="Company.jar"/>
+                <include name="Email.jar"/>
+                <include name="Note.jar"/>
+                <include name="Phone.jar"/>
+                <include name="PreferenceLevel.jar"/>
+                <include name="Product.jar"/>
+                <include name="ResumeService.jar"/>
+                <include name="ScreeningCoder.jar"/>
+                <include name="Session.jar"/>
+                <include name="SessionProfile.jar"/>
+                <include name="User.jar"/>
+            </fileset>
+        </copy>
+        <unwar src="${war.dir}/corp.war" dest="${jboss_deploy}/corp.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/corp.war/META-INF"/>
+
+    </target>
+
+
+    <target name="compile-reg" depends="compile">
+        <javac
+                srcdir="${java}"
+                destdir="${classes}"
+                classpathref="class.path"
+                deprecation="${deprecation}"
+                debug="${debug}"
+                source="1.5"
+                target="1.5"
+                >
+            <include name="com/topcoder/web/reg/**"/>
+        </javac>
+    </target>
+
+    <target name="war-reg" depends="compile-reg">
+        <war warfile="${war.dir}/reg.war" webxml="${resources}/reg/web.xml">
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/reg/**/*.class"/>
+            </classes>
+            <webinf dir="${resources}/taglib">
+                <include name="tc.tld"/>
+                <include name="tc-webtags.tld"/>
+                <include name="reg-tags.tld"/>
+                <include name="common-functions.tld"/>
+            </webinf>
+            <fileset dir="${java}/com/topcoder/web/reg/view">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <fileset dir="${java}/com/topcoder/web/jsp">
+                <include name="errorPage.jsp"/>
+                <include name="date_time.jsp"/>
+                <include name="script.jsp"/>
+                <include name="style.jsp"/>
+                <include name="menu.jsp"/>
+                <include name="page_title.jsp"/>
+            </fileset>
+            <webinf dir="${resources}/reg">
+                <include name="jboss-web.xml"/>
+            </webinf>
+            <classes dir="${resources}/reg">
+                <include name="hibernate.cfg.xml"/>
+            </classes>
+            <classes dir="${resources}/hibernate">
+                <include name="com/topcoder/web/common/**/*.xml"/>
+                <include name="com/topcoder/web/tc/model/**/*.xml"/>
+                <include name="com/topcoder/web/ep/model/**/*.xml"/>
+            </classes>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+            </lib>
+
+        </war>
+    </target>
+
+    <target name="deploy-reg" depends="war-reg,move-libs">
+        <antcall target="expand-reg"/>
+    </target>
+
+    <target name="expand-reg">
+        <delete file="${jboss_deploy}/reg.war"/>
+        <unwar src="${war.dir}/reg.war" dest="${jboss_deploy}/reg.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/reg.war/META-INF"/>
+    </target>
+
+    <target name="compile-reg2" depends="compile">
+        <javac srcdir="${java}" destdir="${classes}" classpathref="class.path" deprecation="${deprecation}" debug="${debug}" source="1.5" target="1.5">
+            <include name="com/topcoder/reg/**/*.java" />
+        </javac>
+    </target>
+    <target name="war-reg2" depends="compile-reg2">
+        <war warfile="${war.dir}/reg2.war" webxml="${resources}/reg2/web.xml">
+            <classes dir="${classes}">
+                <include name="com/topcoder/reg/**/*.class" />
+            </classes>
+            <fileset dir="${java}/com/topcoder/reg/view">
+                <include name="**/*"/>
+            </fileset>
+            <webinf dir="${resources}/reg2">
+                <include name="jboss-web.xml" />
+            </webinf>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar" />
+                <include name="standard.jar" />
+                <include name="netscape_ldap_sdk.jar" />
+            </lib>
+            <lib dir="${jars.dir}/struts/2.3.15.1">
+                <include name="commons-beanutils-1.8.0.jar" />
+                <include name="commons-lang-2.4.jar" />
+                <include name="commons-lang3-3.1.jar" />
+                <include name="ezmorph-1.0.6.jar" />
+                <include name="commons-fileupload-1.3.jar" />
+                <include name="commons-io-2.0.1.jar" />
+                <include name="commons-logging-1.1.3.jar" />
+                <include name="freemarker-2.3.19.jar" />
+                <include name="ognl-3.0.6.jar" />
+                <include name="struts2-core-2.3.15.1.jar" />
+                <include name="struts2-spring-plugin-2.3.15.1.jar" />
+                <include name="xwork-core-2.3.15.1.jar" />
+                <include name="struts2-json-plugin-2.3.15.1.jar" />
+            </lib>
+            <lib dir="${jars.dir}/spring/3.1.2">
+                <include name="org.springframework.aop-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.asm-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.aspects-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.beans-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.context-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.context.support-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.core-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.expression-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.instrument-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.instrument.tomcat-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.jdbc-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.orm-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.transaction-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.web-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.web.servlet-3.1.2.RELEASE.jar" />
+                <include name="org.springframework.web.struts-3.1.2.RELEASE.jar" />
+            </lib>
+            <lib dir="${jars.dir}/aop">
+                <include name="aopalliance.jar" />                
+            </lib>
+            <lib dir="${jars.dir}/asm">
+                <include name="asm-3.3.jar" />                
+                <include name="asm-commons-3.3.jar" />
+                <include name="asm-tree-3.3.jar" />
+            </lib>
+            <lib dir="${jars.dir}/aspectj">
+                <include name="aspectjrt.jar" />
+                <include name="aspectjweaver.jar" />
+            </lib>
+            <lib dir="${external.jars.dir}">
+                <include name="configuration_api-2.0.0.jar" />
+            </lib>
+            <webinf dir="${resources}/reg2">
+                <include name="applicationContext.xml" />
+            </webinf>
+            <classes dir="${resources}/reg2">
+                <include name="RegConfigProperties.properties" />
+                <include name="struts.xml" />
+            </classes>
+            <classes dir="${resources}/reg2/email_templates"/>
+            <classes dir="${resources}/reg2/validators">
+                <exclude name="com/topcoder/web/**"/>
+            </classes>
+        </war>
+    </target>
+    <target name="deploy-reg2" depends="war-reg2,move-libs">
+        <antcall target="expand-reg2" />
+    </target>
+    <target name="expand-reg2">
+        <delete dir="${jboss_deploy}/reg2.war" />
+        <unwar src="${war.dir}/reg2.war" dest="${jboss_deploy}/reg2.war/" overwrite="yes" />
+        <delete dir="${jboss_deploy}/reg2.war/META-INF" />
+    </target>
+    <target name="compile-ep" depends="compile">
+        <javac
+                srcdir="${java}"
+                destdir="${classes}"
+                classpathref="class.path"
+                deprecation="${deprecation}"
+                debug="${debug}"
+                source="1.5"
+                target="1.5"
+                >
+            <include name="com/topcoder/web/ep/**"/>
+        </javac>
+    </target>
+
+    <target name="war-ep" depends="compile-ep">
+        <war warfile="${war.dir}/ep.war" webxml="${resources}/ep/web.xml">
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/ep/**/*.class"/>
+            </classes>
+            <webinf dir="${resources}/taglib">
+                <include name="tc-webtags.tld"/>
+                <include name="taconite.tld"/>
+                <include name="common-functions.tld"/>
+            </webinf>
+            <fileset dir="${java}/com/topcoder/web/ep/view">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <fileset dir="${java}/com/topcoder/web/jsp">
+                <include name="errorPage.jsp"/>
+                <include name="date_time.jsp"/>
+                <include name="script.jsp"/>
+                <include name="style.jsp"/>
+                <include name="menu.jsp"/>
+                <include name="page_title.jsp"/>
+            </fileset>
+            <webinf dir="${resources}/ep">
+                <include name="jboss-web.xml"/>
+            </webinf>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+                <include name="taconite.jar"/>
+            </lib>
+
+        </war>
+    </target>
+
+    <target name="deploy-ep" depends="war-ep,move-libs">
+        <antcall target="expand-ep"/>
+    </target>
+
+    <target name="expand-ep">
+        <delete file="${jboss_deploy}/ep.war"/>
+        <unwar src="${war.dir}/ep.war" dest="${jboss_deploy}/ep.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/ep.war/META-INF"/>
+    </target>
+
+    <target name="compile_tests" depends="compile">
+        <javac srcdir="${testjava}" destdir="${testclasses}"
+               classpathref="class.path"
+               deprecation="${deprecation}"
+               debug="${debug}">
+            <exclude name="com/topcoder/web/csf/**"/>
+            <exclude name="com/topcoder/web/csf/**"/>
+            <exclude name="com/topcoder/web/wiki/**"/>
+            <exclude name="com/topcoder/web/studio/**"/>
+            <exclude name="com/topcoder/web/openaim/**"/>
+            <exclude name="com/topcoder/web/forums/**"/>
+            <exclude name="com/topcoder/web/onsite/**"/>
+        </javac>
+    </target>
+
+    <target name="run_tests" depends="compile_tests" description="run junit tests">
+        <junit printsummary="${junitsummary}" fork="yes">
+            <classpath refid="class.path"/>
+            <formatter type="xml"/>
+            <batchtest todir="${testclasses}">
+                <fileset dir="${testclasses}">
+                    <include name="**/*TestCase.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${testclasses}">
+            <fileset dir="${testclasses}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${testclasses}/html"/>
+        </junitreport>
+    </target>
+
+    <target name="run_reg_tests" depends="compile_tests" description="run junit tests">
+        <junit printsummary="${junitsummary}" fork="yes">
+            <classpath>
+                <pathelement path="${class.path}"/>
+                <pathelement location="resources/reg/"/>
+            </classpath>
+            <formatter type="xml"/>
+            <test name="com.topcoder.web.reg.RegTests" todir="${testclasses}"/>
+        </junit>
+
+        <junitreport todir="${testclasses}">
+            <fileset dir="${testclasses}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${testclasses}/html"/>
+        </junitreport>
+    </target>
+
+    <target name="run_voting_tests" depends="compile_tests" description="run junit tests">
+        <junit printsummary="${junitsummary}" fork="yes">
+            <classpath>
+                <pathelement path="${class.path}"/>
+                <pathelement location="resources/reg/"/>
+            </classpath>
+            <formatter type="xml"/>
+            <test name="com.topcoder.web.common.voting.VotingTests" todir="${testclasses}"/>
+        </junit>
+
+        <junitreport todir="${testclasses}">
+            <fileset dir="${testclasses}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${testclasses}/html"/>
+        </junitreport>
+    </target>
+
+
+    <target name="run_cache_tests" depends="compile_tests" description="run junit tests">
+        <junit printsummary="${junitsummary}" fork="yes">
+            <classpath>
+                <pathelement path="${class.path}"/>
+                <pathelement location="resources"/>
+            </classpath>
+            <formatter type="xml"/>
+            <test name="com.topcoder.web.common.CacheTestCase" todir="${testclasses}"/>
+        </junit>
+
+        <junitreport todir="${testclasses}">
+            <fileset dir="${testclasses}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${testclasses}/html"/>
+        </junitreport>
+    </target>
+
+
+    <target name="run_tc_hibernate_tests" depends="compile_tests" description="run junit tests">
+        <junit printsummary="${junitsummary}" fork="yes">
+            <classpath>
+                <pathelement path="${class.path}"/>
+                <pathelement location="resources/reg/"/>
+            </classpath>
+            <formatter type="xml"/>
+            <test name="com.topcoder.web.tc.TCTests" todir="${testclasses}"/>
+        </junit>
+
+        <junitreport todir="${testclasses}">
+            <fileset dir="${testclasses}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${testclasses}/html"/>
+        </junitreport>
+    </target>
+
+
+    <target name="deploy-admin" depends="compile">
+        <jar jarfile="${ejb_jars}/ContestAdminServices.jar">
+            <zipfileset dir="${classes}" includes="com/topcoder/ejb/ContestAdminServices/*.class"/>
+            <metainf dir="${java}/com/topcoder/ejb/ContestAdminServices" includes="*.xml"/>
+        </jar>
+        <war warfile="${war.dir}/admin.war" webxml="${resources}/admin/web.xml">
+            <fileset dir="${java}/com/topcoder/web/admin/view">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/servlet/admin/"/>
+                <include name="com/topcoder/web/admin/**"/>
+            </classes>
+            <webinf dir="${resources}/taglib">
+                <include name="rsc-taglib.tld"/>
+                <include name="tc-webtags.tld"/>
+            </webinf>
+            <webinf dir="${resources}/admin">
+                <include name="jboss-web.xml"/>
+            </webinf>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+            </lib>
+        </war>
+        <antcall target="expand-admin"/>
+    </target>
+
+    <target name="expand-admin">
+        <unwar src="${war.dir}/admin.war" dest="${jboss_deploy}/admin.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/admin.war/META-INF"/>
+
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ejb_jars}">
+                <include name="ContestAdminServices.jar"/>
+            </fileset>
+        </copy>
+    </target>
+
+
+    <target name="deploy-security" depends="build-security">
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ear.dir}">
+                <include name="security.ear"/>
+            </fileset>
+            <fileset dir="${resources}/security/conf">
+                <include name="topcoderLDAPDBSync-service.xml"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="build-security">
+        <ant antfile="build_security.xml" target="build-security"/>
+    </target>
+
+
+
+    <target name="deploy-privatelabel" depends="compile">
+        <antcall target="package-EJB-AddressBean"/>
+        <antcall target="package-EJB-CoderBean"/>
+        <antcall target="package-EJB-CompanyBean"/>
+        <antcall target="package-EJB-DemographicBean"/>
+        <antcall target="package-EJB-EmailBean"/>
+        <antcall target="package-EJB-JobPostingServicesBean"/>
+        <antcall target="package-EJB-RatingBean"/>
+        <antcall target="package-EJB-SchoolBean"/>
+        <antcall target="package-EJB-UserBean"/>
+
+        <antcall target="war-privatelabel"/>
+        <antcall target="expand-privatelabel"/>
+    </target>
+
+    <target name="expand-privatelabel">
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ejb_jars}">
+                <include name="Address.jar"/>
+                <include name="Coder.jar"/>
+                <include name="Company.jar"/>
+                <include name="Demographic.jar"/>
+                <include name="Email.jar"/>
+                <include name="JobPostingService.jar"/>
+                <include name="Rating.jar"/>
+                <include name="School.jar"/>
+                <include name="User.jar"/>
+            </fileset>
+        </copy>
+        <unwar src="${war.dir}/privatelabel.war" dest="${jboss_deploy}/privatelabel.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/privatelabel.war/META-INF"/>
+    </target>
+
+    <target name="war-privatelabel" depends="compile">
+        <war warfile="${war.dir}/privatelabel.war" webxml="${resources}/privatelabel/web.xml">
+            <fileset dir="${java}/com/topcoder/web/privatelabel/view">
+                <include name="**/*.jsp"/>
+            </fileset>
+            <fileset dir="${java}/com/topcoder/web/jsp">
+                <include name="errorPage.jsp"/>
+                <include name="foot.jsp"/>
+                <include name="script.jsp"/>
+                <include name="body_top.jsp"/>
+                <include name="page_title.jsp"/>
+                <include name="date_time.jsp"/>
+                <include name="style.jsp"/>
+                <include name="menu.jsp"/>
+                <include name="nocache.jsp"/>
+                <include name="top.jsp"/>
+                <include name="includes/global_left.jsp"/>
+                <include name="includes/modules/simpleSearch.jsp"/>
+                <include name="calendar.jsp"/>
+                <include name="public_right.jsp"/>
+            </fileset>
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/privatelabel/"/>
+                <include name="com/topcoder/web/tc/Constants.class"/>
+            </classes>
+            <webinf dir="${resources}/privatelabel">
+                <include name="jboss-web.xml"/>
+            </webinf>
+            <webinf dir="${resources}/taglib">
+                <include name="tc-webtags.tld"/>
+                <include name="privatelabel.tld"/>
+                <include name="nav.tld"/>
+                <include name="rsc-taglib.tld"/>
+            </webinf>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+            </lib>
+
+        </war>
+        <unwar src="${war.dir}/privatelabel.war" dest="${jboss_deploy}/privatelabel.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/privatelabel.war/META-INF"/>
+    </target>
+
+
+    <target name="war-tc" depends="compile">
+        <war warfile="${war.dir}/tc.war" webxml="${resources}/tc/web.xml">
+            <fileset dir="${java}/com/topcoder/web/tc/view">
+                <include name="**/*.*"/>
+            </fileset>
+            <fileset dir="${java}/com/topcoder/web/jsp">
+                <include name="errorPage.jsp"/>
+                <include name="top.jsp"/>
+                <include name="foot.jsp"/>
+                <include name="date_time.jsp"/>
+                <include name="script.jsp"/>
+                <include name="style.jsp"/>
+                <include name="body_top.jsp"/>
+                <include name="page_title.jsp"/>
+                <include name="menu.jsp"/>
+                <include name="includes/global_left.jsp"/>
+                <include name="includes/modules/simpleSearch.jsp"/>
+                <include name="calendar.jsp"/>
+                <include name="public_right.jsp"/>
+            </fileset>
+            <fileset dir="${sar.dir}">
+                <include name="*.sar"/>
+            </fileset>
+            <classes dir="${classes}">
+                <include name="com/topcoder/web/tc/**/*.class"/>
+                <include name="com/fx4m/**/*.class"/>
+                <include name="com/topcoder/utilities/MemberAchievementUtility.class"/>
+            </classes>
+            <webinf dir="${resources}/taglib">
+                <include name="tc.tld"/>
+                <include name="pacts.tld"/>
+                <include name="taconite.tld"/>
+                <include name="rsc-taglib.tld"/>
+                <include name="tc-webtags.tld"/>
+                <include name="nav.tld"/>
+                <include name="common-functions.tld"/>
+            </webinf>
+            <webinf dir="${java}/com/topcoder/web/tc/view/">
+                <include name="tags/**/*.tag"/>
+            </webinf>
+            <webinf dir="${struts.dir}">
+                <include name="*.tld"/>
+            </webinf>
+            <webinf dir="${resources}/tc">
+                <include name="jboss-web.xml"/>
+            </webinf>
+            <webinf dir="${resources}/tc">
+                <include name="applicationContext.xml"/>
+            </webinf>
+            <lib dir="${struts.dir}">
+                <include name="*.jar"/>
+            </lib>
+            <lib dir="${jars.dir}">
+                <include name="jstl.jar"/>
+                <include name="standard.jar"/>
+                <include name="taconite.jar"/>
+                <include name="spring.jar"/>
+                <include name="rome-1.0.jar"/>
+                <include name="jdom-1.1.3.jar"/>
+                <include name="imgscalr-lib-4.2.jar"/>
+            </lib>
+            <lib dir="${jars.dir}/tcs">
+                <include name="copilot_pool_and_profiles_common.jar"/>
+                <include name="copilot_pool_and_profiles_services.jar"/>
+            </lib>
+            <lib dir="${jars.dir}/cxf">
+                <include name="cxf-2.6.10.jar" />
+                <include name="jsr311-api-1.1.1.jar" />
+                <include name="neethi-3.0.2.jar" />
+                <include name="geronimo-jaxws_2.2_spec-1.1.jar" />
+                <include name="jaxb-api-2.2.5.jar" />
+                <include name="jsr173_1.0_api.jar" />
+                <include name="xmlbeans-2.5.0.jar" />
+            </lib>
+            <lib dir="${external.jars.dir}">
+                <include name="base_exception-2.0.0.jar"/>
+            </lib>
+            <!-- Added libs to support ejb3 calls -->
+            <lib dir="${jars.dir}/jboss-add/">
+                <include name="jboss-saaj.jar"/>
+                <include name="jboss-ejb3-client.jar"/>
+                <include name="jboss-ejb3x.jar"/>
+                <include name="jboss-aop-jdk50-client.jar"/>
+                <include name="jboss-aspect-jdk50-client.jar"/>
+                <include name="jboss-remoting.jar"/>
+                <include name="jboss-remoting-int.jar"/>
+                <include name="jboss-common-core.jar"/>
+                <include name="jboss-serialization.jar"/>
+            </lib>
+        </war>
+        <unwar src="${war.dir}/tc.war" dest="${jboss_deploy}/tc.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/tc.war/META-INF"/>
+    </target>
+
+
+    <target name="deploy-tc">
+        <antcall target="package-EJB-AddressBean"/>
+        <antcall target="package-EJB-CoderBean"/>
+        <antcall target="package-EJB-CoderSkillBean"/>
+        <antcall target="package-EJB-ComponentRegistrationServicesBean"/>
+        <antcall target="package-EJB-EmailBean"/>
+        <antcall target="package-EJB-FileConversionBean"/>
+        <antcall target="package-EJB-ImageBean"/>
+        <antcall target="package-EJB-JavaDocServicesBean"/>
+        <antcall target="package-EJB-JobPostingServicesBean"/>
+        <antcall target="package-EJB-PactsServicesBean"/>
+        <antcall target="package-EJB-PasswordBean"/>
+        <antcall target="package-EJB-PhoneBean"/>
+        <antcall target="package-EJB-PreferenceLevelBean"/>
+        <antcall target="package-EJB-ProblemRatingBean"/>
+        <antcall target="package-EJB-ProjectBean"/>
+        <antcall target="package-EJB-ReportingBean"/>
+        <antcall target="package-EJB-ResumeServicesBean"/>
+        <antcall target="package-EJB-SurveyBean"/>
+        <antcall target="package-EJB-UserEvent"/>
+        <antcall target="package-EJB-UserBean"/>
+        <antcall target="package-EJB-UserServicesBean"/>
+        <antcall target="package-EJB-UtilBean"/>
+
+        <antcall target="war-tc"/>
+        <antcall target="expand-tc"/>
+
+    </target>
+
+    <target name="expand-tc">
+        <copy todir="${jboss_deploy}">
+            <fileset dir="${ejb_jars}">
+                <include name="Address.jar"/>
+                <include name="Coder.jar"/>
+                <include name="CoderSkill.jar"/>
+                <include name="ComponentRegistrationServices.jar"/>
+                <include name="Email.jar"/>
+                <include name="FileConversion.jar"/>
+                <include name="Image.jar"/>
+                <include name="JavaDocServices.jar"/>
+                <include name="JobPostingServices.jar"/>
+                <include name="PactsServices.jar"/>
+                <include name="Password.jar"/>
+                <include name="Phone.jar"/>
+                <include name="PreferenceLevel.jar"/>
+                <include name="ProblemRatingServices.jar"/>
+                <include name="Project.jar"/>
+                <include name="Reporting.jar"/>
+                <include name="ResumeServices.jar"/>
+                <include name="Survey.jar"/>
+                <include name="User.jar"/>
+                <include name="UserServices.jar"/>
+                <include name="Util.jar"/>
+            </fileset>
+        </copy>
+        <unwar src="${war.dir}/tc.war" dest="${jboss_deploy}/tc.war/" overwrite="yes"/>
+        <delete dir="${jboss_deploy}/tc.war/META-INF"/>
+    </target>
+
+
+
+</project>
