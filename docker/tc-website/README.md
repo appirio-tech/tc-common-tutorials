@@ -89,6 +89,7 @@ You can now try the following pages:
 TC WAR:
 * Open https://local.tc.cloud.topcoder.com/tc?module=MyHome, the page is like: http://take.ms/TYP9F
 * Open https://local.tc.cloud.topcoder.com/tc?module=EditTheme, change to use old theme, the page is like: http://take.ms/efKBr
+* Open https://local.tc.cloud.topcoder.com/tc?module=ActiveContests&pt=39 (code active contests), the page is like: http://take.ms/RxSWZ
 
 Note that the links like https://local.tc.cloud.topcoder.com/challenges/design/active won't work.
 

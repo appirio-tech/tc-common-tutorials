@@ -32,7 +32,6 @@ README.md: changed to provide screen shots demonstrating marathon match
 
 Added Files
 =====================
-build/files/build_mm.xml: added to build marathon match war. The jboss-cache-jdk50.jar is no longer needed as we switch to use redis for cache, refer to https://github.com/topcoder-platform/tc-website/blob/dev/resources/cache.properties
 test_files/mm_test_data.sql: sample marathon match test data
 test_files/user_sso_login.sql: create the missing user_sso_login table
 
