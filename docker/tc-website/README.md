@@ -19,13 +19,12 @@ docker build -t appiriodevops/tc-website:httpd httpd
 
 ## Prepare tc-website Codebase
 Pull following repos into a directory (e.g. tc-platform):
-- https://github.com/topcoder-platform/tc-website   (with commit hash: f5e9ec2e9e7d99f012e308b530947ab034948ad6 branch: svn2git)
-- https://github.com/topcoder-platform/tc-website-external-artifacts  (with commit hash: 33100ff8b102ee8a386c4200d571b6c31c33fad1 branch: svn2git)
-- https://github.com/topcoder-platform/tc-website-glue  (with commit hash: 61849f3601a25efc40390a59eedd8d1dc92eb4ef branch: svn2git)
-- https://github.com/topcoder-platform/tc-website-shared (with commit hash: fbbc0e49893bf972e46d7c73192a5592e39dab3b branch: svn2git)
-- https://github.com/topcoder-platform/tc-website-static (with commit hash: fc26666a6ee3a323cdd8de9e849a2e576352a656)
-- https://github.com/appirio-tech/temp-maven-repo (with commit hash:
-ae8fe01f5b2f1aec9baa52dcff6d7bf02c5d93bf)
+- https://github.com/topcoder-platform/tc-website
+- https://github.com/topcoder-platform/tc-website-external-artifacts
+- https://github.com/topcoder-platform/tc-website-glue
+- https://github.com/topcoder-platform/tc-website-shared
+- https://github.com/topcoder-platform/tc-website-static
+- https://github.com/appirio-tech/temp-maven-repo
 
 ## Checkout tc-website and all other repo
 ```
@@ -66,8 +65,21 @@ Add the following entry to your hosts file:
 
 Where `<docker-ip>` is the ip address of your docker box. It should be set to `127.0.0.1` on Linux or `192.168.99.100` on Windows/macOS if you are using Docker Toolbox.
 
+## Test Data
+
+Insert some test data into informix database. Also currently the database misses *user_sso_login* table, it needs be created:
+
+```shell
+docker cp test_files/mm_test_data.sql iif_innovator_c:/tmp
+docker cp test_files/user_sso_login.sql iif_innovator_c:/tmp
+docker exec -it iif_innovator_c bash
+dbaccess informixoltp /tmp/mm_test_data.sql
+dbaccess common_oltp /tmp/user_sso_login.sql
+exit
+```
 
 ### Authentication
+
 1. Visit https://local.tc.cloud.topcoder.com/tc - accept the self-signed SSL certificate. See http://take.ms/r5A9U
 2. Now visit https://local.tc.cloud.topcoder.com/tc?&module=Login - login with `heffan/password`. See http://take.ms/uxt4K
 3. You will be redirected to an interstitial page then the main site (https://www.topcoder.com/my-dashboard/). See http://take.ms/O3AaE
@@ -80,6 +92,22 @@ TC WAR:
 * Open https://local.tc.cloud.topcoder.com/tc?module=ActiveContests&pt=39 (code active contests), the page is like: http://take.ms/RxSWZ
 
 Note that the links like https://local.tc.cloud.topcoder.com/challenges/design/active won't work.
+
+Marathon Match WAR:
+
+- Open https://local.tc.cloud.topcoder.com/longcontest/?module=ViewActiveContests, the page is like: http://take.ms/18mww
+
+- Open https://local.tc.cloud.topcoder.com/longcontest/?module=ViewStandings&rd=13673, the page is like: http://take.ms/2TSYJ
+
+- Open https://local.tc.cloud.topcoder.com/longcontest/?module=ViewSubmissionHistory&cr=124834&rd=13673&compid=2020, the page is like: http://take.ms/Wp8cC
+
+- Open https://local.tc.cloud.topcoder.com/longcontest/?module=ViewExampleHistory&cr=124834&rd=13673&compid=2020, the page is like: http://take.ms/HjZES
+
+- Open https://local.tc.cloud.topcoder.com/longcontest/?module=ViewProblemStatement&compid=2020&rd=13673, the page is like: http://take.ms/JKUfg
+
+- Open https://local.tc.cloud.topcoder.com/longcontest/?module=ViewReg&rd=13673, the page is like: http://take.ms/2iCRu
+
+- Open https://local.tc.cloud.topcoder.com/longcontest/?module=ViewRegistrants&rd=13673, the page is like: http://take.ms/F9jit
 
 Query WAR:
 * Open https://local.tc.cloud.topcoder.com/query/query, the page is like: http://take.ms/UvcrU

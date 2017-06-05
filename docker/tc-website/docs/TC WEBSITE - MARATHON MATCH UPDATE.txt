@@ -1,0 +1,47 @@
+The submission is based on https://github.com/appirio-tech/tc-common-tutorials/tree/master/docker/tc-website (commit cc7f86e0d802ece315121a053849a8b8f7aba240)
+
+The used source code of tc website are:
+- https://github.com/topcoder-platform/tc-website   (with commit hash: 4708528c5e544f0061318c1b543662c0368790d9 branch: dev)
+- https://github.com/topcoder-platform/tc-website-external-artifacts  (with commit hash: 33100ff8b102ee8a386c4200d571b6c31c33fad1 branch: dev)
+- https://github.com/topcoder-platform/tc-website-glue  (with commit hash: 99f7878c36dabbd9e5a2d14a4d84a0380b148632 branch: dev)
+- https://github.com/topcoder-platform/tc-website-shared (with commit hash: fbbc0e49893bf972e46d7c73192a5592e39dab3b branch: dev)
+- https://github.com/topcoder-platform/tc-website-static (with commit hash: fc26666a6ee3a323cdd8de9e849a2e576352a656 branch:master)
+- https://github.com/appirio-tech/temp-maven-repo (with commit hash: 6189c0eb6fbda77ea5eff6a15fb46af0705b89ae branch:master)
+
+
+Docker Images
+=====================
+
+The appiriodevops/tc-website:base image is not changed, so instead of building your own(there is error for downloading jdk, see https://apps.topcoder.com/forums//?module=Thread&threadID=901970&start=0),
+you can directly pull the existing base image from docker repo:
+docker pull appiriodevops/tc-website:base
+
+The other 3 images (appiriodevops/tc-website:build, appiriodevops/tc-website:run and appiriodevops/tc-website:httpd) are changed and need be rebuilt.
+
+Refer to README.md for details to build and run docker images.
+
+
+Changed Files
+=====================
+build/build.sh: changed to build marathon match war
+httpd/apache-conf/extra/httpd-vhosts-tc.conf: changed to mount /longcontest/* path 
+httpd/apache-conf/workers.conf: changed to add tomcat_mm worker
+run/Dockerfile: changed to add "-Djava.net.preferIPv4Stack=true" java opt, required for some linux version
+README.md: changed to provide screen shots demonstrating marathon match
+
+
+Added Files
+=====================
+test_files/mm_test_data.sql: sample marathon match test data
+test_files/user_sso_login.sql: create the missing user_sso_login table
+
+
+Deleted unused Files
+=====================
+build/files/build_distui.xml
+build/files/build_tc.xml
+build/files/lib
+build/files/resources/cache.properties
+build/files/resources/LDAP.properties
+run/apache-conf
+run/run.sh
