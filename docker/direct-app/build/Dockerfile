@@ -6,14 +6,23 @@ RUN yum install -y \
   wget \
   dos2unix
 
+WORKDIR /root
 # install jdk7
 
-RUN cd /opt/ \
-       && wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz" \
-       && tar xzf jdk-7u79-linux-x64.tar.gz \
-       && rm -rf jdk-7u79-linux-x64.tar.gz
+# Oracle has blocked direct download link, right now we only can do manual download this file below ( jdk 7 linux 64-bit format tar.gz) 
+#  http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html
+# and
+# put in this current directory with name: jdk7.tar.gz
+#
+#
+#RUN cd /opt/ \
+#       && wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz" \
+#       && tar xzf jdk-7u79-linux-x64.tar.gz \
+#       && rm -rf jdk-7u79-linux-x64.tar.gz
 
-WORKDIR /root
+COPY jdk7.tar.gz /root/
+RUN tar xvfz /root/jdk7.tar.gz -C /opt && mv -f /opt/jdk* /opt/jdk7 && rm -rf /root/jdk7.tar.gz
+
 
 # install apache-ant
 RUN wget -O /root/apache-ant-1.7.1-bin.zip http://archive.apache.org/dist/ant/binaries/apache-ant-1.7.1-bin.zip \
@@ -26,8 +35,8 @@ RUN wget -O /root/grails-1.3.7.zip http://dist.springframework.org.s3.amazonaws.
         && rm /root/grails-1.3.7.zip
 
 # set env variables
-ENV JAVA_HOME=/opt/jdk1.7.0_79
-ENV JRE_HOME=/opt/jdk1.7.0_79/jre
+ENV JAVA_HOME=/opt/jdk7
+ENV JRE_HOME=/opt/jdk7/jre
 
 ENV GRAILS_HOME /root/grails-1.3.7
 ENV ANT_HOME /root/apache-ant-1.7.1
