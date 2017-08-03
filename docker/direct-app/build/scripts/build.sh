@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 echo 'Prepare environment'
 # remove the jboss in mounted data volume
@@ -16,8 +17,8 @@ cp -f /root/config/run.conf /data/jboss-4.2.3.GA/bin/
 cp -f /root/scripts/start.sh /data/jboss-4.2.3.GA/bin/
 
 # copy properties files to mounted direct volume (/root/direct)
-cp -f /root/config/token.properties /root/direct/token.properties
-cp -f /root/config/topcoder_global.properties /root/direct/topcoder_global.properties
+cp -f /root/direct/token.properties.docker /root/direct/token.properties
+cp -f /root/direct/topcoder_global.properties.docker /root/direct/topcoder_global.properties
 
 # build and deploy
 echo 'Build and deploy direct'
