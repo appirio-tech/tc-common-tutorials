@@ -29,6 +29,7 @@ services:
     links:
       - "tc-informix"
       - "tc-cache"
+      - "mock-services:tc-api.cloud.topcoder.com"
     hostname: cockpit.cloud.topcoder.com
     volumes:
       - "${BUILT_JBOSS_DIR}:/root/jboss-4.2.3.GA"
@@ -46,6 +47,7 @@ services:
     links:
       - "tc-informix"
       - "tc-cache"
+      - "mock-services:tc-api.cloud.topcoder.com"
     hostname: cockpit.cloud.topcoder.com
     ports:
       - "443:443"
@@ -66,4 +68,10 @@ services:
       - "80:8080"
     links:
       - tc-informix:db
+      - "mock-services:tc-api.cloud.topcoder.com"
     entrypoint: /root/scripts/run.sh
+  mock-services:
+    image: "appiriodevops/mock-services:latest"
+    ports:
+      - "8080:8080"
+      - "8443:8443"
