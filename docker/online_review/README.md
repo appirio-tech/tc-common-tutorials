@@ -1,17 +1,16 @@
 
 ## Prepare Codebase
-Download the online-review codebase from https://github.com/topcoder-platform/tc-online-review.
-I'm testing with dev branch with commit hash: 0131012a5493cb3162599fd27add81407d8116d1.
+Clone the source code https://github.com/topcoder-platform/tc-online-review.
+After that, be sure to switch to the right branch to develop and deploy.
 
-And then download the components from the contest forum, and extract to the root directory of online-review codebase. 
+## Build Image - Optional
 
-## Build Image
-In the extracted submission directory, execute the command below to build the image
+If you want to revise the build process, you can go to `build` directory, make necessary changes, and rebuild the image like 
 ```
-docker build -t appiriodevops/online-review:build local
+docker build -t appiriodevops/online-review:build .
 ```
 
-## Defined Services
+## Configure the Services for Local enviroment.
 The `env.sh` file in the submission defined the following variables:
 * ONLINE_REVIEW_SOURCE_ROOT - the root directory of the online-review codebase
 * ONLINE_REVIEW_DEPLOYMENT_DIR - the deployment directory that will contain the build the results
