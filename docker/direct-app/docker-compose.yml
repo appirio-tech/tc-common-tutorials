@@ -1,5 +1,10 @@
 version: '2'
 services:
+  elasticsearch:
+    image: elasticsearch:2.3
+    ports:
+      - 9200:9200
+      - 9300:9300
   tc-cache:
     image: "redis:3.2.5"
     ports:
