@@ -1,7 +1,12 @@
 
 ## Prepare Codebase
-Clone the source code https://github.com/topcoder-platform/tc-online-review.
-After that, be sure to switch to the right branch to develop and deploy.
+* Clone the source code https://github.com/topcoder-platform/tc-online-review.
+* Be sure to switch to the right branch to develop and deploy.
+* Initialise all submodules and update.
+```
+cd tc-online-review
+git submodule update --init
+```
 
 ## Build Image - Optional
 
@@ -44,3 +49,5 @@ Edit this contest to turn on auto-pilot and set registration start date to a val
 Save the changes, and if the auto-pilot is running, after a while, you will see the registration and submission phase are open: http://take.ms/H9gdn
 
 For late deliverables tracker and review assignment tool, you can login into the running container, and check their processes are running. 
+
+
