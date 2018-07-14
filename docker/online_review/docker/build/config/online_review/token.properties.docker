@@ -141,3 +141,13 @@
 @svn.mkdir.commit.message@=Online Review auto-commit
 @svn.temp.files.basedir@=/root/temp_files/temp_svn
 @svn.authz.file.url@=https://coder.topcoder.com/tcs/configuration/trunk/svn-permissions.txt
+
+# configuration for event bus
+@topcoder_event_bus_url@=https://api.topcoder-dev.com/v5/bus/events
+@topcoder_event_bus_client_id@=5fctfjaLJHdvM04kSrCcC8yn0I4t1JTd
+@topcoder_event_bus_client_secret@=GhvDENIrYXo-d8xQ10fxm9k7XSVg491vlpvolXyWNBmeBdhsA5BAq2mH4cAAYS0x
+@topcoder_event_bus_auth_audience@=https://www.topcoder.com
+@topcoder_event_bus_auth_domain@=topcoder-newauth.auth0.com
+@topcoder_event_bus_expiration_time@=30
+@contest_submission_download_url@=http://tcs.cloud.topcoder.com/review/actions/DownloadContestSubmission?uid=%s
+@checkpoint_submission_download_url@=http://tcs.cloud.topcoder.com/review/actions/DownloadCheckpointSubmission?uid=%s
