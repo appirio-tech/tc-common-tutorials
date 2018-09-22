@@ -11,7 +11,7 @@ services:
       - "8443:8443"
 
   tc-informix:
-    image: "appiriodevops/tc-database-scripts:latest"
+    image: "pvmagacho/tc-database-scripts:latest"
     hostname: informix.cloud.topcoder.com
     container_name: iif_innovator_c
     environment: 
