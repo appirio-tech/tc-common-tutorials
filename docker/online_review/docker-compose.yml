@@ -1,5 +1,15 @@
 version: '2'
+
+volumes:
+  maven-repo:
+
 services:
+  mock-services:
+    image: "appiriodevops/mock-services:latest"
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+
   tc-informix:
     image: "appiriodevops/tc-database-scripts:latest"
     hostname: informix.cloud.topcoder.com
@@ -15,10 +25,11 @@ services:
     tty: true
 
   build-online-review:
-    image: "appiriodevops/online-review:build"
+    image: "pvmagacho/tc-online-review:build"
     volumes:
       - "${ONLINE_REVIEW_SOURCE_ROOT}:/root/online_review"
       - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
+      - maven-repo:/root/.m2
     environment:
       - DISABLE_ONLINE_REVIEW=${DISABLE_ONLINE_REVIEW}
       - DISABLE_AUTO_PILOT=${DISABLE_AUTO_PILOT}
@@ -27,7 +38,7 @@ services:
     entrypoint: /root/scripts/build.sh
 
   run-online-review:
-    image: "appiriodevops/online-review:build"
+    image: "appiriodevops/online-review:run"
     volumes:
       - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
     environment:
@@ -37,13 +48,8 @@ services:
       - DISABLE_LATE_DELIVERABLES_TRACKER=${DISABLE_LATE_DELIVERABLES_TRACKER}
       - DISABLE_REVIEW_ASSIGNMENT=${DISABLE_REVIEW_ASSIGNMENT}
     ports:
-      - "8080:8080"
-      - "443:443"
+      - "80:8080"
     links:
       - tc-informix:db
+      - "mock-services:tc-api.cloud.topcoder.com"
     entrypoint: /root/scripts/run.sh
-
-
-
-
-

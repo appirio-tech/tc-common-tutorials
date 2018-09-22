@@ -2,7 +2,7 @@
 
 if [ "$DISABLE_ONLINE_REVIEW" = "0"  ]
 then
-    root/scripts/build-online-review.sh
+    /root/scripts/build-online-review.sh
 fi
 
 if [ "$DISABLE_AUTO_PILOT" = "0"  ]
