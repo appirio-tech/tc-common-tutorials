@@ -17,7 +17,7 @@ export JBOSS_HOME=/root/deployment/jboss-4.0.2
 
 cd /root/online_review
 
-mvn -Dmaven.test.skip=true clean package
+mvn -Dmaven.test.skip=true clean antrun:run@tokenize package
 mvn -Dmaven.test.skip=true antrun:run@first-deploy antrun:run@deploy-locally
 
 cp target/review.war ${JBOSS_HOME}/server/default/deploy
