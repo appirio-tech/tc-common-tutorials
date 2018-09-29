@@ -17,10 +17,10 @@ export JBOSS_HOME=/root/deployment/jboss-4.0.2
 
 cd /root/online_review
 
-mvn -Dmaven.test.skip=true clean antrun:run@tokenize package
-mvn -Dmaven.test.skip=true antrun:run@first-deploy antrun:run@deploy-locally
+mvn -B -Dmaven.test.skip=true clean antrun:run@tokenize package
+mvn -B -Dmaven.test.skip=true antrun:run@first-deploy antrun:run@deploy-locally
 
-cp target/review.war ${JBOSS_HOME}/server/default/deploy
+cp build/online_review/review.war ${JBOSS_HOME}/server/default/deploy
 
 mkdir ${JBOSS_HOME}/online-review-conf
 cp -rf /root/online_review/conf/* /root/deployment/jboss-4.0.2/online-review-conf

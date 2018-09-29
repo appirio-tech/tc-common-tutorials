@@ -1,4 +1,4 @@
-FROM maven:3-jdk-7
+FROM maven:3-jdk-7-slim
 
 WORKDIR /root
 
@@ -6,14 +6,6 @@ RUN apt-get -qq update
 RUN apt-get -qq -y install wget dos2unix
 
 RUN wget -q http://downloads.sourceforge.net/project/jboss/JBoss/JBoss-4.0.2/jboss-4.0.2.tar.gz
-
-RUN cd /opt/ \
-       && wget -q https://archive.apache.org/dist/ant/binaries/apache-ant-1.7.0-bin.tar.gz \
-       && tar xzf apache-ant-1.7.0-bin.tar.gz \
-       && rm -rf apache-ant-1.7.0-bin.tar.gz
-
-ENV ANT_HOME=/opt/apache-ant-1.7.0
-ENV PATH=$PATH:/opt/apache-ant-1.7.0/bin
 
 ADD config /root/config
 ADD scripts /root/scripts

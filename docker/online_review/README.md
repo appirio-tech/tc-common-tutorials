@@ -7,11 +7,12 @@ After that, be sure to switch to the right branch to develop and deploy.
 
 If you want to revise the build process, you can go to `build` directory, make necessary changes, and rebuild the image like 
 ```
-docker build -t appiriodevops/online-review:build .
+docker build -t appiriodevops/online-review:build-maven -f Dockerfile.maven .
 ```
 
 ## Configure the Services for Local enviroment.
 The `env.sh` file in the submission defined the following variables:
+* AUTO_PILOT_SOURCE_ROOT - the root directory of the auto-pilot application codebase
 * ONLINE_REVIEW_SOURCE_ROOT - the root directory of the online-review codebase
 * ONLINE_REVIEW_DEPLOYMENT_DIR - the deployment directory that will contain the build the results
 * DISABLE_ONLINE_REVIEW - disable online review or not. 1 - disabled, 0 - enabled.

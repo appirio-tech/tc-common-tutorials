@@ -1,8 +1,8 @@
 #! /bin/bash
 if [ "$DISABLE_AUTO_PILOT" = "0"  ]
 then
-    cd /root/deployment/auto_pilot
-    ant test_ap &
+    cd /root/scripts
+    ./run-auto-pilot.sh
 fi
 
 if [ "$DISABLE_LATE_DELIVERABLES_TRACKER" = "0"  ]
