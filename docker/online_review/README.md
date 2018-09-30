@@ -45,10 +45,12 @@ Update your hosts file with appropriate IP address
 ```
 * For Windows or Mac, replace 127.0.0.1 with docker-machine ip address.
 
-Now go to http://local.topcoder.com:8080/review to go to the login page: http://take.ms/JhO4p
-Login with heffan/password, and the page will be like this: http://take.ms/NFkBI
-Click a contest to open it: http://take.ms/o48Kha
-Edit this contest to turn on auto-pilot and set registration start date to a value in near future: http://take.ms/y6GIG and http://take.ms/jLCZT
+Now go to http://local.topcoder.com/review to go to the login page: http://take.ms/JhO4p
+
+Login with heffan/password, and the page will be like this: http://take.ms/NFkBI. Click a contest to open it: http://take.ms/o48Kha.
+
+Edit this contest to turn on auto-pilot and set registration start date to a value in near future: http://take.ms/y6GIG and http://take.ms/jLCZT.
+
 Save the changes, and if the auto-pilot is running, after a while, you will see the registration and submission phase are open: http://take.ms/H9gdn
 
 For late deliverables tracker and review assignment tool, you can login into the running container, and check their processes are running. 

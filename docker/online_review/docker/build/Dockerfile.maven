@@ -9,7 +9,6 @@ RUN wget -q http://downloads.sourceforge.net/project/jboss/JBoss/JBoss-4.0.2/jbo
 
 ADD config /root/config
 ADD scripts /root/scripts
-# ADD default /root/default
 RUN chmod +x /root/scripts/*.sh
 RUN dos2unix /root/scripts/*.sh
 

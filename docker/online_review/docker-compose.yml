@@ -25,8 +25,9 @@ services:
     tty: true
 
   build-online-review:
-    image: "pvmagacho/tc-online-review:build"
+    image: "pvmagacho/online-review:build"
     volumes:
+      - "${AUTO_PILOT_SOURCE_ROOT}:/root/auto_pilot"
       - "${ONLINE_REVIEW_SOURCE_ROOT}:/root/online_review"
       - "${ONLINE_REVIEW_DEPLOYMENT_DIR}:/root/deployment"
       - maven-repo:/root/.m2

@@ -11,10 +11,6 @@ tar xzf /root/jboss-4.0.2.tar.gz
 
 export JBOSS_HOME=/root/deployment/jboss-4.0.2
 
-#cd ${JBOSS_HOME}/server
-#rm -rf default
-#cp -Rf /root/default .
-
 cd /root/online_review
 
 mvn -B -Dmaven.test.skip=true clean antrun:run@tokenize package
