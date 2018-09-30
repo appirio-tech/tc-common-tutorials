@@ -1,6 +1,11 @@
 
 ## Prepare Codebase
-Clone the source code https://github.com/topcoder-platform/tc-online-review and https://github.com/topcoder-platform/autopilot-application.
+Clone the source code:
+
+- https://github.com/topcoder-platform/tc-online-review
+
+- https://github.com/topcoder-platform/autopilot-application
+
 After that, be sure to switch to the right branch (**maven**) to develop and deploy.
 
 ## Build Image - Optional
