@@ -1,7 +1,7 @@
 
 ## Prepare Codebase
-Clone the source code https://github.com/topcoder-platform/tc-online-review.
-After that, be sure to switch to the right branch to develop and deploy.
+Clone the source code https://github.com/topcoder-platform/tc-online-review and https://github.com/topcoder-platform/autopilot-application.
+After that, be sure to switch to the right branch (**maven**) to develop and deploy.
 
 ## Build Image - Optional
 
@@ -9,6 +9,8 @@ If you want to revise the build process, you can go to `build` directory, make n
 ```
 docker build -t appiriodevops/online-review:build-maven -f Dockerfile.maven .
 ```
+
+Make sure to update `docker-compose.yml` file to use new image.
 
 ## Configure the Services for Local enviroment.
 The `env.sh` file in the submission defined the following variables:
