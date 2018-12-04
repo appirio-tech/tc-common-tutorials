@@ -15,7 +15,7 @@ cp -f /root/files/TC.prod.ldap.keystore $JBOSS_HOME/bin
 cp -f /root/files/resources/paymentRanges.xml $JBOSS_HOME/server/all/conf
 
 # init code
-cp -f /root/files/build_mm.xml /root/tc-platform/tc-website
+#cp -f /root/files/build_mm.xml /root/tc-platform/tc-website
 cp -f /root/files/resources/ApplicationServer.properties /root/tc-platform/tc-website/resources
 cp -f /root/files/distui/jboss-web.xml /root/tc-platform/tc-website/resources/distui
 
