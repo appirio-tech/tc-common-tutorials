@@ -12,6 +12,13 @@
 @database.INFORMIXSERVER@=informixoltp_tcp
 @database.locale@=en_us.utf8
 
+#database dw
+@database.server.dw@=db
+@database.port.dw@=2021
+@database.username.dw@=informix
+@database.password.dw@=1nf0rm1x
+@database.INFORMIXSERVER.dw@=informixoltp_tcp
+
 # @context.security.url@ - URL for JNDI lookup 
 @context.security.url@=localhost:11199
 
