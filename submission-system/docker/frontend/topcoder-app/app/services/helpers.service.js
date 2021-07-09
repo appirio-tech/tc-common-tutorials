@@ -314,7 +314,8 @@ import _ from 'lodash'
           'application/octet-stream',
           'application/x-compress',
           'application/x-compressed',
-          'multipart/x-zip'
+          'multipart/x-zip',
+          'application/x-download'
         ],
         jpeg: [
           'image/jpeg',

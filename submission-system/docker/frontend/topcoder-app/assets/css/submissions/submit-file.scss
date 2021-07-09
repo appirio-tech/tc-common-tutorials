@@ -133,12 +133,14 @@ modal {
   }
 
   .upload-progress__image,
-  .upload-progress__image--error {
+  .upload-progress__image--error,
+  .submission-status__image--error {
     margin-top: 30px;
   }
 
   .upload-progress__message,
-  .upload-progress__message--error {
+  .upload-progress__message--error,
+  .submission-status__message--error {
     @include font-with-weight('Merriweather Sans', 400);
     font-size: 15px;
     line-height: 19px;
@@ -154,7 +156,10 @@ modal {
 
   .upload-progress__preparing,
   .upload-progress__finishing,
-  .upload-progress__error {
+  .upload-progress__error,
+  .submission-status__pending,
+  .submission-status__processing,
+  .submission-status__submitted {
     @include font-with-weight('Sofia Pro', 500);
     font-size: 12px;
     line-height: 14px;

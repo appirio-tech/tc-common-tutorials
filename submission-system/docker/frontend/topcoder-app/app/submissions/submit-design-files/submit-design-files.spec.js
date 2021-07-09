@@ -19,13 +19,18 @@ describe('Submit Design Files Controller', function() {
   }
 
   var submissionsService = {
-    getPresignedURL: function() {}
+    getPresignedURL: function() {},
+    getSubmissionStatus: function() {}
   }
 
   var mockWindow = {
     location: {
       reload: function(val) { return val }
     }
+  }
+
+  var mockInterval = {
+    cancel: function() {}
   }
 
   beforeEach(function() {
@@ -43,7 +48,8 @@ describe('Submit Design Files Controller', function() {
       UserService: userService,
       challengeToSubmitTo: mockChallenge,
       SubmissionsService: submissionsService,
-      $window: mockWindow
+      $window: mockWindow,
+      $interval: mockInterval
     })
     vm = controller
   })
@@ -265,6 +271,59 @@ describe('Submit Design Files Controller', function() {
         scope.$digest()
         expect(vm.submissionsBody.data.fonts).to.deep.equal(processedFonts)
       })
+    })
+  })
+
+  describe('updateSubmissionStatus', function() {
+    var args = {status: 'PROCESSING', result: 'STATUS'}
+    var mockAPICall = sinon.stub(submissionsService, 'getSubmissionStatus', function(id, cb) {
+      cb(args.result, {status: args.status})
+    })
+    var mockIntervalCancelCall = sinon.spy(mockInterval, 'cancel')
+
+    it('calls the submissions service', function() {
+      vm.submissionId = 1
+      scope.$digest()
+      vm.updateSubmissionStatus()
+      scope.$digest()
+
+      expect(mockAPICall).calledOnce
+    })
+
+    it('sets the submission status', function() {
+      vm.submissionId = 1
+      scope.$digest()
+      vm.updateSubmissionStatus()
+      scope.$digest()
+      expect(vm.submissionStatus).to.equal('PROCESSING')
+    })
+
+    it('resets the polling timer on SUBMITTED status', function() {
+      args.status = 'SUBMITTED'
+      vm.submissionId = 1
+      scope.$digest()
+      vm.updateSubmissionStatus()
+      scope.$digest()
+      expect(vm.submissionStatus).to.equal('SUBMITTED')
+      expect(mockIntervalCancelCall).calledOnce
+    })
+
+    it('handles ERROR status', function() {
+      args.status = 'ERROR'
+      vm.submissionId = 1
+      scope.$digest()
+      vm.updateSubmissionStatus()
+      scope.$digest()
+      expect(vm.submissionStatus).to.equal('ERROR')
+      expect(vm.errorInSubmissionStatus).to.equal(true)
+      args.status = null
+      args.result = 'ERROR'
+      vm.submissionId = 1
+      scope.$digest()
+      vm.updateSubmissionStatus()
+      scope.$digest()
+      expect(vm.submissionStatus).to.equal('ERROR')
+      expect(vm.errorInSubmissionStatus).to.equal(true)
     })
   })
 

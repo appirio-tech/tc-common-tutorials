@@ -6,9 +6,9 @@ import _ from 'lodash'
 
   angular.module('tc.submissions').controller('SubmitDesignFilesController', SubmitDesignFilesController)
 
-  SubmitDesignFilesController.$inject = ['$scope','$window', '$stateParams', 'logger', 'UserService', 'SubmissionsService', 'challengeToSubmitTo']
+  SubmitDesignFilesController.$inject = ['$scope','$window', '$interval', '$stateParams', 'logger', 'UserService', 'SubmissionsService', 'challengeToSubmitTo', 'CONSTANTS']
 
-  function SubmitDesignFilesController($scope, $window, $stateParams, logger, UserService, SubmissionsService, challengeToSubmitTo) {
+  function SubmitDesignFilesController($scope, $window, $interval, $stateParams, logger, UserService, SubmissionsService, challengeToSubmitTo, CONSTANTS) {
     if (!challengeToSubmitTo.challenge) { return }
 
     var vm = this
@@ -38,6 +38,11 @@ import _ from 'lodash'
       stockArts: [],
       hasAgreedToTerms: false
     }
+    vm.submissionId = null
+    vm.submissionStatus = null
+    vm.errorInSubmissionStatus = false
+    vm.stopSubmissionStatusPoll = null
+
 
     var userId = parseInt(UserService.getUserIdentity().userId)
 
@@ -64,6 +69,7 @@ import _ from 'lodash'
     vm.setRankTo1 = setRankTo1
     vm.setFileReference = setFileReference
     vm.uploadSubmission = uploadSubmission
+    vm.updateSubmissionStatus = updateSubmissionStatus
     vm.refreshPage = refreshPage
     vm.cancelRetry = cancelRetry
 
@@ -203,15 +209,44 @@ import _ from 'lodash'
           vm.finishing = true
         }
       } else if (phase === 'FINISH') {
-        // we are concerned only for completion of the phase
-        if (args === 100) {
+        if (typeof args === 'object' && args.progress === 100) {
           logger.debug('Finished upload.')
+          // start polling submission state
+          vm.submissionId = args.submissionId
+          vm.stopSubmissionStatusPoll = $interval(updateSubmissionStatus, CONSTANTS.SUBMISSION_STATUS_POLL_INTERVAL)
+          updateSubmissionStatus()
+        } else {
+          if (args === 100) {
+            logger.debug('Finished upload.')
+          }
         }
       } else {
         // assume it to be error condition
         logger.debug('Error Condition: ' + phase)
         vm.errorInUpload = true
       }
+    }
+
+    function updateSubmissionStatus() {
+      SubmissionsService.getSubmissionStatus(vm.submissionId, function(result, args) {
+        if (result === 'STATUS') {
+          vm.submissionStatus = args.status
+          if (args.status === 'SUBMITTED' || args.status === 'ERROR') {
+            $interval.cancel(vm.stopSubmissionStatusPoll)
+            vm.stopSubmissionStatusPoll = undefined
+          }
+          if (args.status === 'ERROR') {
+            vm.errorInSubmissionStatus = true
+          }  
+        } else {
+          // Assume error
+          logger.debug('Error Condition: Get submission status')
+          vm.submissionStatus = 'ERROR'
+          vm.errorInSubmissionStatus = true
+          $interval.cancel(vm.stopSubmissionStatusPoll)
+          vm.stopSubmissionStatusPoll = undefined
+        }
+      })
     }
 
     function refreshPage() {
